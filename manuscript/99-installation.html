@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Appendix: Installing tmux {#appendix-installation} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Appendix: tmux on Windows 10 {#appendix-windows-bash}" href="99-windows-bash.html" />
+    <link rel="prev" title="Appendix: Cheatsheets {#appendix-cheatsheets}" href="99-cheatsheets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Appendix: Installing tmux {#appendix-installation}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#macos-os-x">macOS / OS X</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#brew">brew</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#macports">macports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fink">fink</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#linux">Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ubuntu-mint-debian-etc">Ubuntu / Mint / Debian, etc.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#centos-fedora-redhat-etc">CentOS / Fedora / Redhat, etc.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arch-linux-pacman">Arch Linux (pacman)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gentoo-portage">Gentoo (portage)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bsd">BSD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#freebsd">FreeBSD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pkg-1">pkg(1)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pkg-add-1">pkg_add(1)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#openbsd">OpenBSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#netbsd">NetBSD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#windows-10">Windows 10</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Appendix: Installing tmux {#appendix-installation}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/99-installation.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="appendix-installing-tmux-appendix-installation">
+<h1>Appendix: Installing tmux {#appendix-installation}<a class="headerlink" href="#appendix-installing-tmux-appendix-installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="macos-os-x">
+<h2>macOS / OS X<a class="headerlink" href="#macos-os-x" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="brew">
+<h3>brew<a class="headerlink" href="#brew" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ brew install tmux</p>
+</div>
+<div class="section" id="macports">
+<h3>macports<a class="headerlink" href="#macports" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ sudo port install tmux</p>
+</div>
+<div class="section" id="fink">
+<h3>fink<a class="headerlink" href="#fink" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ fink install tmux</p>
+</div>
+</div>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ubuntu-mint-debian-etc">
+<h3>Ubuntu / Mint / Debian, etc.<a class="headerlink" href="#ubuntu-mint-debian-etc" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ sudo apt-get install tmux</p>
+</div>
+<div class="section" id="centos-fedora-redhat-etc">
+<h3>CentOS / Fedora / Redhat, etc.<a class="headerlink" href="#centos-fedora-redhat-etc" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ sudo yum install tmux</p>
+</div>
+<div class="section" id="arch-linux-pacman">
+<h3>Arch Linux (pacman)<a class="headerlink" href="#arch-linux-pacman" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ sudo pacman -S tmux</p>
+</div>
+<div class="section" id="gentoo-portage">
+<h3>Gentoo (portage)<a class="headerlink" href="#gentoo-portage" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ sudo emerge –ask app-misc/tmux</p>
+</div>
+</div>
+<div class="section" id="bsd">
+<h2>BSD<a class="headerlink" href="#bsd" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="freebsd">
+<h3>FreeBSD<a class="headerlink" href="#freebsd" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="pkg-1">
+<h4>pkg(1)<a class="headerlink" href="#pkg-1" title="Permalink to this headline">¶</a></h4>
+<p>{line-numbers=off}
+# pkg install tmux</p>
+</div>
+<div class="section" id="pkg-add-1">
+<h4>pkg_add(1)<a class="headerlink" href="#pkg-add-1" title="Permalink to this headline">¶</a></h4>
+<p>{line-numbers=off}
+# pkg_add -r tmux</p>
+</div>
+</div>
+<div class="section" id="openbsd">
+<h3>OpenBSD<a class="headerlink" href="#openbsd" title="Permalink to this headline">¶</a></h3>
+<p>As of OpenBSD 4.6, <a class="reference external" href="https://www.openbsd.org/46.html">tmux is part of the base system</a>.</p>
+<p>If you are using an earlier version:</p>
+<p>{line-numbers=off}
+# pkg_add tmux</p>
+</div>
+<div class="section" id="netbsd">
+<h3>NetBSD<a class="headerlink" href="#netbsd" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ make -C /usr/pkgsrc/misc/tmux install</p>
+</div>
+</div>
+<div class="section" id="windows-10">
+<h2>Windows 10<a class="headerlink" href="#windows-10" title="Permalink to this headline">¶</a></h2>
+<p>Check out the <a class="reference external" href="#appendix-windows-bash">tmux on Windows 10 appendix section</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="99-windows-bash.html" class="btn btn-neutral float-right" title="Appendix: tmux on Windows 10 {#appendix-windows-bash}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="99-cheatsheets.html" class="btn btn-neutral float-left" title="Appendix: Cheatsheets {#appendix-cheatsheets}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

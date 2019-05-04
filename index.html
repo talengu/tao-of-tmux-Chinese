@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Welcome to tao-of-tmux’s documentation! &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Foreword" href="manuscript/00-foreword.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Welcome to tao-of-tmux’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-tao-of-tmux-s-documentation">
+<h1>Welcome to tao-of-tmux’s documentation!<a class="headerlink" href="#welcome-to-tao-of-tmux-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>The Tao of tmux by Tony Narlock</p>
+<p>This book is available for free to read on the web at &lt;<a class="reference external" href="https://leanpub.com/the-tao-of-tmux/read">https://leanpub.com/the-tao-of-tmux/read</a>&gt;.</p>
+<p>talen move it to sphinx.</p>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/00-foreword.html">Foreword</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/00-foreword.html#about-this-book">About this book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/00-foreword.html#styles">Styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/00-foreword.html#how-this-book-is-structured">How this book is structured</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/00-foreword.html#donations">Donations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/00-foreword.html#formats">Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/00-foreword.html#errata-errata">Errata {#errata}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/00-foreword.html#thanks">Thanks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/00-foreword.html#book-updates-and-tmux-changes">Book Updates and tmux changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/01-thinking-tmux.html#window-manager-for-the-terminal">Window manager for the terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/01-thinking-tmux.html#multitasking">Multitasking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/01-thinking-tmux.html#keep-your-applications-running-in-the-background">Keep your applications running in the background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/01-thinking-tmux.html#powerful-combos">Powerful combos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/01-thinking-tmux.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/02-terminal-fundamentals.html#posix-standards">POSIX standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/02-terminal-fundamentals.html#terminal-interface">Terminal interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/02-terminal-fundamentals.html#terminal-emulators">Terminal emulators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/02-terminal-fundamentals.html#shell-languages-shell-languages">Shell languages {#shell-languages}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/02-terminal-fundamentals.html#shell-interpreters-shells-shells">Shell interpreters (Shells) {#shells}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/02-terminal-fundamentals.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/03-practical-usage.html">Practical usage {#practical-usage}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/03-practical-usage.html#the-prefix-key-prefix-key">The prefix key {#prefix-key}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/03-practical-usage.html#session-persistence-and-the-server-model">Session persistence and the server model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/03-practical-usage.html#it-s-all-commands">It’s all commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/03-practical-usage.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/04-server.html">Server {#server}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/04-server.html#what-tmux-is-a-server">What? tmux is a server?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/04-server.html#zero-config-needed">Zero config needed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/04-server.html#stayin-alive">Stayin’ alive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/04-server.html#servers-hold-sessions">Servers hold sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/04-server.html#how-servers-are-named">How servers are “named”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/04-server.html#clients">Clients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/04-server.html#clipboard-clipboard">Clipboard {#clipboard}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/04-server.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/05-session.html">Sessions {#sessions}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/05-session.html#creating-a-session">Creating a session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/05-session.html#switching-sessions-within-tmux">Switching sessions within tmux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/05-session.html#naming-sessions">Naming sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/05-session.html#does-my-session-exist">Does my session exist?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/05-session.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/06-window.html">Windows {#windows}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/06-window.html#creating-windows">Creating windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/06-window.html#naming-windows">Naming windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/06-window.html#traversing-windows">Traversing windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/06-window.html#moving-windows">Moving windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/06-window.html#layouts-window-layouts">Layouts {#window-layouts}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/06-window.html#closing-windows">Closing windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/06-window.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/07-pane.html">Panes {#panes}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/07-pane.html#creating-new-panes">Creating new panes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/07-pane.html#traversing-panes-pane-traversal">Traversing Panes {#pane-traversal}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/07-pane.html#zoom-in-zoom-pane">Zoom in {#zoom-pane}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/07-pane.html#resizing-panes-resizing-panes">Resizing panes {#resizing-panes}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/07-pane.html#outputting-pane-to-a-file">Outputting pane to a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/07-pane.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/08-configuration.html">Configuration {#config}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/08-configuration.html#reloading-configuration-reload-config">Reloading configuration {#reload-config}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/08-configuration.html#how-configs-work">How configs work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/08-configuration.html#server-options">Server options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/08-configuration.html#session-options">Session options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/08-configuration.html#window-options">Window options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/08-configuration.html#keybindings">Keybindings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/09-status-bar.html">Status bar and styling {#status-bar}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/09-status-bar.html#window-status-symbols">Window status symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/09-status-bar.html#date-and-time">Date and time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/09-status-bar.html#shell-command-output">Shell command output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/09-status-bar.html#styling">Styling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/09-status-bar.html#styling-while-using-tmux">Styling while using tmux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/09-status-bar.html#toggling-status-line">Toggling status line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/09-status-bar.html#example-default-config">Example: Default config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/09-status-bar.html#example-dressed-up-status-bar-example-dressed-up">Example: Dressed up {#status-bar-example-dressed-up}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/09-status-bar.html#example-powerline">Example: Powerline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/09-status-bar.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/10-scripting.html">Scripting tmux {#scripting-tmux}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/10-scripting.html#aliases-aliases">Aliases {#aliases}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/10-scripting.html#pattern-matching-fnmatch">Pattern matching {#fnmatch}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/10-scripting.html#targets-targets">Targets {#targets}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/10-scripting.html#formats-formats">Formats {#formats}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/10-scripting.html#controlling-tmux-send-keys">Controlling tmux {#send-keys}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/10-scripting.html#capturing-pane-content-capture-pane">Capturing pane content {#capture-pane}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/10-scripting.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/11-tips-and-tricks.html#read-the-tmux-manual-in-style">Read the tmux manual in style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/11-tips-and-tricks.html#log-tailing">Log tailing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/11-tips-and-tricks.html#file-watching-file-watching">File watching {#file-watching}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/11-tips-and-tricks.html#session-managers-session-manager">Session Managers {#session-manager}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/11-tips-and-tricks.html#more-code-and-examples-example-projects">More code and examples {#example-projects}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/11-tips-and-tricks.html#tmux-plugins-and-tpm">tmux-plugins and tpm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/99-cheatsheets.html#commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/99-cheatsheets.html#keybindings">Keybindings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/99-cheatsheets.html#formats-appendix-formats">Formats {#appendix-formats}</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/99-installation.html">Appendix: Installing tmux {#appendix-installation}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/99-installation.html#macos-os-x">macOS / OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/99-installation.html#linux">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/99-installation.html#bsd">BSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/99-installation.html#windows-10">Windows 10</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manuscript/99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/99-troubleshooting.html#e353-nothing-in-register-when-pasting-on-vim"><code class="docutils literal notranslate"><span class="pre">E353:</span> <span class="pre">Nothing</span> <span class="pre">in</span> <span class="pre">register</span> <span class="pre">*</span></code> when pasting on vim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manuscript/99-troubleshooting.html#tmuxp-command-not-found-and-powerline-command-not-found-troubleshoot-site-paths"><code class="docutils literal notranslate"><span class="pre">tmuxp:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> and <code class="docutils literal notranslate"><span class="pre">powerline:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> {#troubleshoot-site-paths}</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="manuscript/00-foreword.html" class="btn btn-neutral float-right" title="Foreword" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

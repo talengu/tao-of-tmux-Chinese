@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sessions {#sessions} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Windows {#windows}" href="06-window.html" />
+    <link rel="prev" title="Server {#server}" href="04-server.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sessions {#sessions}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-session">Creating a session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#switching-sessions-within-tmux">Switching sessions within tmux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#naming-sessions">Naming sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#does-my-session-exist">Does my session exist?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Sessions {#sessions}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/05-session.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sessions-sessions">
+<h1>Sessions {#sessions}<a class="headerlink" href="#sessions-sessions" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the session, the highest-level entity residing in the <a class="reference external" href="#server">server</a>
+instance. Server instances are forked to the background upon starting a fresh
+instance and reconnected to when reattaching sessions. Your interaction with
+tmux will have <em>at least</em> one session running.</p>
+<p>A session holds one or more <a class="reference external" href="#windows">windows</a>.</p>
+<p><img alt="../_images/session.png" src="../_images/session.png" /></p>
+<p>The active window will have a <code class="docutils literal notranslate"><span class="pre">*</span></code> symbol next to it.</p>
+<p><img alt="../_images/active-window.png" src="../_images/active-window.png" />The first window, ID 1, titled &quot;manuscript&quot; is active. The second window, ID 2, titled zsh.</p>
+<div class="section" id="creating-a-session">
+<h2>Creating a session<a class="headerlink" href="#creating-a-session" title="Permalink to this headline">¶</a></h2>
+<p>The simplest command to create a new session is typing <code class="docutils literal notranslate"><span class="pre">tmux</span></code>:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span></code> application, with no commands is equivalent to
+<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">new-session</span></code>. Nifty!</p>
+<p>By default, your session name will be given a number, which isn’t too
+descriptive. What would be better is:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux new-session -s’my rails project’</p>
+</div>
+<div class="section" id="switching-sessions-within-tmux">
+<h2>Switching sessions within tmux<a class="headerlink" href="#switching-sessions-within-tmux" title="Permalink to this headline">¶</a></h2>
+<p>Some acquire the habit of detaching their tmux client and reattaching via
+<code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">att</span> <span class="pre">-t</span> <span class="pre">session_name</span></code>. Thankfully, you can switch sessions from within
+tmux!</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Prefix</code> + <code>(</code></td>
+<td>Switch the attached client to the previous session.</td>
+</tr>
+<tr>
+<td><code>Prefix</code> + <code>)</code></td>
+<td>Switch the attached client to the next session.</td>
+</tr>
+<tr>
+<td><code>Prefix</code> + <code>L</code></td>
+<td>Switch the attached client back to the last</td>
+</tr>
+<tr>
+<td></td>
+<td>session.</td>
+</tr>
+<tr>
+<td><code>Prefix</code> + <code>s</code></td>
+<td>Select a new session for the attached client</td>
+</tr>
+<tr>
+<td></td>
+<td>interactively.</td>
+</tr>
+</tbody>
+</table><p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">s</span></code> will allow you to switch between sessions within the same tmux
+client.</p>
+<p>This command name can be confusing. <code class="docutils literal notranslate"><span class="pre">switch-client</span></code> will allow you to traverse
+between sessions in the <a class="reference external" href="#server">server</a>.</p>
+<p>Example usage:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux switch-client -t dev</p>
+<p>If already inside a client, this will switch to a session, named “dev”, if it exists.</p>
+</div>
+<div class="section" id="naming-sessions">
+<h2>Naming sessions<a class="headerlink" href="#naming-sessions" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, the default session name given by tmux isn’t descriptive enough. It
+only takes a few seconds to update it.</p>
+<p>You can name it whatever you want. Typically, if I’m working on multiple web
+projects in one session, I’ll name it “web”. If I’m assigning one software
+project to a single session, I’ll name it after the software project. You’ll
+likely develop your own naming conventions, but anything is more descriptive
+than the default.</p>
+<p><img alt="../_images/rename.png" src="../_images/rename.png" />Renaming a session '0' to 'react web'</p>
+<p>If you don’t name your sessions, it’ll be difficult to keep track of what the
+session contains. Sometimes, you may forget you have a project opened,
+especially if your machine has been running for a few days, weeks, or months.
+You can save time by reattaching your session and avoid creating a duplicate.</p>
+<p>You can rename sessions from within tmux with <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <span class="math notranslate nohighlight">\(\)</span>.  The status bar
+will be temporarily altered into a text field to allow altering the session
+name.</p>
+<p>Through command line, you can try:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux rename-session -t 1 “my session”</p>
+</div>
+<div class="section" id="does-my-session-exist">
+<h2>Does my session exist?<a class="headerlink" href="#does-my-session-exist" title="Permalink to this headline">¶</a></h2>
+<p>If you’re scripting tmux, you will want to see if a session exists.
+<code class="docutils literal notranslate"><span class="pre">has-session</span></code> will return a 0 <a class="reference external" href="https://en.wikipedia.org/wiki/Exit_status">exit code</a>
+if the session exists, but will report a 1 exit code <em>and</em> print an error if a
+session does not exist.</p>
+<p>{language=shell, line-numbers=off}
+$ tmux has-session -t 1</p>
+<p>It assumes the session “1” exists; it’ll just return 0 with no output.</p>
+<p>But if it doesn’t, you’ll get something like this in a response:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux has-session -t 1
+&gt; can’t find session 1</p>
+<p>To try it in a shell script:</p>
+<p>{language=shell, line-numbers=off}
+if tmux has-session -t 0 ; then
+echo “has session 0”
+fi</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter, you learned how to rename sessions for organizational purposes
+and how to switch between them quickly.</p>
+<p>You’ll always be attached to a session when you’re using a client in tmux. When
+the last remaining session is closed, the server will close also.</p>
+<p>Think of sessions as workspaces designed to help organize a set of windows,
+analogous to <a class="reference external" href="https://en.wikipedia.org/wiki/Virtual_desktop">virtual desktop</a>
+spaces in GUI computing.</p>
+<p>In the next chapter, we will go into <em>windows</em>, which, like sessions, are also
+nameable and let you switch between them.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="06-window.html" class="btn btn-neutral float-right" title="Windows {#windows}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="04-server.html" class="btn btn-neutral float-left" title="Server {#server}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

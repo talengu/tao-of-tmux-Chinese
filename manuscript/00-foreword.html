@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Foreword &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Thinking in tmux {#thinking-tmux}" href="01-thinking-tmux.html" />
+    <link rel="prev" title="Welcome to tao-of-tmux’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Foreword</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#about-this-book">About this book</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#styles">Styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-this-book-is-structured">How this book is structured</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#donations">Donations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#formats">Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#errata-errata">Errata {#errata}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#thanks">Thanks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#book-updates-and-tmux-changes">Book Updates and tmux changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Foreword</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/00-foreword.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>{frontmatter}</p>
+<div class="section" id="foreword">
+<h1>Foreword<a class="headerlink" href="#foreword" title="Permalink to this headline">¶</a></h1>
+<p>Nearly all my friends use tmux. I remember going out at night for drinks and the
+three of us would take a seat at a round table and take out our smart phones.
+This was back when phones still had physical “QWERTY” keyboards.</p>
+<p>Despite our home computers being asleep or turned off, our usernames in the IRC
+channel we frequently visited persisted in the chatroom list. Our screens were
+lit by a kaleidoscope of colors on a black background. We ssh’d with ConnectBot
+into our cloud servers and reattached by running <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Screen"><code class="docutils literal notranslate"><span class="pre">screen(1)</span></code></a>.
+As it hit 2AM, our Turkish coffee arrived, the <code class="docutils literal notranslate"><span class="pre">|away</span></code> status indicator trailing
+our online nicknames disappeared.</p>
+<p>It was funny noticing, even though we knew each other by our real names, we
+sometimes opted to call each other by our nicks. It’s something about how
+personal relationships, formed online, persist in real life.</p>
+<p>It seemed as if it were orchestrated, but each of us fell into the same ebb and
+flow of living our lives. No one told us to do it, but bit by bit, we
+incrementally optimized our lifestyles, personally and professionally, to arrive
+at destinations seeming eerily alike.</p>
+<p>Like many things in life, when we act on autopilot, we sometimes arrive at
+similar destinations. This is often unplanned.</p>
+<p>So, when I write an educational book about a computer application, I hope to
+write it for human beings. Not to sell you on tmux, convince you to like it or
+hate it, but to tell you what it is and how some people use it. I’ll leave the
+rest to you.</p>
+<div class="section" id="about-this-book">
+<h2>About this book<a class="headerlink" href="#about-this-book" title="Permalink to this headline">¶</a></h2>
+<p>I’ve helped thousands learn tmux through my free resource under the name
+<a class="reference external" href="https://tmuxp.git-pull.com/en/latest/about_tmux.html">The Tao of tmux</a>, which I
+kept as part of the documentation for the <a class="reference external" href="https://github.com/tony/tmuxp">tmuxp session manager</a>.
+And now, it’s been expanded into a full-blown book with refined graphics,
+examples, and much more.</p>
+<p>You do not need a book to use or understand tmux. If you want a technical
+manual, look at the <a class="reference external" href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1">manpage for tmux</a>.
+Manpages, however, are rarely sufficient to wrap your brain around
+abstract concepts; they’re there for reference. This learning book is the
+culmination of years of explaining tmux to others online and in person.</p>
+<p>In this book, we will break down tmux by its objects, from servers
+down to panes. It also includes a rehash of terminal facilities we use every day
+to keep us autodidacts up to speed with what is what. I’ve included numerous
+examples of projects, permissively licensed source code, and workflows designed
+for efficiency in the world of the terminal.</p>
+<p>tmux is a tool I find useful. While I don’t attach it to my personal identity,
+it’s been part of my daily life for years. Besides the original resource,
+I’ve written a <a class="reference external" href="https://github.com/tony/tmux-config">popular tmux starter configuration</a>,
+a <a class="reference external" href="https://libtmux.git-pull.com">pythonic tmux library</a>, and a
+<a class="reference external" href="https://tmuxp.git-pull.com">tmux session manager</a>.</p>
+<p>I am writing this from vim running in a tmux pane, inside a window, in a session
+running on a tmux server, through a client.</p>
+<p>A word to absolute beginners: Don’t feel you need to grasp the concepts
+of the command line and terminal multiplexing in a single sitting. You have the
+choice of picking out concepts of tmux you like, according to your
+needs or interests. If you haven’t installed tmux yet, please view the
+<a class="reference external" href="#appendix-installation">Installation section</a> in the Appendix of the book.</p>
+<p>Follow <a class="reference external" href="https://twitter.com/TheTaoOfTmux">&#64;TheTaoOfTmux</a> for
+updates or <a class="reference external" href="https://twitter.com/intent/tweet?text=I%27m%20reading%20The%20Tao%20of%20tmux%20online%20at&amp;url=https://leanpub.com/the-tao-of-tmux/read&amp;hashtags=tmux&amp;via=TheTaoOfTmux">share on Twitter</a>!</p>
+</div>
+<div class="section" id="styles">
+<h2>Styles<a class="headerlink" href="#styles" title="Permalink to this headline">¶</a></h2>
+<p>Formatted text <code class="docutils literal notranslate"><span class="pre">like</span> <span class="pre">this</span></code> is source code.</p>
+<p>Formatted text with a $ in front is a terminal command. <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">echo</span> <span class="pre">'like</span> <span class="pre">this'</span></code>.
+The text can be typed into the console, without the dollar character. For more
+information on the meaning of the “dollar prompt”, check out <a class="reference external" href="https://superuser.com/questions/57575/what-is-the-origin-of-the-unix-dollar-prompt"><em>What is the
+origin of the UNIX $ (dollar) prompt?</em></a>
+on Super User.</p>
+<p>In tmux, shortcuts require a <a class="reference external" href="#prefix-key">prefix key</a> to be sent beforehand.
+For instance, <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">d</span></code> will detach a tmux client from its session. This
+prefix, by default, is <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-b&gt;</span></code>, but users can override it. This is discussed in
+greater detail in <em>the prefix key</em> section and <a class="reference external" href="#config"><em>configuration</em></a>.</p>
+</div>
+<div class="section" id="how-this-book-is-structured">
+<h2>How this book is structured<a class="headerlink" href="#how-this-book-is-structured" title="Permalink to this headline">¶</a></h2>
+<p>First, anything involving <a class="reference external" href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1">installation</a>
+and hard technical details are in the Appendix. A lot of books use installation
+instructions as filler in the early chapters. For me, it’s more of not wanting
+to confuse beginners.</p>
+<p>For special circumstances, like <a class="reference external" href="#appendix-windows-bash">tmux on Windows 10</a>, I
+decided adding screenshots is best, since many readers may be more comfortable
+with a visual approach.</p>
+<p><a class="reference external" href="#thinking-tmux"><em>Thinking in tmux</em></a> goes over what tmux does and how it relates to
+the GUI desktops on our computers.  You’ll understand the big picture of
+what tmux is and how it can make your life easier.</p>
+<p><a class="reference external" href="#terminal-fundamentals"><em>Terminal Fundamentals</em></a> shows the text-based
+environments you’ll be dealing with. It’s great for those new to tmux, but also
+presents technical background for developers, who learned the ropes through
+examples and osmosis. At the end of this section, you’ll be more confident and
+secure using the essential components underpinning a modern terminal
+environment.</p>
+<p><a class="reference external" href="#practical-usage"><em>Practical usage</em></a> covers common bread-and-butter uses for
+you to use tmux immediately.</p>
+<p><a class="reference external" href="#server"><em>Server</em></a> gives life to the unseen workhorse behind the scenes
+powering tmux. You’ll think of tmux differently and may be impressed a
+client-server architecture could be presented to end users so seamlessly.</p>
+<p><a class="reference external" href="#sessions"><em>Sessions</em></a> are the containers holding windows. You’ll learn what
+sessions are and how they help organize your workspace in the terminal. You’ll
+learn how to manipulate and rename and traverse sessions.</p>
+<p><a class="reference external" href="#windows"><em>Windows</em></a> are what you see when tmux is open in front of you.
+You’ll learn how to rename and move windows.</p>
+<p><a class="reference external" href="#panes"><em>Panes</em></a> are a terminal in a terminal. This is where you get to work and
+do your magic! You’ll learn how to create, delete, move between, and resize
+panes.</p>
+<p><a class="reference external" href="#config"><em>Configuration</em></a> discusses customization of tmux and sets the
+foundation for how to think about <code class="docutils literal notranslate"><span class="pre">.tmux.conf</span></code> so you can customize your own.</p>
+<p><a class="reference external" href="#status-bar"><em>Status bar and styling</em></a> is devoted to the customization
+of the status line and colors in tmux. As a bonus, you’ll even learn how to
+display system information like CPU and memory usage via the status line.</p>
+<p><a class="reference external" href="#scripting-tmux"><em>Scripting tmux</em></a> goes into command <a class="reference external" href="#aliases">aliases</a>
+and the advanced and powerful <a class="reference external" href="#targets">Targets</a> and <a class="reference external" href="#formats">Formats</a>
+concepts.</p>
+<p><a class="reference external" href="#technical-stuff"><em>Technical stuff</em></a> is a glimpse at tmux source code and how it
+works under the hood. You may learn enough to impress colleagues who already use
+tmux. If you like programming on Unix-like systems, this one is for you.</p>
+<p><a class="reference external" href="#tips-and-tricks"><em>Tips and tricks</em></a> wraps up with a whirlwind of useful
+terminal tutorials you can use with tmux to improve day to day development and
+administration experience.</p>
+<p><a class="reference external" href="#appendix-cheatsheets"><em>Cheatsheets</em></a> are organized tables of commands,
+shortcuts, and formats grouped by section.</p>
+</div>
+<div class="section" id="donations">
+<h2>Donations<a class="headerlink" href="#donations" title="Permalink to this headline">¶</a></h2>
+<p>If you enjoy my learning material or my open source software projects, please
+consider donating. Donations go directly to me and my current and future open source
+projects and are not squandered. Visit <a class="reference external" href="http://www.git-pull.com/support.html">http://www.git-pull.com/support.html</a>
+for ways to contribute.</p>
+</div>
+<div class="section" id="formats">
+<h2>Formats<a class="headerlink" href="#formats" title="Permalink to this headline">¶</a></h2>
+<p>This book is available for sale on <a class="reference external" href="https://leanpub.com/the-tao-of-tmux">Leanpub</a> and <a class="reference external" href="http://amzn.to/2gPfRhC">Amazon Kindle</a>.</p>
+<p>It’s also available to read for <a class="reference external" href="https://leanpub.com/the-tao-of-tmux/read">free on the web</a>.</p>
+</div>
+<div class="section" id="errata-errata">
+<h2>Errata {#errata}<a class="headerlink" href="#errata-errata" title="Permalink to this headline">¶</a></h2>
+<p>This is my first book. I am human and make mistakes.</p>
+<p>If you find errors in this book, please submit them to me at tao.of.tmux <AT>
+nospam git-pull.com.</p>
+<p>You can also submit a pull request via <a class="reference external" href="https://github.com/git-pull/tao-of-tmux">https://github.com/git-pull/tao-of-tmux</a>.</p>
+<p>I will update digital versions of the book with the changes where applicable.</p>
+</div>
+<div class="section" id="thanks">
+<h2>Thanks<a class="headerlink" href="#thanks" title="Permalink to this headline">¶</a></h2>
+<p>Thanks to the <a class="reference external" href="https://github.com/git-pull/tao-of-tmux/graphs/contributors">contributors</a>
+for spotting errors in this book and submitting errata through GitHub. In
+addition, readers like Graziano Misuraca, who looked through the book closely,
+providing valuable feedback.</p>
+<p>Some copy, particularly in <a class="reference external" href="#appendix-cheatsheets">cheatsheets</a>, comes straight out
+of the manual of tmux, which is <a class="reference external" href="https://github.com/tmux/tmux/blob/master/COPYING">ISC-licensed</a>.</p>
+</div>
+<div class="section" id="book-updates-and-tmux-changes">
+<h2>Book Updates and tmux changes<a class="headerlink" href="#book-updates-and-tmux-changes" title="Permalink to this headline">¶</a></h2>
+<p>This book was written for tmux 2.3, released September 2016.</p>
+<p>As of January 2017, it’s trivial to push out minor changes to
+Leanpub. Kindle is harder.</p>
+<p>tmux does intermittently receive updates. I’ve accommodated many over the past 5
+years on my personal configurations and software libraries set with <a class="reference external" href="https://github.com/tony/libtmux/blob/master/.travis.yml">continuous integration tests against multiple tmux versions</a>.
+Sometimes, publishers overplay version numbers to make it seem as if it’s worth
+striking a new edition of a book over it. It’s effective for them, but I’d
+rather be honest to my readership.</p>
+<p>If you’re considering keeping up to date with new features and adjustments to tmux,
+the <a class="reference external" href="https://github.com/tmux/tmux/blob/master/CHANGES"><code class="docutils literal notranslate"><span class="pre">CHANGES</span></code></a> file in the
+project source serves as a way to see what’s updated between official releases.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="01-thinking-tmux.html" class="btn btn-neutral float-right" title="Thinking in tmux {#thinking-tmux}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to tao-of-tmux’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

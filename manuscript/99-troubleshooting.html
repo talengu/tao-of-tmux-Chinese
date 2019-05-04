@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Appendix: Troubleshooting {#appendix-troubleshooting} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Appendix: tmux on Windows 10 {#appendix-windows-bash}" href="99-windows-bash.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Appendix: Troubleshooting {#appendix-troubleshooting}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#e353-nothing-in-register-when-pasting-on-vim"><code class="docutils literal notranslate"><span class="pre">E353:</span> <span class="pre">Nothing</span> <span class="pre">in</span> <span class="pre">register</span> <span class="pre">*</span></code> when pasting on vim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tmuxp-command-not-found-and-powerline-command-not-found-troubleshoot-site-paths"><code class="docutils literal notranslate"><span class="pre">tmuxp:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> and <code class="docutils literal notranslate"><span class="pre">powerline:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> {#troubleshoot-site-paths}</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Appendix: Troubleshooting {#appendix-troubleshooting}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/99-troubleshooting.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="appendix-troubleshooting-appendix-troubleshooting">
+<h1>Appendix: Troubleshooting {#appendix-troubleshooting}<a class="headerlink" href="#appendix-troubleshooting-appendix-troubleshooting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="e353-nothing-in-register-when-pasting-on-vim">
+<h2><code class="docutils literal notranslate"><span class="pre">E353:</span> <span class="pre">Nothing</span> <span class="pre">in</span> <span class="pre">register</span> <span class="pre">*</span></code> when pasting on vim<a class="headerlink" href="#e353-nothing-in-register-when-pasting-on-vim" title="Permalink to this headline">¶</a></h2>
+<p>If you are using macOS / OS X with vim inside tmux, you may get the error
+<code class="docutils literal notranslate"><span class="pre">E353:</span> <span class="pre">Nothing</span> <span class="pre">in</span> <span class="pre">register</span> <span class="pre">*</span></code> when trying to paste.</p>
+<p>Try installing <a class="reference external" href="https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard"><code class="docutils literal notranslate"><span class="pre">reattach-to-user-namespace</span></code></a>
+via <a class="reference external" href="http://brew.sh">brew</a>.</p>
+<p>{language=shell, line-numbers=off}
+$ brew install reattach-to-user-namespace</p>
+</div>
+<div class="section" id="tmuxp-command-not-found-and-powerline-command-not-found-troubleshoot-site-paths">
+<h2><code class="docutils literal notranslate"><span class="pre">tmuxp:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> and <code class="docutils literal notranslate"><span class="pre">powerline:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> {#troubleshoot-site-paths}<a class="headerlink" href="#tmuxp-command-not-found-and-powerline-command-not-found-troubleshoot-site-paths" title="Permalink to this headline">¶</a></h2>
+<p>This is due to your site package bin path (where application entry points are
+installed) not being in your paths. To find your user site packages base directory:</p>
+<p>{language=shell, line-numbers=off}
+$ python -m site –user-base</p>
+<p>This will get you something like <code class="docutils literal notranslate"><span class="pre">/Users/me/Library/Python/2.7</span></code> on macOS with
+Python 2.7 or <code class="docutils literal notranslate"><span class="pre">/home/me/.local</span></code> on Linux/BSD boxes.</p>
+<p>The applications are in the <code class="docutils literal notranslate"><span class="pre">bin/</span></code> folder inside. So, concatenate the two and
+apply them to your <a class="reference external" href="https://en.wikipedia.org/wiki/PATH_(variable)"><code class="docutils literal notranslate"><span class="pre">PATH</span></code></a>. This
+can be done automatically on every shell session by using one of these in your
+<code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> or <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code>:</p>
+<p>{language=shell, line-numbers=off}
+export PATH=/Users/me/Library/Python/2.7/bin:$PATH     # macOS w/ python 2.7
+export PATH=$HOME/.local/bin:$PATH                     # Linux/BSD
+export PATH=”<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">site</span> <span class="pre">--user-base</span></code>/bin”:$PATH   # May work all-around</p>
+<p>Then open a new terminal, or <code class="docutils literal notranslate"><span class="pre">.</span> <span class="pre">~/.zshrc</span></code> / <code class="docutils literal notranslate"><span class="pre">.</span> <span class="pre">~/.bashrc</span></code> in your current one.
+Then you can run <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmuxp</span> <span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmuxp</span> <span class="pre">load</span></code> and <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">powerline</span> <span class="pre">tmux</span> <span class="pre">right</span></code>
+commands.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="99-windows-bash.html" class="btn btn-neutral float-left" title="Appendix: tmux on Windows 10 {#appendix-windows-bash}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

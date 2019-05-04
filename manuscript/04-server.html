@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Server {#server} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sessions {#sessions}" href="05-session.html" />
+    <link rel="prev" title="Practical usage {#practical-usage}" href="03-practical-usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Server {#server}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-tmux-is-a-server">What? tmux is a server?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zero-config-needed">Zero config needed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stayin-alive">Stayin’ alive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#servers-hold-sessions">Servers hold sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-servers-are-named">How servers are “named”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clients">Clients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clipboard-clipboard">Clipboard {#clipboard}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Server {#server}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/04-server.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="server-server">
+<h1>Server {#server}<a class="headerlink" href="#server-server" title="Permalink to this headline">¶</a></h1>
+<p>The server holds <a class="reference external" href="#sessions">sessions</a> and the <a class="reference external" href="#windows">windows</a> and
+<a class="reference external" href="#panes">panes</a> within them.</p>
+<p>When tmux starts, you are connected to a server via a socket connection.
+What you see presented in your shell is merely a client connection. In
+this chapter, we uncover the invisible engine enabling your terminal
+applications to persist for months or even years at a time.</p>
+<p>{width=90%}
+<img alt="../_images/server.png" src="../_images/server.png" /></p>
+<div class="section" id="what-tmux-is-a-server">
+<h2>What? tmux is a server?<a class="headerlink" href="#what-tmux-is-a-server" title="Permalink to this headline">¶</a></h2>
+<p>Often, when “server” is mentioned, what comes to mind for many
+may be rackmounted hardware; to others, it may be software running
+daemonized on a server and managed through a utility, like upstart,
+supervisor, and so on.</p>
+<p>Unlike web or database software, tmux doesn’t require specialized
+configuration settings or creating a service entry to start things.</p>
+<p>tmux uses a client-server model, but the server is forked to the
+background for you.</p>
+</div>
+<div class="section" id="zero-config-needed">
+<h2>Zero config needed<a class="headerlink" href="#zero-config-needed" title="Permalink to this headline">¶</a></h2>
+<p>You don’t notice it, but when you use tmux normally, a server is launched and
+being connected via a client.</p>
+<p>tmux is so streamlined, the book could continue to explain usage and not even
+mention servers. But, I’d rather you have a true understanding of how it works
+on systems. The implementation feels like magic, while living up to the unix
+expectations of utilitarianism. One cannot deny it’s exquisitely executed
+from a user experience standpoint.</p>
+<p>How is it utilitarian? We’ll go into it more in future chapters, where we dive
+into <a class="reference external" href="#formats">Formats</a>, <a class="reference external" href="#targets">Targets</a>, and tools, such as <a class="reference external" href="https://github.com/tony/libtmux">libtmux</a>
+I made, which utilize these features.</p>
+<p>It surprises some, because servers often beget a setup process. But servers
+being involved doesn’t entail hours of configuration on each machine you run on.
+There’s no setup.</p>
+<p>When people think server, they think pain. It invokes an image of digging
+around <code class="docutils literal notranslate"><span class="pre">/etc/</span></code> for configuration files and flipping settings on and off just to
+get basic systems online. But not with tmux. It’s a server, but in the good way.</p>
+</div>
+<div class="section" id="stayin-alive">
+<h2>Stayin’ alive<a class="headerlink" href="#stayin-alive" title="Permalink to this headline">¶</a></h2>
+<p>The server part of tmux is how your sessions can stay alive, even after your client
+is detached.</p>
+<p>You can detach a tmux session from an SSH server and reconnect later.
+You can detach a tmux session, stop your X server in Linux/BSD, and reattach
+your tmux session in a TTY or new X server.</p>
+<p>The tmux server won’t go away until all sessions are closed.</p>
+</div>
+<div class="section" id="servers-hold-sessions">
+<h2>Servers hold sessions<a class="headerlink" href="#servers-hold-sessions" title="Permalink to this headline">¶</a></h2>
+<p>One server can contain one or multiple <a class="reference external" href="#sessions">sessions</a>.</p>
+<p>Starting tmux after a server already is running will create a new session inside
+the existing server.</p>
+<p>W&gt; ### Advanced: Multiple servers
+W&gt;
+W&gt; tmux is nimble. To use a separate server, pass in the <code class="docutils literal notranslate"><span class="pre">-L</span></code> flag to any
+W&gt; command.
+W&gt;
+W&gt; <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">-L</span> <span class="pre">moo</span></code> - connect to server under socket name “moo” and attach
+W&gt; a new session. Create server if none already exists for socket.
+W&gt;
+W&gt; <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">-L</span> <span class="pre">moo</span> <span class="pre">attach</span></code> will attempt to re-attach a session if one exists.</p>
+</div>
+<div class="section" id="how-servers-are-named">
+<h2>How servers are “named”<a class="headerlink" href="#how-servers-are-named" title="Permalink to this headline">¶</a></h2>
+<p>The default name for the server is <code class="docutils literal notranslate"><span class="pre">default</span></code>, which is stored as a socket in
+<code class="docutils literal notranslate"><span class="pre">/tmp</span></code>. The default directory for storing this can be overridden via setting
+the <code class="docutils literal notranslate"><span class="pre">TMUX_TMPDIR</span></code> environment variable.</p>
+<p>So, something like:</p>
+<p>{language=shell, line-numbers=off}
+$ export TMUX_TMPDIR=$HOME
+$ tmux</p>
+<p>Will give you a tmux directory created within your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> folder. On OS X,
+your home folder will probably be something like <code class="docutils literal notranslate"><span class="pre">/Users/yourusername</span></code>. On
+other systems, it may be <code class="docutils literal notranslate"><span class="pre">/home/yourusername</span></code>. If you want to find out, type
+<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">echo</span> <span class="pre">$HOME</span></code>.</p>
+</div>
+<div class="section" id="clients">
+<h2>Clients<a class="headerlink" href="#clients" title="Permalink to this headline">¶</a></h2>
+<p>Servers will have clients (you) connecting to them.</p>
+<p>When you connect to a session and see windows and panes, it’s a client
+connection into tmux.</p>
+<p>You can retrieve a list of active client connections via:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux list-clients</p>
+<p>These commands and the other <code class="docutils literal notranslate"><span class="pre">list-</span></code> commands, in practice, are rare. But, they
+are part of tmux scriptability should you want to get creative. The <a class="reference external" href="#scripting-tmux">scripting tmux</a>
+chapter will cover this in greater detail.</p>
+</div>
+<div class="section" id="clipboard-clipboard">
+<h2>Clipboard {#clipboard}<a class="headerlink" href="#clipboard-clipboard" title="Permalink to this headline">¶</a></h2>
+<p>tmux clients wield a powerful clipboard feature to copy and paste across
+sessions, windows, and panes.</p>
+<p>Much like vi, tmux handles copying as a mode in which a pane is
+temporarily placed. When inside this mode, text can be selected and copied to
+the <em>paste buffer</em>, tmux’s clipboard.</p>
+<p>The default key to enter copy mode is <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">[</span></code>.</p>
+<ol class="simple">
+<li>From within, use <code class="docutils literal notranslate"><span class="pre">[space]</span></code> to enter copy mode.</li>
+<li>Use the arrow keys to adjust the text to be selected.</li>
+<li>Press <code class="docutils literal notranslate"><span class="pre">[enter]</span></code> to copy the selected text.</li>
+</ol>
+<p>The default key to paste the text copied is <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">]</span></code>.</p>
+<p>I&gt; <em>Vi-like copy-paste</em>
+I&gt;
+I&gt; In your <a class="reference external" href="#config">config</a>, put this:
+I&gt;
+I&gt; {language=shell, line-numbers=off}
+I&gt;     # Vi copypaste mode
+I&gt;     set-window-option -g mode-keys vi
+I&gt;     bind-key -t vi-copy ‘v’ begin-selection
+I&gt;     bind-key -t vi-copy ‘y’ copy-selection</p>
+<p>In addition to the “copy mode”, tmux has advanced functionality to
+programmatically copy and paste. Later in the book, the <a class="reference external" href="#capture-pane">Capturing pane content</a>
+section in the <a class="reference external" href="#scripting-tmux">Scripting tmux</a> chapter goes into
+<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">capture-pane</span></code> and how you can use <a class="reference external" href="#targets">targets</a> to copy pane
+content into your paste buffer or files with <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">save-buffer</span></code>.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>The server is one of the fundamental underpinnings of tmux. Initialized
+automatically to the user, it persists by forking into the background. Running
+behind the scenes, it ensures sessions, windows, panes, and buffers are
+operating, even when the client is detached.</p>
+<p>The server can hold one or more <em>sessions</em>. You can copy and paste between
+sessions via the clipboard. In the next chapter, we will go deeper into the role
+sessions play and how they help you organize and control your terminal
+workspace.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="05-session.html" class="btn btn-neutral float-right" title="Sessions {#sessions}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="03-practical-usage.html" class="btn btn-neutral float-left" title="Practical usage {#practical-usage}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

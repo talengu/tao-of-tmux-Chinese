@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Practical usage {#practical-usage} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Server {#server}" href="04-server.html" />
+    <link rel="prev" title="Terminal fundamentals {#terminal-fundamentals}" href="02-terminal-fundamentals.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Practical usage {#practical-usage}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-prefix-key-prefix-key">The prefix key {#prefix-key}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nested-tmux-sessions">Nested tmux sessions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#session-persistence-and-the-server-model">Session persistence and the server model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#it-s-all-commands">It’s all commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Practical usage {#practical-usage}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/03-practical-usage.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="practical-usage-practical-usage">
+<h1>Practical usage {#practical-usage}<a class="headerlink" href="#practical-usage-practical-usage" title="Permalink to this headline">¶</a></h1>
+<p>This is the easiest part; open your terminal and type <code class="docutils literal notranslate"><span class="pre">tmux</span></code>, hit enter.</p>
+<p>{language=shell, line-numbers=off}
+$ tmux</p>
+<p>You’re in tmux.</p>
+<div class="section" id="the-prefix-key-prefix-key">
+<h2>The prefix key {#prefix-key}<a class="headerlink" href="#the-prefix-key-prefix-key" title="Permalink to this headline">¶</a></h2>
+<p>The <em>prefix</em> is how we send commands into tmux. With this, we can split windows,
+move windows, switch windows, switch sessions, send in custom commands, you name
+it.</p>
+<p>And it’s a hump we have to get over.</p>
+<p>It’s kind of like <a class="reference external" href="https://en.wikipedia.org/wiki/Street_Fighter"><em>Street Fighter</em></a>.
+In this video game, the player inputs a combination of buttons in sequence to
+perform flying spinning kicks and shoot fireballs; sweet. As the player grows
+more accustomed with the combos, they repeat moves by intuition, since they
+develop muscle memory.</p>
+<p>Without understanding how to send <em>command sequences</em> to tmux via the prefix
+key, you’ll be dead in the water.</p>
+<p>Key sequences will come up later if you use Vim, Emacs, or other TUI (Terminal
+User Interface) applications. If you haven’t internalized the concept, let’s do
+it now. Prior experience command sequences in TUI/GUI applications will come in
+handy.</p>
+<p>When you memorize a key combo, it’s one less time you’ll be moving your hand
+away from the keyboard to grab your mouse. You can focus your short-term memory
+on getting stuff done, resulting in fewer mistakes.</p>
+<p>Q&gt; ### Coming from <code class="docutils literal notranslate"><span class="pre">GNU</span> <span class="pre">Screen</span></code>?
+Q&gt;
+Q&gt; Your tmux prefix key can be set via your tmux configuration later!  In
+Q&gt; your <code class="docutils literal notranslate"><span class="pre">~/.tmux.conf</span></code> file, set the <code class="docutils literal notranslate"><span class="pre">prefix</span></code> option:
+Q&gt;
+Q&gt; {language=shell, line-numbers=off}
+Q&gt;     set-option -g prefix C-a
+Q&gt;
+Q&gt; This will set the prefix key to <code class="docutils literal notranslate"><span class="pre">screen(1)</span></code>’s (another terminal
+Q&gt; multiplexer’s) prefix key.</p>
+<p>The default leader prefix is <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-b&gt;</span></code>. While holding down the <code class="docutils literal notranslate"><span class="pre">control</span></code> key,
+press <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<p>X&gt; ### Sending tmux commands
+X&gt;
+X&gt; Practice:
+X&gt;
+X&gt; 1. Press <code class="docutils literal notranslate"><span class="pre">control</span></code> key down and <em>hold it</em>.
+X&gt; 2. Press <code class="docutils literal notranslate"><span class="pre">b</span></code> and hold it.
+X&gt; 3. Release both keys at the same time.
+X&gt;
+X&gt; Try it a few times. It may feel unnatural until you’ve done it a couple
+X&gt; times, which is normal when memorizing shortcuts.
+X&gt;
+X&gt; Now, let’s try something:
+X&gt;
+X&gt; <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-b&gt;</span> <span class="pre">d</span></code>. So,
+X&gt;
+X&gt; 1. Press <code class="docutils literal notranslate"><span class="pre">control</span></code> key down and <em>hold it</em>.
+X&gt; 2. Press <code class="docutils literal notranslate"><span class="pre">b</span></code> and hold it.
+X&gt; 3. Release both keys at the same time.
+X&gt; 4. Hit <code class="docutils literal notranslate"><span class="pre">d</span></code>!
+X&gt;
+X&gt; You’ve sent tmux your first command, and you’re now outside of tmux!</p>
+<p>You’ve detached the tmux session you were in. You can reattach via <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">attach</span></code>.</p>
+<div class="section" id="nested-tmux-sessions">
+<h3>Nested tmux sessions<a class="headerlink" href="#nested-tmux-sessions" title="Permalink to this headline">¶</a></h3>
+<p>You can also send the prefix key to <em>nested</em> tmux sessions. For instance, if
+you’re inside a tmux client on a <em>local</em> machine and you SSH into a <em>remote</em> machine
+in one of your panes, on the remote machine, you can attach the client via <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">attach</span></code> as you normally would. To send the prefix key to the machine’s tmux
+client, not your local one, hit the prefix key again.</p>
+<p>So, if your prefix key is the default, <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-b&gt;</span></code>, do <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-b&gt;</span></code> + <code class="docutils literal notranslate"><span class="pre">b</span></code> again,
+<em>then</em> hit the shortcut for what you want to do.</p>
+<p>Example: If you wanted to create a window on the remote machine, which would normally
+be <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-b&gt;</span></code> + <code class="docutils literal notranslate"><span class="pre">c</span></code> locally, it’d be <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-b&gt;</span></code> + <code class="docutils literal notranslate"><span class="pre">b</span></code> + <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
+<p>Hereinafter, the book will refer to shortcuts by <code class="docutils literal notranslate"><span class="pre">Prefix</span></code>. Instead
+of <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-b&gt;</span> <span class="pre">+</span> <span class="pre">d</span></code>, you will see <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">d</span></code>.</p>
+</div>
+</div>
+<div class="section" id="session-persistence-and-the-server-model">
+<h2>Session persistence and the server model<a class="headerlink" href="#session-persistence-and-the-server-model" title="Permalink to this headline">¶</a></h2>
+<p>If you use Linux or a similar system, you’ve likely brushed through <a class="reference external" href="https://en.wikipedia.org/wiki/Job_control_(Unix)">Job Control</a>,
+such as <a class="reference external" href="http://pubs.opengroup.org/onlinepubs/9699919799/utilities/fg.html"><code class="docutils literal notranslate"><span class="pre">fg(1)</span></code></a>, <a class="reference external" href="http://pubs.opengroup.org/onlinepubs/9699919799/utilities/jobs.html"><code class="docutils literal notranslate"><span class="pre">jobs(1)</span></code></a>.
+tmux behavior feels similar, like you ran <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-z&gt;</span></code> except, technically, you
+were in a “job” all along. You were just using a client to view it.</p>
+<p>Another way of understanding it: <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-b&gt;</span></code> + <code class="docutils literal notranslate"><span class="pre">d</span></code> closed the client connection,
+therefore, ‘detached’ from the session.</p>
+<p>Your tmux client disconnected from the server instance. The session, however, is
+still running in the background.</p>
+</div>
+<div class="section" id="it-s-all-commands">
+<h2>It’s all commands<a class="headerlink" href="#it-s-all-commands" title="Permalink to this headline">¶</a></h2>
+<p>Multiple roads can lead you to the same behavior. <em>Commands</em> are what tmux uses
+to define instructions for setting options, resizing, renaming, traversing,
+switching modes, copying and pasting, and so forth.</p>
+<ul class="simple">
+<li><a class="reference external" href="#config">Configs</a> are the same as automatically running commands via
+<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">command</span></code>.</li>
+<li>Internal tmux commands via <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">:</span></code> prompt.</li>
+<li>Settings defined in your configuration can also set shortcuts, which can
+execute commands via keybindings via <code class="docutils literal notranslate"><span class="pre">bind-key</span></code>.</li>
+<li>Commands called from CLI via <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">cmd</span></code></li>
+<li>To pull it all together, <a class="reference external" href="#technical-stuff">source code</a> files are prefixed
+<code class="docutils literal notranslate"><span class="pre">cmd-</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>We’ve established tmux automatically creates a server upon starting it. The
+server allows you to detach and later reattach your work. The keyboard
+sequences you send to tmux require understanding how to send the prefix key.</p>
+<p>Keyboard sequences, configuration, and command line actions all boil down to the
+same core commands inside tmux.  In our next chapter, we will cover the server.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="04-server.html" class="btn btn-neutral float-right" title="Server {#server}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="02-terminal-fundamentals.html" class="btn btn-neutral float-left" title="Terminal fundamentals {#terminal-fundamentals}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

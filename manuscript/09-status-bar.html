@@ -1,0 +1,531 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Status bar and styling {#status-bar} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Scripting tmux {#scripting-tmux}" href="10-scripting.html" />
+    <link rel="prev" title="Configuration {#config}" href="08-configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Status bar and styling {#status-bar}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#window-status-symbols">Window status symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#date-and-time">Date and time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-command-output">Shell command output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#styling">Styling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#status-line">Status line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clock-styling">Clock styling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prompt-colors">Prompt colors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#styling-while-using-tmux">Styling while using tmux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#toggling-status-line">Toggling status line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-default-config">Example: Default config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-dressed-up-status-bar-example-dressed-up">Example: Dressed up {#status-bar-example-dressed-up}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-powerline">Example: Powerline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Status bar and styling {#status-bar}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/09-status-bar.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="status-bar-and-styling-status-bar">
+<h1>Status bar and styling {#status-bar}<a class="headerlink" href="#status-bar-and-styling-status-bar" title="Permalink to this headline">¶</a></h1>
+<p>The status bar, or <em>status line</em>, serves as a customizable taskbar in the bottom
+of tmux. It is comprised of 3 sections. The status fields on either side
+of the status line are customizable. The center field is a list of windows.</p>
+<p><img alt="../_images/overview.png" src="../_images/overview.png" /></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">status-left</span></code> and <code class="docutils literal notranslate"><span class="pre">status-right</span></code> option can be configured with  variables.</p>
+<p>It’s <a class="reference external" href="#config">configurable</a> through the <code class="docutils literal notranslate"><span class="pre">.tmux.conf</span></code> file and modifiable live
+through using <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">set-option</span></code>.</p>
+<p>I&gt; <em>Finding your current status line settings</em>
+I&gt;
+I&gt; {language=shell, line-numbers=off}
+I&gt;     $ tmux show-options -g | grep status</p>
+<div class="section" id="window-status-symbols">
+<h2>Window status symbols<a class="headerlink" href="#window-status-symbols" title="Permalink to this headline">¶</a></h2>
+<p>This window list is between the left and right status bar regions.</p>
+<p>tmux indicates status of a window through symbols. See below:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>Denotes the current window.</td>
+</tr>
+<tr>
+<td>-</td>
+<td>Marks the last window (previously selected).</td>
+</tr>
+<tr>
+<td>#</td>
+<td>Window is monitored and activity has been detected.</td>
+</tr>
+<tr>
+<td>!</td>
+<td>A bell has occurred in the window.</td>
+</tr>
+<tr>
+<td>~</td>
+<td>The window has been silent for the monitor-silence interval.</td>
+</tr>
+<tr>
+<td>M</td>
+<td>The window contains the marked pane.</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>The window's active pane is zoomed.</td>
+</tr>
+</tbody>
+</table><p>Reminder: A pane can be <a class="reference external" href="#zoom-pane">zoomed</a> via <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">z</span></code>. To unzoom,
+press <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">z</span></code> or move left / right / up / down panes.</p>
+</div>
+<div class="section" id="date-and-time">
+<h2>Date and time<a class="headerlink" href="#date-and-time" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">status-left</span></code> and <code class="docutils literal notranslate"><span class="pre">status-right</span></code> accept variables for the date.</p>
+<p>This happens via piping the status templates through <a class="reference external" href="https://github.com/tmux/tmux/blob/2.3/format.c#L868"><code class="docutils literal notranslate"><span class="pre">format_expand_time</span></code></a>
+in <code class="docutils literal notranslate"><span class="pre">format.c</span></code>, which routes right into <a class="reference external" href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/strftime.html"><code class="docutils literal notranslate"><span class="pre">strftime(3)</span></code></a>
+from <code class="docutils literal notranslate"><span class="pre">time.h</span></code>.</p>
+<p>A full list of variables can be found in the documentation for <code class="docutils literal notranslate"><span class="pre">strftime(3)</span></code>.
+This can be viewed through <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">man</span> <span class="pre">strftime</span></code> on Unix-like systems.</p>
+</div>
+<div class="section" id="shell-command-output">
+<h2>Shell command output<a class="headerlink" href="#shell-command-output" title="Permalink to this headline">¶</a></h2>
+<p>You can also call applications, such as <a class="reference external" href="https://github.com/thewtex/tmux-mem-cpu-load">tmux-mem-cpu-load</a>,
+<a class="reference external" href="https://github.com/brndnmtthws/conky">conky</a>, and <a class="reference external" href="#powerline">powerline</a>.</p>
+<p>For this example, we’ll use <code class="docutils literal notranslate"><span class="pre">tmux-mem-cpu-load</span></code>. This works on Unix-like systems
+like FreeBSD, Linux distributions, and macOS.</p>
+<p>To build from source, you must have <a class="reference external" href="https://cmake.org">CMake</a> and <code class="docutils literal notranslate"><span class="pre">git</span></code>, which
+are available through your package manager. You must have a C++ compiler. On
+macOS, install Xcode CLI Utilities. You can do this by going to <em>Applications -&gt;
+Utilities</em>, launching <em>Terminal.app</em> and typing <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">xcode-select</span> <span class="pre">--install</span></code>.
+macOS can use <a class="reference external" href="https://brew.sh/">Homebrew</a> to install the CMake and git package.
+Major Linux distributions package CMake, clang, and git.</p>
+<p>Before this step, you can <code class="docutils literal notranslate"><span class="pre">cd</span></code> into any directory you’re ok keeping code in.</p>
+<p>{language=shell, line-numbers=off}
+$ git clone https://github.com/thewtex/tmux-mem-cpu-load.git
+$ cd tmux-mem-cpu-load
+$ mkdir ./build
+$ cd ./build
+$ cmake ..
+$ make</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># macOS, no sudo required
+$ make install
+
+# Linux, BSD will require sudo / root to install
+$ sudo make install
+</pre></div>
+</div>
+<p>If successful, you should see the output below:</p>
+<p>{language=shell, line-numbers=off}
+[100%] Built target tmux-mem-cpu-load
+Install the project…
+– Install configuration: “MinSizeRel”
+– Installing: /usr/local/bin/tmux-mem-cpu-load</p>
+<p>You can remove the source code you cloned from the computer. The compiled
+application is installed.</p>
+<p>You can now add <code class="docutils literal notranslate"><span class="pre">#(tmux-mem-cpu-load)</span></code> to your <code class="docutils literal notranslate"><span class="pre">status-left</span></code> or <code class="docutils literal notranslate"><span class="pre">status-right</span></code>
+option. In the “<a class="reference external" href="#status-bar-example-dressed-up">Dressed up</a>” example below, I
+use <code class="docutils literal notranslate"><span class="pre">status-left</span></code> and also theme it to be green:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#[fg=green,bg=default,bright]#(tmux-mem-cpu-load)</span></code></p>
+<p>So to apply it to your theme, you need to double check what you already have.
+You may have information on there you want to keep.</p>
+<p>{language=shell, line-numbers=off}
+$ tmux show-option -g status-right
+status-right “ “#{=21:pane_title}” %H:%M %d-%b-%y”</p>
+<p>Copy what you had in response (or change, rearrange as you see fit) then add the
+<code class="docutils literal notranslate"><span class="pre">#(tmux-mem-cpu-load)</span></code> to it. You can apply the new status line in your current
+tmux session via <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">set-option</span> <span class="pre">-g</span> <span class="pre">status-right</span></code>:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux set-option -g status-right ‘”#{=21:pane_title}” #(tmux-mem-cpu-load) %H:%M %d-%b-%y’</p>
+<p>Also, note how I switched out the double quotes on either side of the option
+with single quotes. This is required, since there are double quotes inside.</p>
+<p>You can do this with anything, for instance, try adding <a class="reference external" href="https://linux.die.net/man/1/uptime"><code class="docutils literal notranslate"><span class="pre">uptime</span></code></a>.
+This could be done by adding <code class="docutils literal notranslate"><span class="pre">#(uptime)</span></code> to your status line. Typically the
+output is pretty long, so trim it down by doing something like this:</p>
+<p>`#(uptime | cut -f 4-5 -d “ “ | cut -f 1 -d “,”)``</p>
+<p>In the next section, we go into how you can style (color) tmux.</p>
+</div>
+<div class="section" id="styling">
+<h2>Styling<a class="headerlink" href="#styling" title="Permalink to this headline">¶</a></h2>
+<p>The <em>colors</em> available to tmux are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">black</span></code>, <code class="docutils literal notranslate"><span class="pre">red</span></code>, <code class="docutils literal notranslate"><span class="pre">green</span></code>, <code class="docutils literal notranslate"><span class="pre">yellow</span></code>, <code class="docutils literal notranslate"><span class="pre">blue</span></code>, <code class="docutils literal notranslate"><span class="pre">magenta</span></code>, <code class="docutils literal notranslate"><span class="pre">cyan</span></code>, <code class="docutils literal notranslate"><span class="pre">white</span></code>.</li>
+<li>bright colors, such as <code class="docutils literal notranslate"><span class="pre">brightred</span></code>, <code class="docutils literal notranslate"><span class="pre">brightgreen</span></code>, <code class="docutils literal notranslate"><span class="pre">brightyellow</span></code>,
+<code class="docutils literal notranslate"><span class="pre">brightblue</span></code>, <code class="docutils literal notranslate"><span class="pre">brightmagenta</span></code>, <code class="docutils literal notranslate"><span class="pre">brightcyan</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">colour0</span></code> through <code class="docutils literal notranslate"><span class="pre">colour255</span></code> from the 256-color set.</li>
+<li><code class="docutils literal notranslate"><span class="pre">default</span></code></li>
+<li>hexadecimal RGB code like <code class="docutils literal notranslate"><span class="pre">#000000</span></code>, <code class="docutils literal notranslate"><span class="pre">#FFFFFF</span></code>, similar to HTML colors.</li>
+</ul>
+<div class="section" id="status-line">
+<h3>Status line<a class="headerlink" href="#status-line" title="Permalink to this headline">¶</a></h3>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">[bg=color]</span></code> and <code class="docutils literal notranslate"><span class="pre">[fg=color]</span></code> to adjust the text color and
+background within for status line text. This works on <code class="docutils literal notranslate"><span class="pre">status-left</span></code> and
+<code class="docutils literal notranslate"><span class="pre">status-right</span></code>.</p>
+<p>Let’s say you want to style the background:</p>
+<p>Command: <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">set-option</span> <span class="pre">status-style</span> <span class="pre">fg=white,bg=black</span></code></p>
+<p>In config: <code class="docutils literal notranslate"><span class="pre">status-style</span> <span class="pre">fg=white,bg=black</span></code></p>
+<p>In the examples at the end of the chapter, you will see complete examples of how
+colors can be used.</p>
+</div>
+<div class="section" id="clock-styling">
+<h3>Clock styling<a class="headerlink" href="#clock-styling" title="Permalink to this headline">¶</a></h3>
+<p>You can style the color of the tmux clock via:</p>
+<p>{lang=”text”, line-numbers=off}
+set-option -g clock-mode-colour white</p>
+<p>Reminder: Clock mode can be opened with <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">clock-mode</span></code> or <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">t</span></code>.
+Pressing any key will exit clock mode.</p>
+</div>
+<div class="section" id="prompt-colors">
+<h3>Prompt colors<a class="headerlink" href="#prompt-colors" title="Permalink to this headline">¶</a></h3>
+<p>The benefit of wrapping your brain around this styling is you will see
+it <code class="docutils literal notranslate"><span class="pre">message-command-style</span></code>, <code class="docutils literal notranslate"><span class="pre">message</span> <span class="pre">style</span></code> and so on.</p>
+<p>Let’s try this:</p>
+<p>{lang=”shell”, line-numbers=off}
+$ tmux set-option -ag message-style fg=yellow,blink; set-option -ag message-style bg=black</p>
+<p><img alt="../_images/prompt.png" src="../_images/prompt.png" />Top: default scheme for prompt. Bottom: newly-styled.</p>
+</div>
+</div>
+<div class="section" id="styling-while-using-tmux">
+<h2>Styling while using tmux<a class="headerlink" href="#styling-while-using-tmux" title="Permalink to this headline">¶</a></h2>
+<p>So, you want to customize your tmux status line before you write the changes to
+your <a class="reference external" href="#config">config</a> file.</p>
+<p>Start by grabbing your current status line section you want to edit, for
+instance:</p>
+<p>{lang=”text”, line-numbers=off}
+$ tmux show-options -g status-left
+&gt; status-left “[#S] “
+$ tmux show-options -g status-right
+&gt; status-right “ “#{=21:pane_title}” %H:%M %d-%b-%y”</p>
+<p>Also, you can try to snip off the variable with <code class="docutils literal notranslate"><span class="pre">|</span> <span class="pre">cut</span> <span class="pre">-d'</span> <span class="pre">'</span> <span class="pre">-f2-</span></code>:</p>
+<p>{lang=”text”, line-numbers=off}
+$ tmux show-options -g status-left | cut -d’ ‘ -f2-
+&gt; “[#S] “
+$ tmux show-options -g status-right | cut -d’ ‘ -f2-
+&gt; “ “#{=21:pane_title}” %H:%M %d-%b-%y”</p>
+<p>Then, add the options to your <a class="reference external" href="#config">configuration</a>.</p>
+<p>To be sure your configuration fully works, you can start it in a different
+server via <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">-Lrandom</span></code>, verify the settings, and close it. This is helpful
+to make sure your config file isn’t missing any styling info.</p>
+</div>
+<div class="section" id="toggling-status-line">
+<h2>Toggling status line<a class="headerlink" href="#toggling-status-line" title="Permalink to this headline">¶</a></h2>
+<p>The tmux status line can be hidden, as well. Turn it off:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux set-option status off</p>
+<p>And, turn it on:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux set-option status on</p>
+<p>The above is best for scripting, but if you’re binding it to a keyboard
+shortcut, <em>toggling</em>, or reversing the current option, it can be done via
+omitting the on/off value:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux set-option status</p>
+<p>Bind toggling status line to <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">q</span></code>:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux bind-key q set-option status</p>
+</div>
+<div class="section" id="example-default-config">
+<h2>Example: Default config<a class="headerlink" href="#example-default-config" title="Permalink to this headline">¶</a></h2>
+<p><img alt="../_images/default.png" src="../_images/default.png" /></p>
+<p>This is an example of the default config you see if your tmux
+configuration has no status styling.</p>
+<p>{line-numbers=off}
+status on
+status-interval 15
+status-justify left
+status-keys vi
+status-left “[#S] “
+status-left-length 10
+status-left-style default
+status-position bottom
+status-right “ “#{=21:pane_title}” %H:%M %d-%b-%y”
+status-right-length 40
+status-right-style default
+status-style fg=black,bg=green</p>
+</div>
+<div class="section" id="example-dressed-up-status-bar-example-dressed-up">
+<h2>Example: Dressed up {#status-bar-example-dressed-up}<a class="headerlink" href="#example-dressed-up-status-bar-example-dressed-up" title="Permalink to this headline">¶</a></h2>
+<p>![](images/09-status-bar/dressed up.png)</p>
+<p>{line-numbers=off}
+status on
+status-interval 1
+status-justify centre
+status-keys vi
+status-left “#[fg=green]#H #[fg=black]• #[fg=green,bright]#(uname -r | cut -c 1-6)#[default]”
+status-left-length 20
+status-left-style default
+status-position bottom
+status-right “#[fg=green,bg=default,bright]#(tmux-mem-cpu-load) #[fg=red,dim,bg=default]#(uptime | cut -f 4-5 -d “ “ | cut -f 1 -d “,”) #[fg=white,bg=default]%a%l:%M:%S %p#[default] #[fg=blue]%Y-%m-%d”
+status-right-length 140
+status-right-style default
+status-style fg=colour136,bg=colour235</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># default window title colors</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">window</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="n">window</span><span class="o">-</span><span class="n">status</span><span class="o">-</span><span class="n">fg</span> <span class="n">colour244</span>  <span class="c1"># base0</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">window</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="n">window</span><span class="o">-</span><span class="n">status</span><span class="o">-</span><span class="n">bg</span> <span class="n">default</span>
+
+<span class="c1"># active window title colors</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">window</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="n">window</span><span class="o">-</span><span class="n">status</span><span class="o">-</span><span class="n">current</span><span class="o">-</span><span class="n">fg</span> <span class="n">colour166</span>  <span class="c1"># orange</span>
+<span class="nb">set</span><span class="o">-</span><span class="n">window</span><span class="o">-</span><span class="n">option</span> <span class="o">-</span><span class="n">g</span> <span class="n">window</span><span class="o">-</span><span class="n">status</span><span class="o">-</span><span class="n">current</span><span class="o">-</span><span class="n">bg</span> <span class="n">default</span>
+</pre></div>
+</div>
+<p>Configs can print the output of an application. In this example,
+<a class="reference external" href="https://github.com/thewtex/tmux-mem-cpu-load">tmux-mem-cpu-load</a> is providing
+system statistics in the right-side section of the status line.</p>
+<p>To build tmux-mem-cpu-load, you have to install <a class="reference external" href="https://cmake.org/">CMake</a>
+and have a C++ compiler, like <a class="reference external" href="http://clang.llvm.org/">clang</a> or <a class="reference external" href="https://gcc.gnu.org/">GCC</a>.</p>
+<p>On Ubuntu, Debian, and Mint machines, you can do this via <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">cmake</span> <span class="pre">build-essential</span></code>. On macOS w/ <a class="reference external" href="http://brew.sh/">brew</a> via <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">brew</span> <span class="pre">install</span> <span class="pre">cmake</span></code>.</p>
+<p>Source: <a class="reference external" href="https://github.com/tony/tmux-config">https://github.com/tony/tmux-config</a></p>
+</div>
+<div class="section" id="example-powerline">
+<h2>Example: Powerline<a class="headerlink" href="#example-powerline" title="Permalink to this headline">¶</a></h2>
+<p><img alt="../_images/powerline.png" src="../_images/powerline.png" /></p>
+<p>The most full-featured solution available for tmux status lines is
+<a class="reference external" href="https://github.com/powerline/powerline/">powerline</a>, which heavily utilizes the
+shell command outputs, not only to give direct system statistics, but also to
+generate graphical-like styling.</p>
+<p>To get the styling to work correctly, special fonts must be installed. The
+easiest way to use this is to install <a class="reference external" href="https://github.com/powerline/fonts">powerline fonts</a>,
+a collection of fixed width coder fonts patched to support <a class="reference external" href="https://en.wikipedia.org/wiki/Wingdings">Wingdings</a>-like
+symbols.</p>
+<p><a class="reference external" href="https://powerline.readthedocs.io/en/latest/installation.html">Installation instructions</a>
+are on Read the Docs. For a better idea:</p>
+<p>{language=shell, line-numbers=off}
+$ pip install –user powerline-status psutil</p>
+<p><a class="reference external" href="https://github.com/giampaolo/psutil">psutil</a>, a required dependency of
+powerline, is a cross-platform tool to gather system information.</p>
+<p>Assure you <a class="reference external" href="#troubleshoot-site-paths">properly configured python with your PATHs</a>,
+and try this:</p>
+<p>{line-numbers=off}
+set -g status-interval 2
+set -g status-right ‘#(powerline tmux right)’</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Configuring the status line is optional. It can use the output of programs
+installed on your system to give you specialized information, such as CPU, ram,
+and I/O usage. By default, you’ll at least have a window list and a clock.</p>
+<p>In addition, you can customize the colors of the status line, clock, and prompt.
+By default, it’s only a green bar with dark text, so take some time to customize
+yours, if you want, and save it to your <a class="reference external" href="#config">configuration</a>.</p>
+<p>In the next chapter, we will go into the command line and scripting features of
+tmux.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="10-scripting.html" class="btn btn-neutral float-right" title="Scripting tmux {#scripting-tmux}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="08-configuration.html" class="btn btn-neutral float-left" title="Configuration {#config}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

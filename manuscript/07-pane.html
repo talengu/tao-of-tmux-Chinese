@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Panes {#panes} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration {#config}" href="08-configuration.html" />
+    <link rel="prev" title="Windows {#windows}" href="06-window.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Panes {#panes}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-new-panes">Creating new panes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#traversing-panes-pane-traversal">Traversing Panes {#pane-traversal}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zoom-in-zoom-pane">Zoom in {#zoom-pane}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resizing-panes-resizing-panes">Resizing panes {#resizing-panes}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#outputting-pane-to-a-file">Outputting pane to a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Panes {#panes}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/07-pane.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="panes-panes">
+<h1>Panes {#panes}<a class="headerlink" href="#panes-panes" title="Permalink to this headline">¶</a></h1>
+<p>Panes are <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudoterminal">pseudoterminals</a>
+encapsulating shells (e.g., Bash, Zsh). They reside within a <a class="reference external" href="#windows">window</a>.
+A terminal within a terminal, they can run shell commands, scripts, and programs,
+like vim, emacs, top, htop, irssi, weechat, and so on within them.</p>
+<p><img alt="../_images/pane.png" src="../_images/pane.png" /></p>
+<div class="section" id="creating-new-panes">
+<h2>Creating new panes<a class="headerlink" href="#creating-new-panes" title="Permalink to this headline">¶</a></h2>
+<p>To create a new pane, you can <code class="docutils literal notranslate"><span class="pre">split-window</span></code> from within the current
+<a class="reference external" href="#windows">window</a> and pane you are in.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Prefix</code> + <code>%</code></td>
+<td><code>split-window -h</code> (split horizontally)</td>
+</tr>
+<tr>
+<td><code>Prefix</code> + <code>"</code></td>
+<td><code>split-window -v</code> (split vertically)</td>
+</tr>
+</tbody>
+</table><p>You can continue to create panes until you’ve reached the limit of what the
+terminal can fit. This depends on the dimensions of your terminal. A normal
+window will usually have 1 to 5 panes open.</p>
+<p>Example usage:</p>
+<p>{language=shell, line-numbers=off}
+# Create pane horizontally, $HOME directory, 50% width of current pane
+$ tmux split-window -h -c $HOME -p 50 vim</p>
+<p>{width=75%}
+![](images/07-pane/splitw/-h -c $HOME -p 50 vim - 2 panes.png)</p>
+<p>{language=shell, line-numbers=off}
+# create new pane, split vertically with 75% height
+tmux split-window -p 75</p>
+<p>{width=75%}
+![](images/07-pane/splitw/-p 75.png)</p>
+<p>{pagebreak}</p>
+</div>
+<div class="section" id="traversing-panes-pane-traversal">
+<h2>Traversing Panes {#pane-traversal}<a class="headerlink" href="#traversing-panes-pane-traversal" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Prefix</code> + <code>;</code></td>
+<td>Move to the previously active pane.</td>
+</tr>
+<tr>
+<td><code>Prefix</code> + <code>Up</code> /</td>
+<td>Change to the pane above, below,</td>
+</tr>
+<tr>
+<td><code>Down</code> / <code>Left</code> /</td>
+<td>to the left, or to the</td>
+</tr>
+<tr>
+<td><code>Right</code></td>
+<td>the right of the current pane.</td>
+</tr>
+<tr>
+<td><code>Prefix</code> + <code>o</code></td>
+<td>Select the next pane in the current window.</td>
+</tr>
+</tbody>
+</table><p>I&gt; <em>Moving around vimtuitively</em>
+I&gt;
+I&gt; If you like vim (hjkl) keybindings, add these to your <a class="reference external" href="#config">config</a>:
+I&gt;
+I&gt; {language=shell, line-numbers=off}
+I&gt;     # hjkl pane traversal
+I&gt;     bind h select-pane -L
+I&gt;     bind j select-pane -D
+I&gt;     bind k select-pane -U
+I&gt;     bind l select-pane -R</p>
+</div>
+<div class="section" id="zoom-in-zoom-pane">
+<h2>Zoom in {#zoom-pane}<a class="headerlink" href="#zoom-in-zoom-pane" title="Permalink to this headline">¶</a></h2>
+<p>To zoom in on a pane, navigate to it and do <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p>
+<p>You can unzoom by pressing <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">z</span></code> again.</p>
+<p>In addition, you can unzoom and move to an adjacent pane at the same time
+using a <a class="reference external" href="#pane-traversal">pane traversal</a> key.</p>
+<p>Behind the scenes, the keybinding is a shortcut for <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">resize-pane</span> <span class="pre">-Z</span></code>. So,
+if you ever wanted to script tmux to zoom/unzoom a pane or apply this
+functionality to a custom key binding, you can do that too, for instance:</p>
+<p>{line-numbers=off}
+bind-key -T prefix y resize-pane -Z</p>
+<p>This would have <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">y</span></code> zoom and unzoom panes.</p>
+</div>
+<div class="section" id="resizing-panes-resizing-panes">
+<h2>Resizing panes {#resizing-panes}<a class="headerlink" href="#resizing-panes-resizing-panes" title="Permalink to this headline">¶</a></h2>
+<p>Pane size can be adjusted within <a class="reference external" href="#windows">windows</a> via <a class="reference external" href="#window-layouts">window layouts</a>
+and <code class="docutils literal notranslate"><span class="pre">resize-pane</span></code>. Adjusting window layout switches the proportions and order of
+the panes. Resizing the panes targets a specific pane inside the window
+containing it, also shrinking or growing the size of the other columns or rows.
+It’s like adjusting your car seat or reclining on a flight; if you take up more
+space, something else will have less space.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Prefix M-Up</code></td>
+<td><code>resize-pane -U 5</code></td>
+</tr>
+<tr>
+<td><code>Prefix M-Down</code></td>
+<td><code>resize-pane -D 5</code></td>
+</tr>
+<tr>
+<td><code>Prefix M-Left</code></td>
+<td><code>resize-pane -L 5</code></td>
+</tr>
+<tr>
+<td><code>Prefix M-Right</code></td>
+<td><code>resize-pane -R 5</code></td>
+</tr>
+<tr>
+<td><code>Prefix C-Up</code></td>
+<td><code>resize-pane -U</code></td>
+</tr>
+<tr>
+<td><code>Prefix C-Down</code></td>
+<td><code>resize-pane -D</code></td>
+</tr>
+<tr>
+<td><code>Prefix C-Left</code></td>
+<td><code>resize-pane -L</code></td>
+</tr>
+<tr>
+<td><code>Prefix C-Right</code></td>
+<td><code>resize-pane -R</code></td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="outputting-pane-to-a-file">
+<h2>Outputting pane to a file<a class="headerlink" href="#outputting-pane-to-a-file" title="Permalink to this headline">¶</a></h2>
+<p>You can output the display of a pane to a file.</p>
+<p>{language=shell, line-numbers=off}
+$ tmux pipe-pane -o ‘cat &gt;&gt;~/output.#I-#P’</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">#I</span></code> and <code class="docutils literal notranslate"><span class="pre">#P</span></code> are <a class="reference external" href="#formats">formats</a> for window index and pane index, so
+the file created is unique. Clever!</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Panes are shells within a shell. You can keep adding panes to a tmux window
+until you run out of room on your screen. Within your shell, you can <code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-F</span></code>
+log files, write and run scripts, and run <a class="reference external" href="https://en.wikipedia.org/wiki/Curses_(programming_library)">curses</a>-powered
+applications, like vim, top, htop, ncmpcpp, irssi, weechat, mutt, and so on.</p>
+<p>You will always have at least one pane open. Once you kill the last pane in
+the window, the window will close. Panes are also resizable; you can resize
+panes by targeting them specifically and changing the window layout.</p>
+<p>In the next chapter, we will go into the ways you can customize your tmux
+shortcuts, status line, and behavior.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="08-configuration.html" class="btn btn-neutral float-right" title="Configuration {#config}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="06-window.html" class="btn btn-neutral float-left" title="Windows {#windows}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

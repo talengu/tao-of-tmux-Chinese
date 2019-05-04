@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Scripting tmux {#scripting-tmux} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tips and tricks {#tips-and-tricks}" href="11-tips-and-tricks.html" />
+    <link rel="prev" title="Status bar and styling {#status-bar}" href="09-status-bar.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Scripting tmux {#scripting-tmux}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aliases-aliases">Aliases {#aliases}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pattern-matching-fnmatch">Pattern matching {#fnmatch}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#targets-targets">Targets {#targets}</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#attach-session-t-target-session"><code class="docutils literal notranslate"><span class="pre">attach-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detach-client-s-target-session-t-target-client"><code class="docutils literal notranslate"><span class="pre">detach-client</span> <span class="pre">[-s</span> <span class="pre">target-session]</span> <span class="pre">[-t</span> <span class="pre">target-client]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#has-session-t-target-session"><code class="docutils literal notranslate"><span class="pre">has-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmux-kill-session-t-target-session"><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">kill-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmux-list-clients-t-target-session"><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">list-clients</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmux-lock-client-t-target-client"><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">lock-client</span> <span class="pre">[-t</span> <span class="pre">target-client]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmux-lock-session-t-target-session"><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">lock-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmux-new-session-t-target-session"><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">new-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmux-refresh-client-t-target-client"><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">refresh-client</span> <span class="pre">[-t</span> <span class="pre">target-client]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmux-rename-session-t-target-session-session-name"><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">rename-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code> session-name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmux-show-messages-t-target-client"><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">show-messages</span> <span class="pre">[-t</span> <span class="pre">target-client]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmux-suspend-client-t-target-client"><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">suspend-client</span> <span class="pre">[-t</span> <span class="pre">target-client]</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmux-switch-client-c-target-client-t-target-session"><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">switch-client</span> <span class="pre">[-c</span> <span class="pre">target-client]</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#formats-formats">Formats {#formats}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controlling-tmux-send-keys">Controlling tmux {#send-keys}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#capturing-pane-content-capture-pane">Capturing pane content {#capture-pane}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Scripting tmux {#scripting-tmux}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/10-scripting.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="scripting-tmux-scripting-tmux">
+<h1>Scripting tmux {#scripting-tmux}<a class="headerlink" href="#scripting-tmux-scripting-tmux" title="Permalink to this headline">¶</a></h1>
+<p>The command line shortcuts and options in tmux is an area often uncharted.</p>
+<p>I will use tables in this chapter. Never get a feeling you have to commit a
+table to memory immediately. Not my intention, but every person’s way of using
+tmux is slightly different. I want to cover points most likely to benefit
+people’s flows. Full tables are in the <a class="reference external" href="#appendix-cheatsheets">cheatsheets</a>.</p>
+<div class="section" id="aliases-aliases">
+<h2>Aliases {#aliases}<a class="headerlink" href="#aliases-aliases" title="Permalink to this headline">¶</a></h2>
+<p>tmux supports a variety of alias commands. With aliases, instead of typing
+<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">attach-session</span></code> to attach a session, <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">attach</span></code> could do the trick.</p>
+<p>Most aliases come to mind via intuition and are a lot friendlier than typing the
+full hyphenated commands.</p>
+<p>{width=”narrow”}
+| Command             | Alias     |
+|———————|———–|
+| attach-session      | attach    |
+| break-pane          | breakp    |
+| capture-pane        | capturep  |
+| display-panes       | displayp  |
+| find-window         | findw     |
+| join-pane           | joinp     |
+| kill-pane           | killp     |
+| kill-window         | killw     |
+| last-pane           | lastp     |
+| last-window         | last      |
+| link-window         | linkw     |
+| list-panes          | lsp       |
+| list-windows        | lsw       |
+| move-pane           | movep     |
+| move-window         | movew     |
+| new-session         | new       |
+| new-window          | neww      |
+| next-layout         | nextl     |
+| next-window         | next      |
+| pipe-pane           | pipep     |
+| previous-layout     | prevl     |
+| previous-window     | prev      |
+| rename-window       | renamew   |
+| resize-pane         | resizep   |
+| respawn-pane        | respawnp  |
+| respawn-window      | respawnw  |
+| rotate-window       | rotatew   |
+| select-layout       | selectl   |
+| select-pane         | selectp   |
+| set-option          | set       |
+| set-window-option   | setw      |
+| show-options        | show      |
+| show-window-options | showw     |
+| split-window        | splitw    |
+| swap-pane           | swapp     |
+| swap-window         | swapw     |
+| unlink-window       | unlinkw   |</p>
+<p>If you know the full name of the command, if you were to chop the hyphen
+(-) from the command and add the first letter of the last word, you’d get the
+shortcut, e.g., <strong>swap</strong>-<strong>w</strong>indow is swapw, <strong>split</strong>-<strong>w</strong>indow is splitw.</p>
+</div>
+<div class="section" id="pattern-matching-fnmatch">
+<h2>Pattern matching {#fnmatch}<a class="headerlink" href="#pattern-matching-fnmatch" title="Permalink to this headline">¶</a></h2>
+<p>In addition to aliases, tmux commands and arguments may all be accessed via
+<a class="reference external" href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/fnmatch.html"><code class="docutils literal notranslate"><span class="pre">fnmatch(3)</span></code></a>
+patterns.</p>
+<p>For instance, you need not type <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">attach-session</span></code> every time. First,
+there’s the <a class="reference external" href="#aliases">alias</a> of <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">attach</span></code>, but additionally, more
+concise commands can be used if they partially match the name of the command or
+the target. tmux’s pattern matching allows <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">attac</span></code>, <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">att</span></code>, <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">at</span></code>
+and <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">a</span></code> to reach <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">attach</span></code>.</p>
+<p>Every tmux command has shorthands; let’s try this for <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">new-session</span></code>:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux new-session</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tmux new-sessio
+
+# ...
+
+$ tmux new-s
+</pre></div>
+</div>
+<p>and so on, until:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux new-
+ambiguous command: new-, could be: new-session, new-window</p>
+<p>The limitation, as seen above, is command matches can collide. Multiple commands
+begin with <code class="docutils literal notranslate"><span class="pre">new-</span></code>. So, if you wanted to use matches, <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">new-s</span></code> for a new
+session or <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">new-w</span></code> for a new window would be the most efficient way. But,
+the alias of <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">new</span></code> for new session and <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">neww</span></code> for new windows is
+even more concise than matching, since the special alias exists.</p>
+<p>Patterns can also match <a class="reference external" href="#targets">targets</a> with window and session names. For
+instance, a session named <code class="docutils literal notranslate"><span class="pre">mysession</span></code> can be matched via <code class="docutils literal notranslate"><span class="pre">mys</span></code>:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux attach -t mys</p>
+<p>Matching targets will fail if a pattern matches more than one item. If 2
+sessions exist, named <code class="docutils literal notranslate"><span class="pre">mysession</span></code> and <code class="docutils literal notranslate"><span class="pre">mysession2</span></code>, the above command would
+fail. To target either session, the complete target name must be specified.</p>
+</div>
+<div class="section" id="targets-targets">
+<h2>Targets {#targets}<a class="headerlink" href="#targets-targets" title="Permalink to this headline">¶</a></h2>
+<p>If a command allows target specification, it’s usually done through <code class="docutils literal notranslate"><span class="pre">-t</span></code>.</p>
+<p>Think of targets as tmux’s way of specifying a <a class="reference external" href="https://en.wikipedia.org/wiki/Unique_key">unique key</a>
+in a relational database.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Entity</th>
+<th>Prefix</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>server</td>
+<td>n/a</td>
+<td>n/a, uses socket-name and socket-path</td>
+</tr>
+<tr>
+<td>client</td>
+<td>n/a</td>
+<td>n/a, uses /dev/tty{p,s}[000-9999]</td>
+</tr>
+<tr>
+<td>session</td>
+<td>$</td>
+<td>$13</td>
+</tr>
+<tr>
+<td>window</td>
+<td>@</td>
+<td>@2313</td>
+</tr>
+<tr>
+<td>pane</td>
+<td>%</td>
+<td>%5432</td>
+</tr>
+</tbody>
+</table><p>What I use to help me remember:</p>
+<p>So, sessions are represented by dollar signs ($) because they hold your projects
+(<em>ostensibly</em> where you make money or help someone else do it).</p>
+<p>Windows are represented by the <a class="reference external" href="https://en.wikipedia.org/wiki/At_sign">at sign</a>
+(&#64;). So, windows are like referencing / messaging a user on a social
+networking website.</p>
+<p>Panes are the fun one, represented by the percent sign (%), like the
+default prompt for <a class="reference external" href="https://en.wikipedia.org/wiki/C_shell">csh</a> and
+<a class="reference external" href="https://en.wikipedia.org/wiki/Tcsh">tcsh</a>. Hey, makes sense, since panes are
+pseudoterminals!</p>
+<p>When scripting tmux, the symbols help denote the type of object, but also serve
+as a way to target something deeply, such as the pane, <em>directly</em>, without
+needing to know or specify its window or session.</p>
+<p>Here are some examples of targets, assuming one session named <code class="docutils literal notranslate"><span class="pre">mysession</span></code> and a
+client at <code class="docutils literal notranslate"><span class="pre">/dev/ttys004</span></code>:</p>
+<div class="section" id="attach-session-t-target-session">
+<h3><code class="docutils literal notranslate"><span class="pre">attach-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code><a class="headerlink" href="#attach-session-t-target-session" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux attach-session -t mysession</p>
+</div>
+<div class="section" id="detach-client-s-target-session-t-target-client">
+<h3><code class="docutils literal notranslate"><span class="pre">detach-client</span> <span class="pre">[-s</span> <span class="pre">target-session]</span> <span class="pre">[-t</span> <span class="pre">target-client]</span></code><a class="headerlink" href="#detach-client-s-target-session-t-target-client" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux detach-client -s mysession -t /dev/ttys004</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># If within client, -t is assumed to be current client
+$ tmux detach-client -s mysession
+</pre></div>
+</div>
+</div>
+<div class="section" id="has-session-t-target-session">
+<h3><code class="docutils literal notranslate"><span class="pre">has-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code><a class="headerlink" href="#has-session-t-target-session" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux has-session -t mysession</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Pattern matching session name
+$ tmux has-session -t mys
+</pre></div>
+</div>
+</div>
+<div class="section" id="tmux-kill-session-t-target-session">
+<h3><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">kill-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code><a class="headerlink" href="#tmux-kill-session-t-target-session" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux kill-session -t mysession</p>
+</div>
+<div class="section" id="tmux-list-clients-t-target-session">
+<h3><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">list-clients</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code><a class="headerlink" href="#tmux-list-clients-t-target-session" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux list-clients -t mysession</p>
+</div>
+<div class="section" id="tmux-lock-client-t-target-client">
+<h3><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">lock-client</span> <span class="pre">[-t</span> <span class="pre">target-client]</span></code><a class="headerlink" href="#tmux-lock-client-t-target-client" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux lock-clients -t /dev/ttys004</p>
+</div>
+<div class="section" id="tmux-lock-session-t-target-session">
+<h3><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">lock-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code><a class="headerlink" href="#tmux-lock-session-t-target-session" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux lock-session -t mysession</p>
+</div>
+<div class="section" id="tmux-new-session-t-target-session">
+<h3><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">new-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code><a class="headerlink" href="#tmux-new-session-t-target-session" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux new-session -t newsession</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create new-session in the background
+$ tmux new-session -t newsession -d
+</pre></div>
+</div>
+</div>
+<div class="section" id="tmux-refresh-client-t-target-client">
+<h3><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">refresh-client</span> <span class="pre">[-t</span> <span class="pre">target-client]</span></code><a class="headerlink" href="#tmux-refresh-client-t-target-client" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux refresh-client -t /dev/ttys004</p>
+</div>
+<div class="section" id="tmux-rename-session-t-target-session-session-name">
+<h3><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">rename-session</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code> session-name<a class="headerlink" href="#tmux-rename-session-t-target-session-session-name" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux rename-session -t mysession renamedsession</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># If within attached session, -t is assumed
+$ tmux rename-session renamedsession
+</pre></div>
+</div>
+</div>
+<div class="section" id="tmux-show-messages-t-target-client">
+<h3><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">show-messages</span> <span class="pre">[-t</span> <span class="pre">target-client]</span></code><a class="headerlink" href="#tmux-show-messages-t-target-client" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux show-messages -t /dev/ttys004</p>
+</div>
+<div class="section" id="tmux-suspend-client-t-target-client">
+<h3><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">suspend-client</span> <span class="pre">[-t</span> <span class="pre">target-client]</span></code><a class="headerlink" href="#tmux-suspend-client-t-target-client" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux suspend-client -t /dev/ttys004</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># If already in client
+$ tmux suspend-client
+
+# Bring client back to the foreground
+$ fg
+</pre></div>
+</div>
+</div>
+<div class="section" id="tmux-switch-client-c-target-client-t-target-session">
+<h3><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">switch-client</span> <span class="pre">[-c</span> <span class="pre">target-client]</span> <span class="pre">[-t</span> <span class="pre">target-session]</span></code><a class="headerlink" href="#tmux-switch-client-c-target-client-t-target-session" title="Permalink to this headline">¶</a></h3>
+<p>{language=shell, line-numbers=off}
+$ tmux suspend-client -c /dev/ttys004 -t othersession</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Within current client, -c is assumed
+$ tmux suspend-client -t othersession 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="formats-formats">
+<h2>Formats {#formats}<a class="headerlink" href="#formats-formats" title="Permalink to this headline">¶</a></h2>
+<p>tmux provides a minimal template language and set of variables to access
+information about your tmux environment.</p>
+<p>Formats are specified via the <code class="docutils literal notranslate"><span class="pre">-F</span></code> flag.</p>
+<p>You know how template engines, such as
+<a class="reference external" href="https://mustache.github.io/">mustache</a>, <a class="reference external" href="http://handlebarsjs.com/">handlebars</a>
+<a class="reference external" href="http://ruby-doc.org/stdlib-2.3.3/libdoc/erb/rdoc/ERB.html">ERB</a> in ruby,
+<a class="reference external" href="http://jinja.pocoo.org/docs/dev/">jinja2</a> in python,
+<a class="reference external" href="http://twig.sensiolabs.org/">twig</a> in PHP, and
+<a class="reference external" href="https://en.wikipedia.org/wiki/JavaServer_Pages">JSP</a> in Java, allow template
+variables? Formats are a similar concept.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">FORMATS</span></code> (variables) provided by tmux have expanded greatly
+since version 1.8. Some of the most commonly used formats as of tmux 2.3 are
+listed below. See the <a class="reference external" href="#appendix-formats">appendix section on formats</a> for a
+complete list.</p>
+<p>Let’s try to output it:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux list-windows -F “#{window_id} #{window_name}”
+&gt; &#64;0 zsh</p>
+<p>Here’s a cool trick to list all panes with the x and y coordinates of the cursor
+position:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux list-panes -F “#{pane_id} #{pane_current_command} #{pane_current_path} #{cursor_x},#{cursor_y}”
+&gt; %0 vim /Users/me/work/tao-of-tmux/manuscript 0,34
+%1 tmux /Users/me/work/tao-of-tmux/manuscript 0,17
+%2 man /Users/me/work/tao-of-tmux/manuscript 0,0</p>
+<p>Variables are specific to the objects being listed. For instance:</p>
+<p>Server-wide variables: <code class="docutils literal notranslate"><span class="pre">host</span></code>, <code class="docutils literal notranslate"><span class="pre">host_short</span></code> (no domain name), <code class="docutils literal notranslate"><span class="pre">socket_path</span></code>,
+<code class="docutils literal notranslate"><span class="pre">start_time</span></code> and <code class="docutils literal notranslate"><span class="pre">pid</span></code>.</p>
+<p>Session-wide variables: <code class="docutils literal notranslate"><span class="pre">session_attached</span></code>, <code class="docutils literal notranslate"><span class="pre">session_activity</span></code>,
+<code class="docutils literal notranslate"><span class="pre">session_created</span></code>, <code class="docutils literal notranslate"><span class="pre">session_height</span></code>, <code class="docutils literal notranslate"><span class="pre">session_id</span></code>, <code class="docutils literal notranslate"><span class="pre">session_name</span></code>,
+<code class="docutils literal notranslate"><span class="pre">session_width</span></code>, <code class="docutils literal notranslate"><span class="pre">session_windows</span></code> and all server-wide variables.</p>
+<p>Window variables: <code class="docutils literal notranslate"><span class="pre">window_activity</span></code>, <code class="docutils literal notranslate"><span class="pre">window_active</span></code>, <code class="docutils literal notranslate"><span class="pre">window_height</span></code>,
+<code class="docutils literal notranslate"><span class="pre">window_id</span></code>, <code class="docutils literal notranslate"><span class="pre">window_index</span></code>, <code class="docutils literal notranslate"><span class="pre">window_layout</span></code>, <code class="docutils literal notranslate"><span class="pre">window_name</span></code>, <code class="docutils literal notranslate"><span class="pre">window_panes</span></code>,
+<code class="docutils literal notranslate"><span class="pre">window_width</span></code> and all session and server variables.</p>
+<p>Pane variables: <code class="docutils literal notranslate"><span class="pre">cursor_x</span></code>, <code class="docutils literal notranslate"><span class="pre">cursor_y</span></code>, <code class="docutils literal notranslate"><span class="pre">pane_active</span></code>, <code class="docutils literal notranslate"><span class="pre">pane_current_command</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pane_current_path</span></code>, <code class="docutils literal notranslate"><span class="pre">pane_height</span></code>, <code class="docutils literal notranslate"><span class="pre">pane_id</span></code>, <code class="docutils literal notranslate"><span class="pre">pane_index</span></code>, <code class="docutils literal notranslate"><span class="pre">pane_width</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pane_pid</span></code> and all window, session and server variables.</p>
+<p>This book focuses on separating the concept of server, sessions,
+windows, and panes. With the knowledge of targets and formats, this
+separation takes shape in tmux’s internal attributes. If you <code class="docutils literal notranslate"><span class="pre">list-panes</span></code> all
+variables up the ladder, including window, session and server variables are
+available for the panes being listed. Try this:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux list-panes -F “pane: #{pane_id}, window: #{window_id}, session: #{session_id}, server: #{socket_path}”
+&gt; pane: %35, window: &#64;13, session: $6, server: /private/tmp/tmux-501/default
+pane: %38, window: &#64;13, session: $6, server: /private/tmp/tmux-501/default
+pane: %36, window: &#64;13, session: $6, server: /private/tmp/tmux-501/default</p>
+<p>Listing windows isn’t designed to display variables for pane-specific properties.
+Since a window is a collection of panes, it can have 1 or more panes open at any
+time.</p>
+<p>{language=shell, line-numbers=off}
+$ tmux list-windows -F “window: #{window_id}, panes: #{window_panes} pane_id: #{pane_id}”
+&gt; window: &#64;15, panes: 1 pane_id: %40
+window: &#64;13, panes: 3 pane_id: %36
+window: &#64;25, panes: 1 pane_id: %50</p>
+<p>This will show the window ID, prefixed by an <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol, and the number of panes
+inside the window.</p>
+<p>Surprisingly, <code class="docutils literal notranslate"><span class="pre">pane_id</span></code> shows up via <code class="docutils literal notranslate"><span class="pre">list-windows</span></code>, as of tmux 2.3. While this
+output occurs in this version of tmux, it’s undefined behavior. It’s advised to
+keep use of <code class="docutils literal notranslate"><span class="pre">-F</span></code> scoped to the objects being listing when scripting to avoid
+breakage. For instance, if you want the active pane, use <code class="docutils literal notranslate"><span class="pre">#{pane_active}</span></code> via
+<code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">list-panes</span> <span class="pre">-F</span> <span class="pre">&quot;#{pane_active}&quot;</span></code>.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">list-panes</span></code> will only show panes in a window, unless you specify
+<code class="docutils literal notranslate"><span class="pre">-a</span></code> to output all on a server or <code class="docutils literal notranslate"><span class="pre">-s</span> <span class="pre">[-t</span> <span class="pre">session-name]</span></code> for all panes in a
+session:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux list-panes -s -t mysession
+&gt; 1.0: [176x29] [history 87/2000, 21033 bytes] %0
+1.1: [87x6] [history 1814/2000, 408479 bytes] %1 (active)
+1.2: [88x6] [history 1916/2000, 464932 bytes] %2
+2.0: [176x24] [history 9/2000, 2262 bytes] %13
+2.1: [55x11] [history 55/2000, 7395 bytes] %14</p>
+<p>And the <code class="docutils literal notranslate"><span class="pre">-t</span></code> flag lists all panes in a window:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux list-panes -t &#64;0
+&gt; 0: [176x29] [history 87/2000, 21033 bytes] %0
+1: [176x36] [history 1790/2000, 407807 bytes] %1 (active)
+2: [88x6] [history 1916/2000, 464932 bytes] %2</p>
+<p>The same concept applies to <code class="docutils literal notranslate"><span class="pre">list-windows</span></code>. By default, The <code class="docutils literal notranslate"><span class="pre">-a</span></code> flag will list
+all windows on a server, <code class="docutils literal notranslate"><span class="pre">-t</span></code> lists windows within a session, and omitting <code class="docutils literal notranslate"><span class="pre">-t</span></code>
+will only list windows within the current session inside tmux.</p>
+<p>{language=shell, line-numbers=off}
+$ tmux list-windows
+&gt; 1: zsh* (3 panes) [176x36] [layout f9a4,176x36,0,0[176x29,0,0,0,176x6,0,30{87x6,0,30,1,88x6,88,30,2}]] &#64;0 (active)
+2: zsh- (5 panes) [176x36] [layout 55ef,176x36,0,0[176x24,0,0,13,176x11,0,25{55x11,0,25,14,58x11,56,25[58x7,56,25,16,58x3,56,33,17],61x11,115,25,15}]] &#64;6</p>
+</div>
+<div class="section" id="controlling-tmux-send-keys">
+<h2>Controlling tmux {#send-keys}<a class="headerlink" href="#controlling-tmux-send-keys" title="Permalink to this headline">¶</a></h2>
+<p>tmux allows sending keys, including Ctrl via <code class="docutils literal notranslate"><span class="pre">C-</span></code> or <code class="docutils literal notranslate"><span class="pre">^</span></code>, alt (Meta) via <code class="docutils literal notranslate"><span class="pre">M-</span></code>,
+and special key names. Here’s a list of special keys straight from the manual:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Up</span></code>, <code class="docutils literal notranslate"><span class="pre">Down</span></code>, <code class="docutils literal notranslate"><span class="pre">Left</span></code>, <code class="docutils literal notranslate"><span class="pre">Right</span></code>, <code class="docutils literal notranslate"><span class="pre">BSpace</span></code>, <code class="docutils literal notranslate"><span class="pre">BTab</span></code>, <code class="docutils literal notranslate"><span class="pre">DC</span></code> (Delete), <code class="docutils literal notranslate"><span class="pre">End</span></code>, <code class="docutils literal notranslate"><span class="pre">Enter</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Escape</span></code>, <code class="docutils literal notranslate"><span class="pre">F1</span></code> to <code class="docutils literal notranslate"><span class="pre">F12</span></code>, <code class="docutils literal notranslate"><span class="pre">Home</span></code>, <code class="docutils literal notranslate"><span class="pre">IC</span></code> (Insert), <code class="docutils literal notranslate"><span class="pre">NPage</span></code>/<code class="docutils literal notranslate"><span class="pre">PageDown</span></code>/<code class="docutils literal notranslate"><span class="pre">PgDn</span></code>,
+<code class="docutils literal notranslate"><span class="pre">PPage</span></code>/<code class="docutils literal notranslate"><span class="pre">PageUp</span></code>/<code class="docutils literal notranslate"><span class="pre">PgUp</span></code>, <code class="docutils literal notranslate"><span class="pre">Space</span></code>, and <code class="docutils literal notranslate"><span class="pre">Tab</span></code>.</p>
+<p>If special keys are not matched, the defined behavior is to send it as a string
+to the pane, character by character.</p>
+<p>For this example, we will use <code class="docutils literal notranslate"><span class="pre">send-keys</span></code> through tmux prompt, because omitting
+target (<code class="docutils literal notranslate"><span class="pre">-t</span></code>) will direct the command to the current pane, but the keys sent will
+sometimes print before the prompt.</p>
+<p>Open tmux command prompt via <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">:</span></code> and type this after the <code class="docutils literal notranslate"><span class="pre">:</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">send-keys</span> <span class="pre">echo</span> <span class="pre">'hi'</span></code></p>
+<p>Hit enter. This inserted <em>hi</em> into the current active pane. You can also
+use targets to specify which pane to send it to.</p>
+<p>Let’s now try to send keys to another pane in our current window. Create a
+second pane via splitting the window if one doesn’t exist. You can also do this
+exercise outside of tmux or inside a scripting file and running it.</p>
+<p>Grab a pane ID from the output of <code class="docutils literal notranslate"><span class="pre">list-panes</span></code>:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux list-panes
+&gt; 0: [180x57] [history 87/2000, 21033 bytes] %0
+1: [89x14] [history 1884/2000, 509864 bytes] %1 (active)
+2: [90x14] [history 1853/2000, 465297 bytes] %2</p>
+<p><code class="docutils literal notranslate"><span class="pre">%2</span></code> looks good. Replace <code class="docutils literal notranslate"><span class="pre">%2</span></code> with the pane you want to target. This sends <code class="docutils literal notranslate"><span class="pre">cal</span></code>
+to the input:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux send-keys -t %2 ‘cal’</p>
+<p>Nice, let’s cancel that out by sending a <a class="reference external" href="https://en.wikipedia.org/wiki/Unix_signal#SIGINT"><code class="docutils literal notranslate"><span class="pre">SIGINT</span></code></a>:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux send-keys -t %2 ‘C-c’</p>
+<p>This cancelled the command and brought up a fresh input. This time, let’s send
+an Enter keypress to run <code class="docutils literal notranslate"><span class="pre">cal(1)</span></code>.</p>
+<p>{language=shell, line-numbers=off}
+$ tmux send-keys -t %2 ‘cal’ ‘Enter’</p>
+<p>This outputs in the adjacent pane.</p>
+<p><img alt="../_images/send-keys-cal.png" src="../_images/send-keys-cal.png" />Top-left: Listing panes, Bottom-left: Sending keys to right pane, Right:
+Output of cal(1).</p>
+</div>
+<div class="section" id="capturing-pane-content-capture-pane">
+<h2>Capturing pane content {#capture-pane}<a class="headerlink" href="#capturing-pane-content-capture-pane" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">capture-pane</span></code> will copy a panes’ contents.</p>
+<p>By default, the contents will be saved to tmux’s internal clipboard, the <em>paste
+buffer</em>. You can run <code class="docutils literal notranslate"><span class="pre">capture-pane</span></code> within any pane, then navigate to an
+editor, paste the contents (don’t forget to <code class="docutils literal notranslate"><span class="pre">:set</span> <span class="pre">paste</span></code> and go into insert mode
+with <code class="docutils literal notranslate"><span class="pre">i</span></code> in vim), and save it to a file. To <a class="reference external" href="#clipboard">paste</a>, use <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> +
+<code class="docutils literal notranslate"><span class="pre">]</span></code> inside the pane you’re pasting into.</p>
+<p>You can also add the <code class="docutils literal notranslate"><span class="pre">-p</span></code> flag to print it to <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_.28stdout.29">stdout</a>.
+From there, you could use <a class="reference external" href="http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_07">redirection</a>
+to place the output into a file. Let’s do <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code> so we don’t accidentally
+truncate a file:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux capture-pane -p &gt;&gt; ./test</p>
+<p>As an alternative to redirection, you can also use <code class="docutils literal notranslate"><span class="pre">save-buffer</span></code>. The <code class="docutils literal notranslate"><span class="pre">-a</span></code> flag
+will get you the same behavior as appended output direction.</p>
+<p>{language=shell, line-numbers=off}
+$ tmux save-buffer -a ./test</p>
+<p>To check what’s inside:</p>
+<p>{language=shell, line-numbers=off}
+$ cat ./test</p>
+<p>Like with <code class="docutils literal notranslate"><span class="pre">send-keys</span></code>, <a class="reference external" href="#targets">targets</a> can be specified with <code class="docutils literal notranslate"><span class="pre">-t</span></code>. Let’s
+copy a pane into tmux’s clipboard (“paste buffer”) and paste it into a text
+editor in a third pane:</p>
+<p><img alt="../_images/capture-pane-vim.png" src="../_images/capture-pane-vim.png" />Top-left: Listing panes, Bottom-left: Capturing pane output of top-left pane,
+Right: Pasting buffer into vim.</p>
+<p>Remember, you can also copy, paste, and send-keys to other windows and sessions
+also. Targets are server-wide.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>tmux has a well-devised and intuitive command system, enabling the user to
+access  bread and butter functionality quickly. At the same time, tmux provides
+a powerful way of retrieving information on its objects between <code class="docutils literal notranslate"><span class="pre">list-panes</span></code>,
+<code class="docutils literal notranslate"><span class="pre">list-windows</span></code> and <code class="docutils literal notranslate"><span class="pre">list-sessions</span></code> and formats. This makes tmux not only
+accessible and configurable, but also scriptable.</p>
+<p>The ability to retrieve explicitly and reliably, from a session down to
+a pane. All it takes is a pane’s ID to capture its contents or even send it
+keys. Used by the skilled programmer, scripting tmux can facilitate orchestrating
+terminals in ways previously deemed unrealistic; anything from niche
+shell scripts to monitor and react to behavior on systems to high-level,
+intelligent and structured control via object oriented libraries, like
+<a class="reference external" href="https://libtmux.git-pull.com">libtmux</a>.</p>
+<p>In the next chapter, we delve into optimizations that showcase the latest
+generation of unix tools that build upon old, time-tested concepts, like <a class="reference external" href="https://en.wikipedia.org/wiki/Man_page">man pages</a>
+and <a class="reference external" href="https://en.wikipedia.org/wiki/Pipeline_(Unix)">piping</a>, while maintaining
+portability across differences in platforms and graceful degradation to ensure
+development tooling works on machines missing optional tools. Also, the chapter
+will introduce <em>session managers</em>, a powerful, high-level tool leveraging tmux’s
+scripting capabilities to consistently load workspace via a declarative
+configuration.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="11-tips-and-tricks.html" class="btn btn-neutral float-right" title="Tips and tricks {#tips-and-tricks}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="09-status-bar.html" class="btn btn-neutral float-left" title="Status bar and styling {#status-bar}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

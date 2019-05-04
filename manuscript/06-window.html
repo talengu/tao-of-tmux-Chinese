@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Windows {#windows} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Panes {#panes}" href="07-pane.html" />
+    <link rel="prev" title="Sessions {#sessions}" href="05-session.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Windows {#windows}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-windows">Creating windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#naming-windows">Naming windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#traversing-windows">Traversing windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#moving-windows">Moving windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#layouts-window-layouts">Layouts {#window-layouts}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#closing-windows">Closing windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Windows {#windows}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/06-window.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="windows-windows">
+<h1>Windows {#windows}<a class="headerlink" href="#windows-windows" title="Permalink to this headline">¶</a></h1>
+<p>Windows hold <a class="reference external" href="#panes">panes</a>. They reside within a <a class="reference external" href="#sessions">session</a>.</p>
+<p>They also have <a class="reference external" href="#window-layouts">layouts</a>, which can be one of many preset
+dimensions or a custom one done through <a class="reference external" href="#pane-resizing">pane resizing</a>.</p>
+<p><img alt="../_images/window.png" src="../_images/window.png" /></p>
+<p>You can see the current windows through the <a class="reference external" href="#status-bar">status bar</a>
+at the bottom of tmux.</p>
+<div class="section" id="creating-windows">
+<h2>Creating windows<a class="headerlink" href="#creating-windows" title="Permalink to this headline">¶</a></h2>
+<p>All sessions start with at least one window open. From there, you can create and
+kill windows as you see fit.</p>
+<p>Window indexes are numbers tmux uses to determine ordering. The first window’s
+index is 0, unless you set it via <code class="docutils literal notranslate"><span class="pre">base-index</span></code> in your <a class="reference external" href="#config">configuration</a>.
+I usually <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-g</span> <span class="pre">base-index</span> <span class="pre">1</span></code> in my tmux configuration, since 0 is after 9 on
+the keyboard.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">c</span></code> will create a new window at the first open index. So, if you’re
+in the first window, and there is no second window created, it will create
+the second window. If the second window is already taken, and the third hasn’t
+been created, it will create the third window.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">base_index</span></code> is 1 and there are 7 windows created, with the 5th window
+missing, creating a new window will fill the empty 5th index, since it’s the
+next one in order and nothing is filling it. The next created window would be
+the eighth.</p>
+</div>
+<div class="section" id="naming-windows">
+<h2>Naming windows<a class="headerlink" href="#naming-windows" title="Permalink to this headline">¶</a></h2>
+<p>Just like with sessions, windows can have names. Labelling them helps keep track
+of what you’re doing inside them.</p>
+<p><img alt="../_images/rename1.png" src="../_images/rename1.png" />Renaming a window 'zsh' to 'renamed'</p>
+<p>When inside tmux, the shortcut <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">,</span></code> is most commonly used. It
+opens a prompt in the tmux status line, where you can alter the name of the
+current window.</p>
+<p>The default numbers given to windows also become muscle memory after a while.
+But naming helps you when you’re in a new tmux flow and want to organize
+yourself. Also, if you’re sharing tmux with another user, it’s good practice to
+give a hint what’s inside the windows.</p>
+</div>
+<div class="section" id="traversing-windows">
+<h2>Traversing windows<a class="headerlink" href="#traversing-windows" title="Permalink to this headline">¶</a></h2>
+<p>Moving around windows is done in two ways, first, by iterating through via
+<code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">p</span></code> and <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">n</span></code> and via the window index, which takes you
+directly to a specific window.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">2</span></code>, and so on… allows quickly navigating to
+windows via their index. Unlike window names, which change, indexes are
+consistent and only require a quick key combo for you to invoke.</p>
+<p>Prompt for a window index (useful for indexes greater than 9) with <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> +
+<code class="docutils literal notranslate"><span class="pre">'</span></code>. If the window index is 10 or above, this will help you a lot.</p>
+<p>I&gt; ### Tip: Search + Traverse Windows for Text
+I&gt;
+I&gt; You can forward to a window with a match of a text string by doing <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> +
+I&gt; <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<p>Bring up the last selected window with <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">l</span></code>.</p>
+<p>A list of current windows can be displayed with <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">w</span></code>. This also gives
+some info on what’s inside the window. Helpful when juggling a lot of things!</p>
+</div>
+<div class="section" id="moving-windows">
+<h2>Moving windows<a class="headerlink" href="#moving-windows" title="Permalink to this headline">¶</a></h2>
+<p>Windows can also be reordered one by one via <code class="docutils literal notranslate"><span class="pre">move-window</span></code> and its
+associated shortcut. This is helpful if a window is worth keeping open but not
+important or rarely looked at. After you move a window, you can continue to
+reorder them at any point in time after.</p>
+<p>The command <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">move-window</span></code> can be used to move windows.</p>
+<p>The accepted arguments are <code class="docutils literal notranslate"><span class="pre">-s</span></code> (the window you are moving) and <code class="docutils literal notranslate"><span class="pre">-t</span></code>, where you
+are moving the window to.</p>
+<p>You can also use <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">movew</span></code> for short.</p>
+<p>Example: move the current window to number 2:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux movew -t2</p>
+<p>Example: move window 2 to window 1:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux movew -s2 -t1</p>
+<p>The shortcut to prompt for an index to move the current window to is <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> +
+<code class="docutils literal notranslate"><span class="pre">.</span></code>.</p>
+</div>
+<div class="section" id="layouts-window-layouts">
+<h2>Layouts {#window-layouts}<a class="headerlink" href="#layouts-window-layouts" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">space</span></code> switches window <em>layouts</em>. These are preset configurations
+automatically adjusting proportions of <a class="reference external" href="#panes">panes</a>.</p>
+<p>As of tmux 2.3, the supported layouts are:</p>
+<p>{width=75%}
+<img alt="../_images/even-horizontal.png" src="../_images/even-horizontal.png" /></p>
+<p>{width=75%}
+<img alt="../_images/even-vertical.png" src="../_images/even-vertical.png" /></p>
+<p>{width=75%}
+<img alt="../_images/main-horizontal.png" src="../_images/main-horizontal.png" /></p>
+<p>{width=75%}
+<img alt="../_images/main-vertical.png" src="../_images/main-vertical.png" /></p>
+<p>{width=75%}
+<img alt="../_images/tiled.png" src="../_images/tiled.png" /></p>
+<p>Specific touch-ups can be done via <a class="reference external" href="#resizing-panes">resizing panes</a>.</p>
+<p>To reset the proportions of the layout (such as after splitting or resizing
+panes), you have to run <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">select-layout</span></code> again for the layout.</p>
+<p>This is different behavior than some <a class="reference external" href="https://en.wikipedia.org/wiki/Tiling_window_manager">tiling window managers</a>.
+<a class="reference external" href="https://awesomewm.org/"><em>awesome</em></a> and <a class="reference external" href="http://xmonad.org/"><em>xmonad</em></a>, for
+instance, automatically handle proportions upon new items being added to their
+layouts.</p>
+<p>To allow easy resetting to a sensible layout across machines and terminal
+dimensions, you can try this in your <a class="reference external" href="#config">config</a>:</p>
+<p>{language=shell, line-numbers=off}
+bind m set-window-option main-pane-height 60; select-layout main-horizontal</p>
+<p>This allows you to set a <code class="docutils literal notranslate"><span class="pre">main-horizontal</span></code> layout and automatically set the
+bottom panes proportionally on the bottom every time you do <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">m</span></code>.</p>
+<p>Layouts can also be custom. To get the custom layout snippet for your current
+window, try this:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux lsw -F “#{window_active} #{window_layout}” | grep “^1” | cut -d “ “ -f2</p>
+<p>To apply this layout:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux lsw -F “#{window_active} #{window_layout}” | grep “^1” | cut -d “ “ -f2
+&gt; 5aed,176x79,0,0[176x59,0,0,0,176x19,0,60{87x19,0,60,1,88x19,88,60,2}]</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># resize your panes or try doing this in another window to see the outcome
+$ tmux select-layout &quot;5aed,176x79,0,0[176x59,0,0,0,176x19,0,60{87x19,0,60,1,88x19,88,60,2}]&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="closing-windows">
+<h2>Closing windows<a class="headerlink" href="#closing-windows" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways to kill a window. First, exit or kill every pane in the
+window. Panes can be killed via <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">x</span></code> or by <code class="docutils literal notranslate"><span class="pre">Ctrl</span></code> + <code class="docutils literal notranslate"><span class="pre">d</span></code> within
+the pane’s shell. The second way, <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, prompts if you really
+want to delete the window. Warning: this will destroy all the window’s panes,
+along with the processes within them.</p>
+<p>From inside the current window, try this:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux kill-window</p>
+<p>Another thing, when <a class="reference external" href="#scripting-tmux">scripting</a> or trying to kill the window
+from outside, use a <a class="reference external" href="#targets">target</a> of the window index:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux kill-window -t2</p>
+<p>If you’re trying to find the target of the window to kill, they reside in the number
+in the middle section of the <a class="reference external" href="#status-line">status line</a> and via <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">choose-window</span></code>. You can hit “return” after you’re in choose-window to go back to
+where you were previously.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter, you learned how to manipulate windows via renaming and changing
+their layouts, a couple of ways to kill windows in a pinch or in when shell
+scripting tmux. In addition, this chapter demonstrated how to save any tmux
+layout by printing the <code class="docutils literal notranslate"><span class="pre">window_layout</span></code> template variable.</p>
+<p>If you are in a tmux session, you’ll always have at least one window open, and
+you’ll be in it. And within the window will be “pane”; a shell within a shell.
+When a window closes all of its panes, the window closes too. In the next
+chapter, we’ll go deeper into panes.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="07-pane.html" class="btn btn-neutral float-right" title="Panes {#panes}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="05-session.html" class="btn btn-neutral float-left" title="Sessions {#sessions}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

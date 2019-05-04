@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuration {#config} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Status bar and styling {#status-bar}" href="09-status-bar.html" />
+    <link rel="prev" title="Panes {#panes}" href="07-pane.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration {#config}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reloading-configuration-reload-config">Reloading configuration {#reload-config}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-configs-work">How configs work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#server-options">Server options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tweak-timing-between-key-sequences">Tweak timing between key sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#terminal-coloring">Terminal coloring</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#session-options">Session options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#base-index">Base index</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#window-options">Window options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-window-naming">Automatic window naming</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#keybindings">Keybindings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prefix-key">Prefix key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-window-with-prompt">New window with prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vi-copy-paste-keys">Vi copy-paste keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hjkl-vi-like-pane-traversal">hjkl / vi-like pane traversal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#further-inspiration">Further inspiration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Configuration {#config}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/08-configuration.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuration-config">
+<h1>Configuration {#config}<a class="headerlink" href="#configuration-config" title="Permalink to this headline">¶</a></h1>
+<p>Most tmux users break away from the defaults by creating their own customized
+configurations. These configurations vary from the trivial, such as adding
+keybindings, and adjusting the prefix key, to complex things, such as decking
+out the <a class="reference external" href="#status-bar">status bar</a> with system stats and fancy glyphs via
+powerlines.</p>
+<p>Configuration of tmux is managed through <code class="docutils literal notranslate"><span class="pre">.tmux.conf</span></code> in your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory.
+The paths <code class="docutils literal notranslate"><span class="pre">~/.tmux.conf</span></code> and <code class="docutils literal notranslate"><span class="pre">$HOME/.tmux.conf</span></code> should work on OS X, Linux, and
+BSD.</p>
+<p>Configuration is applied upon initially starting tmux. The contents of the
+configuration are tmux commands. The file can be reloaded later via
+<code class="docutils literal notranslate"><span class="pre">source-file</span></code>, which is discussed in this chapter.</p>
+<p>For a sample config, I maintain a pretty decked out one at
+<a class="reference external" href="https://github.com/tony/tmux-config">https://github.com/tony/tmux-config</a>. It’s permissively licensed, and you’re
+free to copy and paste from it as you wish.</p>
+<p>I&gt; <strong>Custom Configs</strong>
+I&gt;
+I&gt; You can specify your config via the <code class="docutils literal notranslate"><span class="pre">-f</span></code> command. Like this:
+I&gt;
+I&gt; {language=shell, line-numbers=off}
+I&gt;     $ tmux -f path/to/config.conf
+I&gt;
+I&gt; Note: If a tmux server is running in the background and you want
+I&gt; to test a fresh config, you must either shut down the rest of the
+I&gt; tmux sessions or use a different socket name. Like this:
+I&gt;
+I&gt; {language=shell, line-numbers=off}
+I&gt;     $ tmux -f path/to/config.conf -Ltesting_tmux
+I&gt;
+I&gt; And you can treat everything like normal; just keep passing <code class="docutils literal notranslate"><span class="pre">-Ltesting_tmux</span></code>
+I&gt; (or whatever socket name you feel like testing configs with) for reuse.
+I&gt;
+I&gt; {language=shell, line-numbers=off}
+I&gt;     $ tmux -Ltesting_tmux attach</p>
+<div class="section" id="reloading-configuration-reload-config">
+<h2>Reloading configuration {#reload-config}<a class="headerlink" href="#reloading-configuration-reload-config" title="Permalink to this headline">¶</a></h2>
+<p>You can apply config files in live tmux sessions. Compare this to <code class="docutils literal notranslate"><span class="pre">source</span></code> or
+<a class="reference external" href="http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#dot">“dot”</a>
+in the POSIX standard.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">:</span></code> will open the tmux prompt, then type:</p>
+<p><code class="docutils literal notranslate"><span class="pre">:source</span> <span class="pre">/path/to/config.conf</span></code></p>
+<p>And hit return.</p>
+<p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">source-file</span> <span class="pre">/path/to/config.conf</span></code> can also achieve the same result via
+command line.</p>
+<p>I&gt; <strong>Easy reloadin’</strong>
+I&gt;
+I&gt; Even better, often, you will keep your default tmux config stored in
+I&gt; <code class="docutils literal notranslate"><span class="pre">$HOME/.tmux.conf</span></code>. So, what can you do? You can <code class="docutils literal notranslate"><span class="pre">bind-key</span></code> to
+I&gt; <code class="docutils literal notranslate"><span class="pre">source-file</span> <span class="pre">~/.tmux.conf</span></code>:
+I&gt;
+I&gt; <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">r</span> <span class="pre">source</span> <span class="pre">~/.tmux.conf</span></code>
+I&gt;
+I&gt; You can also have it give you a confirmation afterwards:
+I&gt;
+I&gt; <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">r</span> <span class="pre">source</span> <span class="pre">~/.tmux.conf\;</span> <span class="pre">display</span> <span class="pre">&quot;~/.tmux.conf</span> <span class="pre">sourced!&quot;</span></code>
+I&gt;
+I&gt; Now, you can type <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">r</span></code> to get the config to reload.</p>
+<p>Note that reloading the configuration only <em>re-runs</em> the configuration file. It
+will not reset keybindings or styling you apply to tmux.</p>
+</div>
+<div class="section" id="how-configs-work">
+<h2>How configs work<a class="headerlink" href="#how-configs-work" title="Permalink to this headline">¶</a></h2>
+<p>The tmux configuration is processed just like <a class="reference external" href="https://en.wikipedia.org/wiki/Run_commands">run commands</a>
+in a <code class="docutils literal notranslate"><span class="pre">~/.zshrc</span></code> or <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file. <code class="docutils literal notranslate"><span class="pre">bind</span> <span class="pre">r</span> <span class="pre">source</span> <span class="pre">~/.tmux.conf</span></code> in the tmux
+configuration is the same as <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">bind</span> <span class="pre">r</span> <span class="pre">source</span> <span class="pre">~/.tmux.conf</span></code>.</p>
+<p>You could always create a shell script prefixing <code class="docutils literal notranslate"><span class="pre">tmux</span></code> in front of commands
+and run it on fresh servers. The result is the same. Same goes if you manually
+type in <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">set-option</span></code> and <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">bind-key</span></code> commands into any terminal (in
+or outside tmux).</p>
+<p>This in <code class="docutils literal notranslate"><span class="pre">.tmux.conf</span></code>:</p>
+<p>{language=shell, line-numbers=off}
+bind-key a send-prefix</p>
+<p>Is the same as having no <code class="docutils literal notranslate"><span class="pre">.tmux.conf</span></code> (or <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tmux</span> <span class="pre">-f/dev/null</span></code>) and typing:</p>
+<p>{language=shell, line-numbers=off}
+$ tmux bind-key a send-prefix</p>
+<p>in a newly started tmux server.</p>
+<p>The important thing to internalize is that a tmux configuration consists of
+setting server options (<code class="docutils literal notranslate"><span class="pre">set-option</span> <span class="pre">-s</span></code>), global session (<code class="docutils literal notranslate"><span class="pre">set-option</span> <span class="pre">-g</span></code>), and
+window options (<code class="docutils literal notranslate"><span class="pre">set-window-option</span> <span class="pre">-g</span></code>).</p>
+<p>The rest of this chapter is going to proceed cookbook-style. You can pick out
+these tweaks and add them to your <code class="docutils literal notranslate"><span class="pre">.tmux.conf</span></code> and <a class="reference external" href="#reload-config">reload</a>.</p>
+</div>
+<div class="section" id="server-options">
+<h2>Server options<a class="headerlink" href="#server-options" title="Permalink to this headline">¶</a></h2>
+<p>Server options are set with <code class="docutils literal notranslate"><span class="pre">set-option</span> <span class="pre">-s</span> <span class="pre">option</span> <span class="pre">value</span></code>.</p>
+<div class="section" id="tweak-timing-between-key-sequences">
+<h3>Tweak timing between key sequences<a class="headerlink" href="#tweak-timing-between-key-sequences" title="Permalink to this headline">¶</a></h3>
+<p>{line-numbers=off}
+set -s escape-time 0</p>
+</div>
+<div class="section" id="terminal-coloring">
+<h3>Terminal coloring<a class="headerlink" href="#terminal-coloring" title="Permalink to this headline">¶</a></h3>
+<p>If you’re having an issue with color detail in tmux, it may help to set
+<code class="docutils literal notranslate"><span class="pre">default-terminal</span></code> to <code class="docutils literal notranslate"><span class="pre">screen-256color</span></code>.</p>
+<p>{line-numbers=off}
+set -g default-terminal “screen-256color”</p>
+<p>This sets the <code class="docutils literal notranslate"><span class="pre">TERM</span></code> variable in new panes.</p>
+</div>
+</div>
+<div class="section" id="session-options">
+<h2>Session options<a class="headerlink" href="#session-options" title="Permalink to this headline">¶</a></h2>
+<p>Aside from the <a class="reference external" href="#status-bar">status bar</a>, covered in the next chapter, most
+user configuration will be custom keybindings. This section covers the few
+generic options, and the next section goes into snippets involving keybindings.</p>
+<div class="section" id="base-index">
+<h3>Base index<a class="headerlink" href="#base-index" title="Permalink to this headline">¶</a></h3>
+<p>This was mentioned earlier in the book, but it’s a favorite tweak of many tmux
+users, who find it more intuitive to start their window counting at <em>1</em>, rather
+than the default, <em>0</em>. To set the starting number (base index) for windows:</p>
+<p>{line-numbers=off}
+set -g base-index 1</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">base-index</span></code> assures newly created windows start at 1 and count upwards.</p>
+</div>
+</div>
+<div class="section" id="window-options">
+<h2>Window options<a class="headerlink" href="#window-options" title="Permalink to this headline">¶</a></h2>
+<p>Window options are set via <code class="docutils literal notranslate"><span class="pre">set-option</span> <span class="pre">-w</span></code> or <code class="docutils literal notranslate"><span class="pre">set-window-option</span></code>. They are the
+same thing.</p>
+<div class="section" id="automatic-window-naming">
+<h3>Automatic window naming<a class="headerlink" href="#automatic-window-naming" title="Permalink to this headline">¶</a></h3>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">automatic-rename</span></code> alters the name of the window based upon its active
+pane:</p>
+<p>{line-numbers=off}
+set-window-option -g automatic-rename</p>
+<p>Automatic renaming will be disabled for the window if you rename it manually.</p>
+</div>
+</div>
+<div class="section" id="keybindings">
+<h2>Keybindings<a class="headerlink" href="#keybindings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prefix-key">
+<h3>Prefix key<a class="headerlink" href="#prefix-key" title="Permalink to this headline">¶</a></h3>
+<p>The default <a class="reference external" href="#prefix-key">prefix key</a> in tmux is <code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-b&gt;</span></code>. You can customize
+it by setting a new prefix and unsetting the default. To set the prefix to
+<code class="docutils literal notranslate"><span class="pre">&lt;Ctrl-a&gt;</span></code>, like GNU Screen, try this:</p>
+<p>{line-numbers=off}
+set-option -g prefix C-a
+unbind-key C-b
+bind-key a send-prefix</p>
+</div>
+<div class="section" id="new-window-with-prompt">
+<h3>New window with prompt<a class="headerlink" href="#new-window-with-prompt" title="Permalink to this headline">¶</a></h3>
+<p>Prompt for window name upon creating a new window, <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> + <code class="docutils literal notranslate"><span class="pre">C</span></code> (capital C):</p>
+<p>{line-numbers=off}
+bind-key C command-prompt -p “Name of new window: “ “new-window -n ‘%%’”</p>
+</div>
+<div class="section" id="vi-copy-paste-keys">
+<h3>Vi copy-paste keys<a class="headerlink" href="#vi-copy-paste-keys" title="Permalink to this headline">¶</a></h3>
+<p>This is comprised of two-parts: Setting the <code class="docutils literal notranslate"><span class="pre">mode-keys</span></code> window option to vi and
+setting the <code class="docutils literal notranslate"><span class="pre">vi-copy</span></code> bindings to use <code class="docutils literal notranslate"><span class="pre">v</span></code> to begin selection and <code class="docutils literal notranslate"><span class="pre">y</span></code> to yank.</p>
+<p>{line-numbers=off}
+# Vi copypaste mode
+set-window-option -g mode-keys vi
+bind-key -t vi-copy ‘v’ begin-selection
+bind-key -t vi-copy ‘y’ copy-selection</p>
+</div>
+<div class="section" id="hjkl-vi-like-pane-traversal">
+<h3>hjkl / vi-like pane traversal<a class="headerlink" href="#hjkl-vi-like-pane-traversal" title="Permalink to this headline">¶</a></h3>
+<p>Another one for vi fans, this keeps your right hand on the home row when moving
+directionally across panes in a window.</p>
+<p>{line-numbers=off}
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R</p>
+</div>
+<div class="section" id="further-inspiration">
+<h3>Further inspiration<a class="headerlink" href="#further-inspiration" title="Permalink to this headline">¶</a></h3>
+<p>For more ideas, I have a <code class="docutils literal notranslate"><span class="pre">.tmux.conf</span></code> you can copy-paste from on the internet at
+<a class="reference external" href="https://github.com/tony/tmux-config/blob/master/.tmux.conf">https://github.com/tony/tmux-config/blob/master/.tmux.conf</a>.</p>
+<p>In the next chapter, we will go into configuring the <a class="reference external" href="#status-bar">status line</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="09-status-bar.html" class="btn btn-neutral float-right" title="Status bar and styling {#status-bar}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="07-pane.html" class="btn btn-neutral float-left" title="Panes {#panes}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

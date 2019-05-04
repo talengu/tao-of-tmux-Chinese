@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Thinking in tmux {#thinking-tmux} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Terminal fundamentals {#terminal-fundamentals}" href="02-terminal-fundamentals.html" />
+    <link rel="prev" title="Foreword" href="00-foreword.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Thinking in tmux {#thinking-tmux}</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#window-manager-for-the-terminal">Window manager for the terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multitasking">Multitasking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#keep-your-applications-running-in-the-background">Keep your applications running in the background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#powerful-combos">Powerful combos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12-takeaway.html">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Thinking in tmux {#thinking-tmux}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/01-thinking-tmux.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>{mainmatter}</p>
+<div class="section" id="thinking-in-tmux-thinking-tmux">
+<h1>Thinking in tmux {#thinking-tmux}<a class="headerlink" href="#thinking-in-tmux-thinking-tmux" title="Permalink to this headline">¶</a></h1>
+<p>In the world of modern computing, user interaction has 2 realms:</p>
+<ol class="simple">
+<li>The text realm</li>
+<li>The graphical realm</li>
+</ol>
+<p>tmux lives in the graphical realm in which fixed-width fonts appear in
+a rectangular grid in a window, like in a terminal from the 1980s.</p>
+<p><img alt="../_images/server-with-laptop.png" src="../_images/server-with-laptop.png" /></p>
+<div class="section" id="window-manager-for-the-terminal">
+<h2>Window manager for the terminal<a class="headerlink" href="#window-manager-for-the-terminal" title="Permalink to this headline">¶</a></h2>
+<p>tmux is to the console what a desktop is to GUI apps. It’s a world inside the
+text dimension. Inside tmux, you can:</p>
+<ul class="simple">
+<li>multitask inside the terminal, run multiple applications</li>
+<li>have multiple command lines (pane) in the same window</li>
+<li>have multiple windows (window) in the workspace (session)</li>
+<li>switch between multiple workspaces, like virtual desktops</li>
+</ul>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th><strong>tmux</strong></th>
+<th><strong>"Desktop"-Speak</strong></th>
+<th><strong>Plain English</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multiplexer</td>
+<td>Multi-tasking</td>
+<td>Multiple applications</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>simultaneously.</td>
+</tr>
+<tr>
+<td>-------------------</td>
+<td>----------------------</td>
+<td>-----------------------------------</td>
+</tr>
+<tr>
+<td>Session</td>
+<td>Desktop</td>
+<td>Applications are visible here</td>
+</tr>
+<tr>
+<td>-------------------</td>
+<td>----------------------</td>
+<td>-----------------------------------</td>
+</tr>
+<tr>
+<td>Window</td>
+<td>Virtual Desktop or</td>
+<td>Desktop containing its own screen</td>
+</tr>
+<tr>
+<td></td>
+<td>applications</td>
+<td></td>
+</tr>
+<tr>
+<td>-------------------</td>
+<td>----------------------</td>
+<td>-----------------------------------</td>
+</tr>
+<tr>
+<td>Pane</td>
+<td>Application</td>
+<td>Performs operations</td>
+</tr>
+</tbody>
+</table><p>Just like in a graphical desktop environment, they throw in a clock, too.</p>
+<p>{width=75%}
+<img alt="../_images/clocks.png" src="../_images/clocks.png" />top-left: KDE. top-right: Windows 10. center: macOS Sierra. bottom: tmux 2.3 default status bar.</p>
+</div>
+<div class="section" id="multitasking">
+<h2>Multitasking<a class="headerlink" href="#multitasking" title="Permalink to this headline">¶</a></h2>
+<p>tmux allows you to keep multiple terminals running on the same screen. After
+all, the abbreviation “tmux” comes from - <strong>T</strong>erminal <strong>Mu</strong>ltiple<strong>x</strong>er.</p>
+<p>In addition to multiple terminals on one screen, tmux allows you to create and link
+multiple “windows” within the confines of the tmux session you attached.</p>
+<p>Even better, you can copy and paste and scroll. No requirement for graphics
+either, so you have full power, even if you’re SSH’ing or on a system without
+a display server such as <a class="reference external" href="https://en.wikipedia.org/wiki/X.Org_Server">X</a>.</p>
+<p>Here are a few common scenarios:</p>
+<ul class="simple">
+<li>Running <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">tail</span> <span class="pre">-F</span> <span class="pre">/var/log/apache2/error.log</span></code> in a
+pane to get a live stream of the latest system events.</li>
+<li>Running a file watcher, like <a class="reference external" href="https://github.com/facebook/watchman">watchman</a>,
+<a class="reference external" href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpwatchglob-opts-tasks">gulp-watch</a>,
+<a class="reference external" href="https://github.com/gruntjs/grunt-contrib-watch">grunt-watch</a>, <a class="reference external" href="https://github.com/guard/guard">guard</a>,
+or <a class="reference external" href="http://entrproject.org/">entr</a>. On file change, you could do stuff like:<ul>
+<li>rebuild LESS or SASS files, minimize CSS and/or assets and static files</li>
+<li>lint with linters, like <a class="reference external" href="https://github.com/google/styleguide/tree/gh-pages/cpplint">cpplint</a>,
+<a class="reference external" href="http://cppcheck.sourceforge.net/">Cppcheck</a>, <a class="reference external" href="https://github.com/bbatsov/rubocop">rubocop</a>,
+<a class="reference external" href="http://eslint.org/">ESLint</a>, or <a class="reference external" href="http://flake8.pycqa.org/en/latest/">Flake8</a></li>
+<li>rebuild with <code class="docutils literal notranslate"><span class="pre">make</span></code> or <a class="reference external" href="https://ninja-build.org/"><code class="docutils literal notranslate"><span class="pre">ninja</span></code></a></li>
+<li>reload your <a class="reference external" href="http://expressjs.com/">Express</a> server</li>
+<li>run any other custom command of your liking</li>
+</ul>
+</li>
+<li>Keeping a text editor, like vim, emacs, pico, nano, etc., open in a main pane,
+while leaving two others open for CLI commands and building via <code class="docutils literal notranslate"><span class="pre">make</span></code> or
+<code class="docutils literal notranslate"><span class="pre">ninja</span></code>.</li>
+</ul>
+<p><img alt="../_images/dev-watch.png" src="../_images/dev-watch.png" />vim + building a C++ project w/ CMake + Ninja using entr to rebuild on file changes, LLDB bottom right</p>
+<p>With tmux, you quickly have the makings of an IDE! And on your terms.</p>
+</div>
+<div class="section" id="keep-your-applications-running-in-the-background">
+<h2>Keep your applications running in the background<a class="headerlink" href="#keep-your-applications-running-in-the-background" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, GUI applications will have an option to be sidelined to the system
+tray to run in the background.  The application is out of sight, but events and
+notifications can still come in, and the app can be instantly brought to the
+foreground.</p>
+<p>In tmux, a similar concept exists, where we can “detach” a tmux session.</p>
+<p>Detaching can be especially useful on:</p>
+<ul class="simple">
+<li>Local machines. You start all your normal terminal applications within
+a tmux session, you restart X. Instead of losing your processes as you
+normally would if you were using an X terminal, like xterm or konsole, you’d
+be able to <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">attach</span></code> after and find all the processes inside that were
+alive and kicking all along.</li>
+<li>Remote SSH applications and workspaces you run in tmux. You
+can detach your tmux workspace at work before you clock out, then the next
+morning, reattach your session. Ahhh. Refreshing. :)</li>
+<li>Those servers you rarely log into. Perhaps, a cloud instance you log into 9
+months later, and as a reflex, <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">attach</span></code> to see if there is anything on
+there. And boom, you’re back in a session you’ve forgotten about, but still
+jogs your memory to what you were tweaking or fixing. It’s like a hack to
+restore your memory.</li>
+</ul>
+</div>
+<div class="section" id="powerful-combos">
+<h2>Powerful combos<a class="headerlink" href="#powerful-combos" title="Permalink to this headline">¶</a></h2>
+<p>Chatting on <a class="reference external" href="https://irssi.org/">irssi</a> or <a class="reference external" href="https://weechat.org/">weechat</a>,
+one of the “classic combos”, along with a <a class="reference external" href="https://www.bitlbee.org">bitlbee</a>
+server to manage AIM, MSN, Google Talk, Jabber, ICQ, even Twitter. Then, you can
+detach your IRC and “idle” in your favorite channels, stay online on instant
+messengers, and get back to your messages when you return.</p>
+<p><img alt="../_images/weechat.png" src="../_images/weechat.png" />Chatting on weechat w/ tmux</p>
+<p>Some keep development services running in a session. Hearty emphasis on
+<em>development</em>, you probably will want to daemonize and wrap your production web
+applications, using a tool like <a class="reference external" href="http://supervisord.org/">supervisor</a>, with its
+own safe environmental settings.</p>
+<p>You can also have multiple users attach their clients to the same sessions,
+which is great for pair programming.  If you were in the same session, you
+and the other person would see the same thing, share the same input, and the
+same active window and pane.</p>
+<p>The above are just examples; any general workspace you’d normally use in a
+terminal could work, especially projects or repetitive efforts you multitask
+on. The <em><a class="reference external" href="#tips-and-tricks">tips and tricks</a></em> section will dive into specific
+flows you can use today.</p>
+<p>Q&gt; ### Do tmux sessions persist after a system restart?
+Q&gt;
+Q&gt; Unfortunately, no. A restart will kill the tmux server and any processes
+Q&gt; running within it.
+Q&gt;
+Q&gt; Thankfully, the modern server can stay online for a long time. Even for
+Q&gt; consumer laptops and PC’s with a day or two uptime, having tmux persist
+Q&gt; tasks for organizational purposes is satisfactory to run it.
+Q&gt;
+Q&gt; It comes as a disappointment, because some are interested in being able to
+Q&gt; persist a tree of processes after restart. It goes out of the scope of what
+Q&gt; tmux is meant to do.
+Q&gt;
+Q&gt; For tasks you repeat often, you can always use a tool, like
+Q&gt; <a class="reference external" href="https://github.com/tony/tmuxp">tmuxp</a>, <a class="reference external" href="https://github.com/tmuxinator/tmuxinator">tmuxinator</a>,
+Q&gt; or <a class="reference external" href="https://github.com/remiprev/teamocil">teamocil</a>, to resume common
+Q&gt; sessions.
+Q&gt;
+Q&gt; Besides session managers, <a class="reference external" href="https://github.com/tmux-plugins/tmux-resurrect">tmux-resurrect</a>
+Q&gt; attempts to preserve running programs, working directories, and
+Q&gt; so on within tmux. The benefit with tmux-resurrect is there’s no JSON/YAML
+Q&gt; config needed.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>tmux is a versatile addition to your terminal toolbelt. It helps you cover the
+gaps between multitasking and workspace organization you’d otherwise lose, since
+there’s no GUI. In addition, it includes a nice ability to detach workspaces to
+the background and reattach later.</p>
+<p>In the next chapter, we will touch on some terminal basics before diving
+deeper into tmux.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="02-terminal-fundamentals.html" class="btn btn-neutral float-right" title="Terminal fundamentals {#terminal-fundamentals}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="00-foreword.html" class="btn btn-neutral float-left" title="Foreword" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

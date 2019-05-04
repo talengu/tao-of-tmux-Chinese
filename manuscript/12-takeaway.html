@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Takeaway {#takeaway} &mdash; tao-of-tmux v1.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'v1.0.2',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Appendix: Cheatsheets {#appendix-cheatsheets}" href="99-cheatsheets.html" />
+    <link rel="prev" title="Tips and tricks {#tips-and-tricks}" href="11-tips-and-tricks.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tao-of-tmux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-foreword.html">Foreword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-thinking-tmux.html">Thinking in tmux {#thinking-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-terminal-fundamentals.html">Terminal fundamentals {#terminal-fundamentals}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-practical-usage.html">Practical usage {#practical-usage}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-server.html">Server {#server}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-session.html">Sessions {#sessions}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-window.html">Windows {#windows}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-pane.html">Panes {#panes}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08-configuration.html">Configuration {#config}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09-status-bar.html">Status bar and styling {#status-bar}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10-scripting.html">Scripting tmux {#scripting-tmux}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11-tips-and-tricks.html">Tips and tricks {#tips-and-tricks}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Takeaway {#takeaway}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-cheatsheets.html">Appendix: Cheatsheets {#appendix-cheatsheets}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-installation.html">Appendix: Installing tmux {#appendix-installation}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-windows-bash.html">Appendix: tmux on Windows 10 {#appendix-windows-bash}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99-troubleshooting.html">Appendix: Troubleshooting {#appendix-troubleshooting}</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tao-of-tmux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Takeaway {#takeaway}</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/manuscript/12-takeaway.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="takeaway-takeaway">
+<h1>Takeaway {#takeaway}<a class="headerlink" href="#takeaway-takeaway" title="Permalink to this headline">¶</a></h1>
+<p>In this book, we’ve taken an organized approach to understanding tmux. As you
+use tmux more and more, continue to come back and use this resource to help wrap
+your brain around concepts. You do not have to understand the intricacies of
+tmux, let alone the terminal, in a single sitting. Acclimation happens over
+time.</p>
+<p>tmux’s userbase varies in skill level. Some readers of this book may have just
+learned how to use the <code class="docutils literal notranslate"><span class="pre">Prefix</span></code> key yesterday. Others are looking to tweak their
+configurations and host it in their “dot files” on github. There also exists a
+very clever hacker who utilizes the advanced scripting capabilities tmux
+offers to pilot the terminal in ways previously thought impossible.</p>
+<p>We’ve covered the <a class="reference external" href="#server">server</a>, <a class="reference external" href="#sessions">session</a>, <a class="reference external" href="#windows">window</a>,
+and <a class="reference external" href="#panes">pane</a> concepts. Panes are shells, AKA pseudoterminals or
+PTYs. The command system. That <a class="reference external" href="#config">configuration</a> is basically a file
+filled with commands. An overview of the <a class="reference external" href="#targets">target</a> system lets
+you specify objects to interact with tmux commands. A breeze through <a class="reference external" href="#formats">formats</a>,
+a template system with variables to retrieve information on tmux’s current
+state. How to <a class="reference external" href="#send-keys">send keystrokes</a> and <a class="reference external" href="#capture-pane">copy from tmux panes</a>
+programmatically. A lot of <a class="reference external" href="#tips-and-tricks">terminal tricks</a> that work across
+platforms and well with tmux, including a <a class="reference external" href="#file-watching">file watching workflow</a>
+to run linting, testing, and build commands on file changes. <a class="reference external" href="#example-projects">Two permissively licensed open source projects</a>
+for demonstration. A <a class="reference external" href="https://www.github.com/tony/tmux-config">tmux configuration</a>
+you can copy and paste from. An object oriented <a class="reference external" href="https://libtmux.git-pull.com">tmux API wrapper</a>
+and a <a class="reference external" href="https://tmuxp.git-pull.com">tmux session manager</a>.</p>
+<p>If you liked this book, please leave a review on <a class="reference external" href="http://amzn.to/2gPfRhC">Amazon</a> and
+<a class="reference external" href="https://www.goodreads.com/book/show/33246223-the-tao-of-tmux">Goodreads</a>. I
+would also appreciate you leaving something in my <a class="reference external" href="https://www.git-pull.com/support.html">tip jar</a>.
+I am an independent software developer and could use all the help I can get.</p>
+<p>If you found an error or have a suggestion, please contact me at
+<code class="docutils literal notranslate"><span class="pre">tao.of.tmux&#64;git-pull.com</span></code>. I want this book to be the best it can be.
+If you are having technical difficulties with Kindle, please send me your
+receipt and I will comp you a leanpub coupon.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="99-cheatsheets.html" class="btn btn-neutral float-right" title="Appendix: Cheatsheets {#appendix-cheatsheets}" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="11-tips-and-tricks.html" class="btn btn-neutral float-left" title="Tips and tricks {#tips-and-tricks}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tony Narlock
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
