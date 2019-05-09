@@ -1,27 +1,32 @@
 
-{mainmatter}
 
-# Thinking in tmux {#thinking-tmux}
 
-In the world of modern computing, user interaction has 2 realms:
+# tmux介绍 {#thinking-tmux}
 
-1. The text realm
-2. The graphical realm
+在计算机发展中，交互界面有两个王国：
 
-tmux lives in the graphical realm in which fixed-width fonts appear in
-a rectangular grid in a window, like in a terminal from the 1980s.
+1. 命令行界面交互
+2. 图行界面交互
+
+tmux，它存在与terminal应用中，可以将terminal分割成多个块。
 
 ![](images/info/server-with-laptop.png)
 
-## Window manager for the terminal
+## terminal的窗口管理器
 
-tmux is to the console what a desktop is to GUI apps. It's a world inside the
-text dimension. Inside tmux, you can:
+tmux 对于控制台来说，就像windows的desktop对于GUI应用。文字界面也有一个美丽的世界。使用tmux，你可以：
 
-- multitask inside the terminal, run multiple applications
-- have multiple command lines (pane) in the same window
-- have multiple windows (window) in the workspace (session)
-- switch between multiple workspaces, like virtual desktops
+- 多任务处理，运行多个程序
+
+- 同一个窗口拥有多个指令输入的行（行文中叫pane）
+
+- 在一个工作会话(session)中可以有多个窗口(window)
+
+- 就像虚拟windows桌面一样，可以在(session)中相互切换
+
+  
+
+  <p align="center"><em> 表: tmux 与 windows desktop的对应</em></p>
 
 |**tmux**           |**"Desktop"-Speak**   |**Plain English**                  |
 |-------------------|----------------------|-----------------------------------|
@@ -35,13 +40,16 @@ text dimension. Inside tmux, you can:
 |-------------------|----------------------|-----------------------------------|
 |Pane               |Application           |Performs operations                |
 
+就像图形的桌面一样，也可以在tmux的状态栏放一个日期/时间。
 
-Just like in a graphical desktop environment, they throw in a clock, too.
+<p align="center">
+  <img src="images/01-thinking-tmux/clocks.png" alt="Sample"  width="75%" >
+  <p align="center">
+		<em> 图: 左上： KDE（ubuntu等） 右上：Windows 10. 中间：macOS Sierra. 下方： tmux 2.3 默认的 status bar。</em></p>
+</p>
 
-{width=75%}
-![top-left: KDE. top-right: Windows 10. center: macOS Sierra. bottom: tmux 2.3 default status bar.](images/01-thinking-tmux/clocks.png)
 
-## Multitasking
+## 多任务处理
 
 tmux allows you to keep multiple terminals running on the same screen. After
 all, the abbreviation "tmux" comes from - **T**erminal **Mu**ltiple**x**er.
@@ -74,9 +82,9 @@ Here are a few common scenarios:
 
 ![vim + building a C++ project w/ CMake + Ninja using entr to rebuild on file changes, LLDB bottom right](images/01-thinking-tmux/dev-watch.png)
 
-With tmux, you quickly have the makings of an IDE! And on your terms.
+使用tmux，可以便利地做个IDE开发界面，快来试一试。
 
-## Keep your applications running in the background
+## 在后台运行程序
 
 Sometimes, GUI applications will have an option to be sidelined to the system
 tray to run in the background.  The application is out of sight, but events and
@@ -149,12 +157,11 @@ Q> attempts to preserve running programs, working directories, and
 Q> so on within tmux. The benefit with tmux-resurrect is there's no JSON/YAML
 Q> config needed.
 
-## Summary
+## 小节
 
 tmux is a versatile addition to your terminal toolbelt. It helps you cover the
 gaps between multitasking and workspace organization you'd otherwise lose, since
 there's no GUI. In addition, it includes a nice ability to detach workspaces to
 the background and reattach later.
 
-In the next chapter, we will touch on some terminal basics before diving
-deeper into tmux.
+在下一小节，我们会接触一些命令窗口的基本操作，进一步深入tmux。
