@@ -3,12 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to tao-of-tmux's documentation!
+tao-of-tmux 中文版!
 =======================================
 
-The Tao of tmux by Tony Narlock
+Tao of tmux 的作者是 Tony Narlock。
 
-This book is available for free to read on the web at <https://leanpub.com/the-tao-of-tmux/read>.
+本书英文可在线阅读 https://tao-of-tmux.readthedocs.io/en/latest/
+作者英文版地址 <https://leanpub.com/the-tao-of-tmux/read>
+
+翻译说明：
+我的翻译模式为，散步翻译，即有空就翻译翻译，欢迎协助翻译，在issue上说一哈就行。
+欢迎指出翻译错误的地方 https://github.com/talengu/tao-of-tmux-Chinese/issues
 
 talen move it to sphinx.
 

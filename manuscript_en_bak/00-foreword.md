@@ -1,7 +1,7 @@
 
-
+{frontmatter}
  
-# 前言 
+# Foreword 
 
 Nearly all my friends use tmux. I remember going out at night for drinks and the
 three of us would take a seat at a round table and take out our smart phones.
@@ -31,7 +31,7 @@ write it for human beings. Not to sell you on tmux, convince you to like it or
 hate it, but to tell you what it is and how some people use it. I'll leave the
 rest to you.
 
-## 关于本书
+## About this book
 
 I've helped thousands learn tmux through my free resource under the name
 [The Tao of tmux](https://tmuxp.git-pull.com/en/latest/about_tmux.html), which I
@@ -69,7 +69,7 @@ needs or interests. If you haven't installed tmux yet, please view the
 Follow [@TheTaoOfTmux](https://twitter.com/TheTaoOfTmux) for
 updates or [share on Twitter](https://twitter.com/intent/tweet?text=I%27m%20reading%20The%20Tao%20of%20tmux%20online%20at&url=https://leanpub.com/the-tao-of-tmux/read&hashtags=tmux&via=TheTaoOfTmux)!
 
-## 文字等风格说明
+## Styles
 
 Formatted text `like this` is source code.
 
@@ -84,7 +84,7 @@ For instance, `Prefix` + `d` will detach a tmux client from its session. This
 prefix, by default, is `<Ctrl-b>`, but users can override it. This is discussed in
 greater detail in *the prefix key* section and [*configuration*](#config).
 
-## 本书大致框架
+## How this book is structured
 
 First, anything involving [installation](http://man.openbsd.org/OpenBSD-current/man1/tmux.1)
 and hard technical details are in the Appendix. A lot of books use installation
@@ -146,7 +146,7 @@ administration experience.
 [*Cheatsheets*](#appendix-cheatsheets) are organized tables of commands,
 shortcuts, and formats grouped by section.
 
-## 捐赠
+## Donations
 
 If you enjoy my learning material or my open source software projects, please
 consider donating. Donations go directly to me and my current and future open source
