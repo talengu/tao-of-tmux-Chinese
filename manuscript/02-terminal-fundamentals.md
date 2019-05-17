@@ -1,14 +1,10 @@
-# Terminal fundamentals {#terminal-fundamentals}
+# Terminal 基础知识 {#terminal-fundamentals}
 
-Before getting into tmux, a few fundamentals of the command line should be 
-reviewed. Often, we're so used to using these out of street smarts and muscle
-memory, a great deal of us never see the relation of where these tools stand
-next to each other.
+在使用 tmux ，我们回顾一下命令行操作的基本知识。通常，我们使用命令行根据我们的使用经验和肌肉记忆，我们中很大一部人没有了解到工具之间的联系。
 
-Seasoned developers are familiar with Zsh, Bash, iTerm2, konsole, /dev/tty,
-shell scripting, and so on. If you use tmux, you'll be around these all the
-time, regardless whether you're in a GUI on a local machine or SSH'ing
-into a remote server.
+经验丰富的开发者对 Zsh, Bash, iTerm2, konsole, /dev/tty, shell scripting 等比较熟悉。如果使用 tmux，你将经常和这些工具打交道，不管你是使用GUI界面，还是使用SSH连接远程服务器。
+
+如果你想如何在系统kernel层（数据结构等等）处理进程和TTY
 
 If you want to learn more about how processes and TTYs work at the kernel level
 (data structures and all), the book [*The Design and Implementation of the FreeBSD

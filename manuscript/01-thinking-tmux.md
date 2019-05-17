@@ -1,7 +1,7 @@
 
 
 
-# tmux介绍 {#thinking-tmux}
+# tmux 初识{#thinking-tmux}
 
 在计算机发展中，交互界面有两个王国：
 
@@ -51,6 +51,8 @@ tmux 对于控制台来说，就像windows的desktop对于GUI应用。文字界�
 
 ## 多任务处理
 
+tmux 在一个窗口保持多个termianl。“tmux”缩写来自
+
 tmux allows you to keep multiple terminals running on the same screen. After
 all, the abbreviation "tmux" comes from - **T**erminal **Mu**ltiple**x**er.
 
@@ -82,7 +84,7 @@ Here are a few common scenarios:
 
 ![vim + building a C++ project w/ CMake + Ninja using entr to rebuild on file changes, LLDB bottom right](images/01-thinking-tmux/dev-watch.png)
 
-使用tmux，可以便利地做个IDE开发界面，快来试一试。
+使用 tmux，可以便利地做个IDE开发界面，快来试一试。
 
 ## 在后台运行程序
 
@@ -164,4 +166,4 @@ gaps between multitasking and workspace organization you'd otherwise lose, since
 there's no GUI. In addition, it includes a nice ability to detach workspaces to
 the background and reattach later.
 
-在下一小节，我们会接触一些命令窗口的基本操作，进一步深入tmux。
+在下一小节，我们会接触一些 terminal 的基本操作，进一步深入 tmux。
