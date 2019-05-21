@@ -1,11 +1,11 @@
 
 
- 
+
 # 前言 
 
-Nearly all my friends use tmux. I remember going out at night for drinks and the
-three of us would take a seat at a round table and take out our smart phones.
-This was back when phones still had physical "QWERTY" keyboards.
+几乎我所有的朋友使用tmux。我记得我们晚上出去喝酒，我们三个找一个桌子，掏出手机。这还是手机有“QWERTY”键的时代。
+
+
 
 Despite our home computers being asleep or turned off, our usernames in the IRC
 channel we frequently visited persisted in the chatroom list. Our screens were

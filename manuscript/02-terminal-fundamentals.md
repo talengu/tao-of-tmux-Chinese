@@ -4,27 +4,17 @@
 
 经验丰富的开发者对 Zsh, Bash, iTerm2, konsole, /dev/tty, shell scripting 等比较熟悉。如果使用 tmux，你将经常和这些工具打交道，不管你是使用GUI界面，还是使用SSH连接远程服务器。
 
-如果你想如何在系统kernel层（数据结构等等）处理进程和TTY
+如果你想如何在系统kernel层（数据结构等等）处理进程和TTY的细节可以参考 Marshall Kirk
+McKusick 的 [*The Design and Implementation of the FreeBSD
+Operating System (2nd Edition)*](http://amzn.to/2iTmVyv), 尤其是 Chapter 4, *Process Management* and Section
+8.6, *Terminal Handling*。和  Linus Åkesson写的 [*The TTY demystified*](http://www.linusakesson.net/programming/tty/index.php) (在线)深入 TTY，这些会帮助你理解。
 
-If you want to learn more about how processes and TTYs work at the kernel level
-(data structures and all), the book [*The Design and Implementation of the FreeBSD
-Operating System (2nd Edition)*](http://amzn.to/2iTmVyv) by Marshall Kirk
-McKusick is nice, particularly, Chapter 4, *Process Management* and Section
-8.6, *Terminal Handling*. [*The TTY demystified*](http://www.linusakesson.net/programming/tty/index.php)
-by Linus Åkesson (available online) dives into the TTY and is a good read.
 
-Much more exists to glean off the history of Unix, 4.2 BSD, etc. I probably
-could have a coffee / tea with you discussing it for hours. You could look at it
-from multiple perspectives (The C Language, anything from the Unix/BSD lineage,
-etc.), and some clever fellow would likely chime in, mentioning Linux, GNU, and
-so on. It's like *Game of Thrones*; there's multiple story arcs you can follow,
-some of which intersect. A few good video resources would be [*A Narrative History of BSD*](https://www.youtube.com/watch?v=bVSXXeiFLgk)
-by Marshall Kirk McKusick, [*The UNIX Operating System*](https://www.youtube.com/watch?v=tc4ROCJYbm0)
-by AT&T, [*Early days of Unix and design of sh*](https://www.youtube.com/watch?v=FI_bZhV7wpI)
-by Stephen R. Bourne.
+从Unix，4.2 BSD等的历史中，我们可以找到更多相关知识，我们可以讨论一整天。我们可以从多个角度来看，比如c语言或者来自Unix/BSD谱系，或者是Linux，GNU等等。就像《权力的游戏》一样;你可以从多个故事中找到线索。给一些好的 YouTube 视频资源 Marshall Kirk McKusick 讲的 [*A Narrative History of BSD*](https://www.youtube.com/watch?v=bVSXXeiFLgk)、AT&T [*The UNIX Operating System*](https://www.youtube.com/watch?v=tc4ROCJYbm0)、Stephen R. Bourne  [*Early days of Unix and design of sh*](https://www.youtube.com/watch?v=FI_bZhV7wpI)。
 
-## POSIX standards
+## POSIX 标准
 
+操作系统如 macOS（）
 Operating systems like macOS (formerly OS X), Linux, and the BSDs, follow
 something similar to the POSIX specification in terms of how they square away
 various responsibilities and interfaces of the operating system. They're
@@ -160,7 +150,7 @@ a user.
 The other thing to mention is, for `chsh -s` to work, you typically need to have
 it added to [`/etc/shells`](https://bash.cyberciti.biz/guide//etc/shells).
 
-## Summary
+## 小节
 
 To wrap it up, you will hear people talking about shells all the time.
 Context is key. It could be:
