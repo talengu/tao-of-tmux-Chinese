@@ -6,11 +6,11 @@
 same to find instructions for any command or entity with a manpage entry; here
 are some fun ones:
 
-{language=shell, line-numbers=off}
+```shell
     $ man less
     $ man man
     $ man strftime
-
+```
 [most(1)](http://www.jedsoft.org/most/), a solid [`PAGER`](http://pubs.opengroup.org/onlinepubs/9699919799//utilities/man.html),
 drastically improves readability of manual pages by acting as a syntax
 highlighter.
@@ -20,9 +20,9 @@ highlighter.
 To get this working, you need to set your `PAGER` [environmental variable](https://en.wikipedia.org/wiki/Environment_variable)
 to point to the MOST binary. You can test it like this:
 
-{language=shell, line-numbers=off}
+```
     $ PAGER=most man ls
-
+```
 If you found you like `most`, you'll probably want to make it your default
 manpage reader. You can do this by setting an environmental variable in your
 "rc" ([Run Commands](https://en.wikipedia.org/wiki/Run_commands)) for your
@@ -30,28 +30,28 @@ shell. The location of the file depends on your shell. You can use `$ echo
 $SHELL` to find it on most shells). In Bash and zsh, these are kept in
 `~/.bashrc` or `~/.zshrc`, respectively:
 
-{language=shell, line-numbers=off}
+```bash
     export PAGER="most"
-
+```
 I often reuse my configurations across machines, and some of them may not have
 `most` installed, so I will have my scripting only set `PAGER` if `most` is
 found:
 
-{language=shell, line-numbers=off}
+```bash
     #!/bin/sh
 
     if command -v most > /dev/null 2>&1; then
         export PAGER="most"
     fi
-
+```
 Save this in a file, for example, to `~/.dot-config/most.sh`.
 
 Then you can [`source`](https://en.wikipedia.org/wiki/Dot_(command)) it in via
 your main rc file.
 
-{language=shell, line-numbers=off}
+```shell
     source $HOME/.dot-config/most.sh
-
+```
 Patterns like these help make your dot-configs portable, cross-platform, and
 modular. For inspiration, you can fork, copy, and paste from my permissively-
 licensed config at <https://github.com/tony/.dot-config>.
@@ -65,9 +65,9 @@ renames and rotation.
 
 On OS X, you can do:
 
-{language=shell, line-numbers=off}
+```shell
     $ tail -F /var/log/system.log
-
+```
 and keep it running in a pane while log messages come in. It's like
 Facebook newsfeed for your system, except for programmers and system
 administrators.
@@ -99,43 +99,43 @@ Let's search for all [`.go`](https://en.wikipedia.org/wiki/Go_(programming_langu
 files in a directory and [run tests](https://golang.org/cmd/go/#hdr-Test_packages)
 on file change:
 
-{language=shell, line-numbers=off}
+```shell
     $ ls -d *.go | entr -c go test ./...
-
+```
 Sometimes, we may want to watch files recursively, but we need it to run
 reliably across systems. We can't depend on `**` existing to grab files
 recursively, since it's not portable. Something more POSIX-friendly would be
 `find . -print | grep -i '.*[.]go'`:
 
-{language=shell, line-numbers=off}
+```shell
     $ find . -print | grep -i '.*[.]go' | entr -c go test ./...
-
+```
 To only run file watcher if entr is installed, let's wrap in a conditional
 [`command -v`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/command.html)
 test:
 
-{language=shell, line-numbers=off}
+```shell
     $ if command -v entr > /dev/null; then find . -print | grep -i '.*[.]go' | \
       entr -c go test ./...; fi
-
+```
 And have it fallback to `go test` in the event `entr` isn't installed. This
 allows your command to degrade gracefully. You'll thank me when you use this
 snippet in conjunction with a [session manager](#session-manager):
 
-{language=shell, line-numbers=off}
+```shell
     $ if command -v entr > /dev/null; then find . -print | grep -i '.*[.]go' | \
       entr -c go test ./...; else go test ./...; fi
-
+```
 If the project is a team or open source project, where a user never used the
 command before and could be missing a required software package, we can give
 a helpful message. This shows a notice to the user to install entr if not
 installed on the system:
 
-{language=shell, line-numbers=off}
+```shell
     $ if command -v entr > /dev/null; then find . -print | grep -i '.*[.]go' | \
       entr -c go test ./...; else go test ./...; echo "\nInstall entr(1) to \"
       echo "run tasks when files change. \nSee http://entrproject.org/"; fi
-
+```
 Here's why you want patterns like above: You can put it into a [`Makefile`](https://en.wikipedia.org/wiki/Makefile)
 and commit it to your project's [VCS](https://en.wikipedia.org/wiki/Version_control),
 so you and other developers can have access to this reusable command across
@@ -146,33 +146,33 @@ to tabs.
 
 Let's see what a `Makefile` with this looks like:
 
-{language=makefile, line-numbers=off}
+```makefile
     watch_test:
         if command -v entr > /dev/null; then find . -print | grep -i '.*[.]go' | entr -c go test ./...; else go test ./...; echo "\nInstall entr(1) to run tasks when files change. \nSee http://entrproject.org/"; fi
-
+```
 To run this, do `$ make watch_test` in the same directory as the `Makefile`.
 
 But it's still a tad bloated and hard to read. We have a couple tricks at our
 disposal. One would be to add continuation to the next line with a trailing
 backslash (`\`):
 
-{language=makefile, line-numbers=off}
+```makefile
     watch_test:
         if command -v entr > /dev/null; then find . -print | \
         grep -i '.*[.]go' | entr -c go test ./...; \
         else go test ./...; \
         echo "\nInstall entr(1) to run tasks on file change. \n"; \
         echo "See http://entrproject.org/"; fi
-
+```
 Another would be to break the command into variables and `make` subcommands. So:
 
-{language=makefile, line-numbers=off}
+```makefile
     WATCH_FILES= find . -type f -not -path '*/\.*' | \
     grep -i '.*[.]go$$' 2> /dev/null
 
     test:
             go test $(test) ./...
-
+    
     entr_warn:
             @echo "-------------------------------------------------"
             @echo " ! File watching functionality non-operational ! "
@@ -180,11 +180,11 @@ Another would be to break the command into variables and `make` subcommands. So:
             @echo " Install entr(1) to run tasks on file change.    "
             @echo " See http://entrproject.org/                     "
             @echo "-------------------------------------------------"
-
+    
     watch_test:
             if command -v entr > /dev/null; then ${WATCH_FILES} | \
             entr -c $(MAKE) test; else $(MAKE) test entr_warn; fi
-
+```
 `$(MAKE)` is used for portability. One reason is recursive calls, such
 as here. On BSD systems, you may try invoking `make` via `gmake`
 (to call [GNU Make](https://www.gnu.org/software/make/) specifically). This

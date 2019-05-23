@@ -9,7 +9,7 @@ hand into sections for convenience.
 
 ### Session
 
-{width="wide"}
+
 | Command          | Action                                                   |
 |------------------|----------------------------------------------------------|
 | no command       | Short-cut for `new-session`                              |
@@ -24,7 +24,7 @@ hand into sections for convenience.
 
 ### Window
 
-{width="wide"}
+
 | Command              | Action                                               |
 |----------------------|------------------------------------------------------|
 | `choose-window`      | Put a window into window choice                      |
@@ -49,7 +49,7 @@ hand into sections for convenience.
 
 ### Pane
 
-{width="wide"}
+
 | Command         | Action                                                    |
 |-----------------|-----------------------------------------------------------|
 | `break-pane`    | Break a pane from an existing into a new window           |
@@ -70,7 +70,7 @@ hand into sections for convenience.
 
 ## Keybindings
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`C-b`             | Send the prefix key (C-b) through to the           |
@@ -78,7 +78,7 @@ hand into sections for convenience.
 
 ### Miscellaneous
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`C-z`             | Suspend the tmux client.                           |
@@ -93,7 +93,7 @@ hand into sections for convenience.
 
 ### Copy/Paste
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`#`               | List all paste buffers.                            |
@@ -108,14 +108,14 @@ hand into sections for convenience.
 
 ### Session
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`$`               | Rename the current session.                        |
 
 #### Session Traversal
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`L`               | Switch the attached client back to the last        |
@@ -127,7 +127,7 @@ hand into sections for convenience.
 
 ### Window
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`c`               | Create a new window.                               |
@@ -137,7 +137,7 @@ hand into sections for convenience.
 
 #### Window Traversal
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`0 to 9`          | Select windows 0 to 9.                             |
@@ -153,7 +153,7 @@ hand into sections for convenience.
 
 #### Window Moving
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`.`               | Prompt for an index to move the current window     |
@@ -162,7 +162,7 @@ hand into sections for convenience.
 
 ### Pane
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`x`               | Kill the current pane.                             |
@@ -172,7 +172,7 @@ hand into sections for convenience.
 
 #### Pane Traversal
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`;`               | Move to the previously active pane.                |
@@ -182,7 +182,7 @@ hand into sections for convenience.
 
 #### Pane Moving
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`C-o`             | Rotate the panes in the current window forwards.   |
@@ -193,7 +193,7 @@ hand into sections for convenience.
 
 #### Pane Resizing
 
-{width="wide"}
+
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`M-1 to M-5`      | Arrange panes in one of the five preset layouts:   |
@@ -210,7 +210,7 @@ hand into sections for convenience.
 
 ### Copy / paste
 
-{width="wide"}
+
 | Variable name         | Description                              |
 |-----------------------|------------------------------------------|
 | buffer_name           |Name of buffer                            |
@@ -219,7 +219,7 @@ hand into sections for convenience.
 
 ### Clients
 
-{width="wide"}
+
 | Variable name         | Description                              |
 |-----------------------|------------------------------------------|
 | client_activity       |Integer time client last had activity     |
@@ -240,7 +240,7 @@ hand into sections for convenience.
 
 ### Panes
 
-{width="wide"}
+
 | Variable name         | Description                              |
 |-----------------------|------------------------------------------|
 | alternate_on          |If pane is in alternate screen            |
@@ -283,7 +283,7 @@ hand into sections for convenience.
 
 ### Sessions
 
-{width="wide"}
+
 | Variable name         | Description                              |
 |-----------------------|------------------------------------------|
 | session_alerts        |List of window indexes with alerts        |
@@ -302,7 +302,7 @@ hand into sections for convenience.
 
 ### Windows
 
-{width="wide"}
+
 | Variable name         | Description                              |
 |-----------------------|------------------------------------------|
 | history_bytes         |Number of bytes in window history         |
@@ -331,7 +331,7 @@ hand into sections for convenience.
 
 ### Servers
 
-{width="wide"}
+
 | Variable name         | Description                              |
 |-----------------------|------------------------------------------|
 | host                  |Hostname of local host (alias: #H)        |
@@ -345,7 +345,7 @@ hand into sections for convenience.
 
 For `$ tmux list-commands`.
 
-{width="wide"}
+
 | Variable name         | Description                              |
 |-----------------------|------------------------------------------|
 | command_hooked        |Name of command hooked, if any            |

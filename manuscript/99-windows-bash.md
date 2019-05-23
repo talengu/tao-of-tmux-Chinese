@@ -12,7 +12,9 @@ You may be asked to restart.
 
 Then open Command Prompt as you normally would (Run cli.exe). Then type
 
-    C:\Users\tony> bash.exe
+```bash
+C:\Users\tony> bash.exe
+```
 
 It will prompt you to agree to terms, create a user. In my build, tmux was
 already installed! But if it's not, type `sudo apt-get install tmux`.
@@ -33,7 +35,9 @@ already installed! But if it's not, type `sudo apt-get install tmux`.
 
 ![In bash!](images/99-windows-bash/08-bash.jpg)
 
-    yourusername@COMPUTERNAME-ID321FJ:/mnt/c/Users/username$ tmux
+```shell
+yourusername@COMPUTERNAME-ID321FJ:/mnt/c/Users/username$ tmux
+```
 
 ![In tmux!](images/99-windows-bash/09-tmux.jpg)
 

@@ -2,6 +2,8 @@
 
 by Tony Narlock
 
+（talen）正在中文翻译中。。。
+
 This book is available for free to read on the web at <https://leanpub.com/the-tao-of-tmux/read>.
 
 You can also buy the book DRM-free in PDF, mobi and epub format at
