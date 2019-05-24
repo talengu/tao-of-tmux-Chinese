@@ -37,11 +37,8 @@ tmux 对于控制台来说，就像windows的desktop对于GUI应用。文字界�
 
 就像图形的桌面一样，也可以在tmux的状态栏放一个日期/时间。
 
-<p align="center">
-  <img src="images/01-thinking-tmux/clocks.png" alt="Sample"  width="75%" >
-  <p align="center">
-		<em> 图: 左上： KDE（ubuntu等） 右上：Windows 10. 中间：macOS Sierra. 下方： tmux 2.3 默认的 status bar。</em></p>
-</p>
+![](images/01-thinking-tmux/clocks.png)
+<p align="center"><em> 图: 左上： KDE（ubuntu等） 右上：Windows 10. 中间：macOS Sierra. 下方： tmux 2.3 默认的 status bar。</em></p></p>
 
 
 ## 多任务处理

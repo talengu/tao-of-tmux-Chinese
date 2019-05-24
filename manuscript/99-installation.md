@@ -1,42 +1,42 @@
-# Appendix: Installing tmux {#appendix-installation}
+# 附录： 安装 tmux （installation） {#appendix-installation}
 
 ## macOS / OS X
 
 ### brew
 
-```
+```shell
     $ brew install tmux
 ```
 ### macports
 
-```
+```shell
     $ sudo port install tmux
 ```
 ### fink
 
-```
+```shell
     $ fink install tmux
 ```
 ## Linux
 
 ### Ubuntu / Mint / Debian, etc.
 
-```
+```shell
     $ sudo apt-get install tmux
 ```
 ### CentOS / Fedora / Redhat, etc.
 
-```
+```shell
     $ sudo yum install tmux
 ```
 ### Arch Linux (pacman)
 
-```
+```shell
     $ sudo pacman -S tmux 
 ```
 ### Gentoo (portage)
 
-```
+```shell
     $ sudo emerge --ask app-misc/tmux
 ```
 ## BSD
@@ -45,29 +45,29 @@
 
 #### pkg(1)
 
-```
+```shell
     # pkg install tmux
 ```
 #### pkg_add(1)
 
-```
+```shell
     # pkg_add -r tmux
 ```
 ### OpenBSD
 
-As of OpenBSD 4.6, [tmux is part of the base system](https://www.openbsd.org/46.html).
+在 OpenBSD 4.6, [包含了 tmux ](https://www.openbsd.org/46.html).
 
-If you are using an earlier version:
+使用以前的系统版本的话：
 
-```
+```shell
     # pkg_add tmux
 ```
 ### NetBSD
 
-```
+```shell
     $ make -C /usr/pkgsrc/misc/tmux install
 ```
 ## Windows 10
 
-Check out the [tmux on Windows 10 appendix section](99-windows-bash.md).
+查看 [附录中 tmux 在 Windows 10 使用 小节](99-windows-bash.md).
 

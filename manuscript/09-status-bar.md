@@ -1,31 +1,24 @@
-# Status bar and styling {#status-bar}
+# 状态栏（Status bar）和个性化设置  {#status-bar}
 
-The status bar, or *status line*, serves as a customizable taskbar in the bottom
-of tmux. It is comprised of 3 sections. The status fields on either side
-of the status line are customizable. The center field is a list of windows.
+在 tmux 界面的下部位置是状态栏，可以进行个性化。它由三个部分组成。左右他们都可以自定义。中间部分为一系列窗口的名字。如下图。
 
 ![](images/09-status-bar/overview.png)
 
-The `status-left` and `status-right` option can be configured with  variables.
+左右的状态 `status-left` 和 `status-right` 可以参数设置，通过 [configurable](08-configuration.md)  文件 `.tmux.conf`，或者想直接命令行修改的方式 `$ tmux set-option`。
 
-It's [configurable](#config) through the `.tmux.conf` file and modifiable live
-through using `$ tmux set-option`.
-
-> *Finding your current status line settings* 
+> *显示现在的状态栏设置* 
 >
 > ```bash
 > $ tmux show-options -g | grep status
 > ```
 
-## Window status symbols
+## 窗口状态的标记
 
-This window list is between the left and right status bar regions.
-
-tmux indicates status of a window through symbols. See below:
+中间的窗口名字列表部分，在这些窗口名字上由一些标识代表不同的信息。整理成下面的表格：
 
 | Symbol | Meaning                                                      |
 |--------|--------------------------------------------------------------|
-| *      | Denotes the current window.                                  |
+| *      | 当前工作窗口                                  |
 | -      | Marks the last window (previously selected).                 |
 | #      | Window is monitored and activity has been detected.          |
 | !      | A bell has occurred in the window.                           |
@@ -33,12 +26,11 @@ tmux indicates status of a window through symbols. See below:
 | M      | The window contains the marked pane.                         |
 | Z      | The window's active pane is zoomed.                          |
 
-Reminder: A pane can be [zoomed](#zoom-pane) via `Prefix` + `z`. To unzoom,
-press `Prefix` + `z` or move left / right / up / down panes.
+小技巧：一个面板（pane）可以被最小化 [pane zoomed](07-pane.md) 通过 `Prefix` + `z`，再按一次 `Prefix` + `z` 或者 按面板的移动组合键，恢复。
 
-## Date and time
+## 日期和时间
 
-`status-left` and `status-right` accept variables for the date. 
+`status-left` 和 `status-right` 部分可以设置日期。
 
 This happens via piping the status templates through [`format_expand_time`](https://github.com/tmux/tmux/blob/2.3/format.c#L868)
 in `format.c`, which routes right into [`strftime(3)`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/strftime.html)

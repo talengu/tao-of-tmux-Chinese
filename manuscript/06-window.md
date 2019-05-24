@@ -1,4 +1,4 @@
-# Windows {#windows}
+# 窗口（Windows） {#windows}
 
 Windows hold [panes](#panes). They reside within a [session](#sessions).
 

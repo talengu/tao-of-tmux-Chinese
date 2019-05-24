@@ -1,11 +1,11 @@
-# Sessions {#sessions}
+# 会话（Sessions） {#sessions}
 
-Welcome to the session, the highest-level entity residing in the [server](#server)
+Welcome to the session, the highest-level entity residing in the [server](04-server.md)
 instance. Server instances are forked to the background upon starting a fresh
 instance and reconnected to when reattaching sessions. Your interaction with
 tmux will have *at least* one session running.
 
-A session holds one or more [windows](#windows).
+一个会话包含多个窗口 [windows](06-window.md)。
 
 ![](images/info/session.png)
 
@@ -13,22 +13,22 @@ The active window will have a `*` symbol next to it.
 
 ![The first window, ID 1, titled "manuscript" is active. The second window, ID 2, titled zsh.](images/05-session/active-window.png)
 
-## Creating a session
+## 创建会话
 
 The simplest command to create a new session is typing `tmux`:
 
-{language=shell, line-numbers=off}
+```
     $ tmux
-
+```
 The `$ tmux` application, with no commands is equivalent to
 `$ tmux new-session`. Nifty!
 
 By default, your session name will be given a number, which isn't too
 descriptive. What would be better is:
 
-{language=shell, line-numbers=off}
+```
     $ tmux new-session -s'my rails project'
-
+```
 ## Switching sessions within tmux
 
 Some acquire the habit of detaching their tmux client and reattaching via
@@ -52,9 +52,9 @@ between sessions in the [server](#server).
 
 Example usage:
 
-{language=shell, line-numbers=off}
+```
     $ tmux switch-client -t dev
-
+```
 If already inside a client, this will switch to a session, named "dev", if it exists.
 
 ## Naming sessions
@@ -81,9 +81,9 @@ name.
 
 Through command line, you can try:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux rename-session -t 1 "my session"
-
+```
 ## Does my session exist?
 
 If you're scripting tmux, you will want to see if a session exists.
@@ -91,25 +91,25 @@ If you're scripting tmux, you will want to see if a session exists.
 if the session exists, but will report a 1 exit code *and* print an error if a
 session does not exist.
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux has-session -t 1
-
+```
 It assumes the session "1" exists; it'll just return 0 with no output.
 
 But if it doesn't, you'll get something like this in a response:
 
-{language=shell, line-numbers=off}
+```
     $ tmux has-session -t 1
     > can't find session 1
-
+```
 To try it in a shell script:
 
-{language=shell, line-numbers=off}
+```
     if tmux has-session -t 0 ; then
         echo "has session 0"
     fi
-
-## Summary
+```
+## 小节
 
 In this chapter, you learned how to rename sessions for organizational purposes
 and how to switch between them quickly.

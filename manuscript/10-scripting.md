@@ -1,21 +1,14 @@
-# Scripting tmux {#scripting-tmux}
+# tmux的脚本化（Scripting）{#scripting-tmux}
 
-The command line shortcuts and options in tmux is an area often uncharted.
+tmux 中的命令行快捷方式和选项比较多。
 
-I will use tables in this chapter. Never get a feeling you have to commit a
-table to memory immediately. Not my intention, but every person's way of using
-tmux is slightly different. I want to cover points most likely to benefit
-people's flows. Full tables are in the [cheatsheets](#appendix-cheatsheets).
+我整理以一些表格，每个人使用tmux都有点不同，你也可以整理一个你自己使用的表格。这里我尽量包含大家经常使用的，更多的清单可以看  [附录清单（cheatsheets）](99-cheatsheets.md)
 
-## Aliases {#aliases}
 
-tmux supports a variety of alias commands. With aliases, instead of typing
-`$ tmux attach-session` to attach a session, `$ tmux attach` could do the trick.
+## 缩写（Aliases） {#aliases}
 
-Most aliases come to mind via intuition and are a lot friendlier than typing the
-full hyphenated commands.
+tmux 命令有很多缩写（alias）。使用缩写，使用 `$ tmux attach` 命令即可以执行 `$ tmux attach-session`命令。缩写主要是方便记忆，不用将整个命令打出来。
 
-{width="narrow"}
 | Command             | Alias     |
 |---------------------|-----------|
 | attach-session      | attach    |
@@ -77,17 +70,20 @@ Every tmux command has shorthands; let's try this for `$ tmux new-session`:
 {language=shell, line-numbers=off}
     $ tmux new-session
 
-    $ tmux new-sessio
+```shell
+$ tmux new-sessio
 
-    # ...
+# ...
 
-    $ tmux new-s
+$ tmux new-s
+```
 
 and so on, until:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux new-
     ambiguous command: new-, could be: new-session, new-window
+```
 
 The limitation, as seen above, is command matches can collide. Multiple commands
 begin with `new-`. So, if you wanted to use matches, `$ tmux new-s` for a new
@@ -98,9 +94,9 @@ even more concise than matching, since the special alias exists.
 Patterns can also match [targets](#targets) with window and session names. For
 instance, a session named `mysession` can be matched via `mys`:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux attach -t mys
-
+```
 Matching targets will fail if a pattern matches more than one item. If 2
 sessions exist, named `mysession` and `mysession2`, the above command would
 fail. To target either session, the complete target name must be specified.
@@ -143,90 +139,90 @@ client at `/dev/ttys004`:
 
 ### `attach-session [-t target-session]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux attach-session -t mysession
-
+```
 ### `detach-client [-s target-session] [-t target-client]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux detach-client -s mysession -t /dev/ttys004
 
     # If within client, -t is assumed to be current client
     $ tmux detach-client -s mysession
-
+```
 ### `has-session [-t target-session]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux has-session -t mysession
 
     # Pattern matching session name
     $ tmux has-session -t mys
-
+```
 ### `$ tmux kill-session [-t target-session]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux kill-session -t mysession
-
+```
 ### `$ tmux list-clients [-t target-session]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux list-clients -t mysession
-
+```
 ### `$ tmux lock-client [-t target-client]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux lock-clients -t /dev/ttys004
-
+```
 ### `$ tmux lock-session [-t target-session]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux lock-session -t mysession
-
+```
 ### `$ tmux new-session [-t target-session]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux new-session -t newsession
 
     # Create new-session in the background
     $ tmux new-session -t newsession -d
-
+```
 ### `$ tmux refresh-client [-t target-client]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux refresh-client -t /dev/ttys004
-
+```
 ### `$ tmux rename-session [-t target-session]` session-name
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux rename-session -t mysession renamedsession
 
     # If within attached session, -t is assumed
     $ tmux rename-session renamedsession
-
+```
 ### `$ tmux show-messages [-t target-client]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux show-messages -t /dev/ttys004
-
+```
 ### `$ tmux suspend-client [-t target-client]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux suspend-client -t /dev/ttys004
 
     # If already in client
     $ tmux suspend-client
-
+    
     # Bring client back to the foreground
     $ fg
-
+```
 ### `$ tmux switch-client [-c target-client] [-t target-session]`
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux suspend-client -c /dev/ttys004 -t othersession
 
     # Within current client, -c is assumed
     $ tmux suspend-client -t othersession 
-
+```
 ## Formats {#formats}
 
 tmux provides a minimal template language and set of variables to access
@@ -249,20 +245,20 @@ complete list.
 
 Let's try to output it:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux list-windows -F "#{window_id} #{window_name}"
     > @0 zsh
-
+```
 Here's a cool trick to list all panes with the x and y coordinates of the cursor
 position:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux list-panes -F "#{pane_id} #{pane_current_command} \
       #{pane_current_path} #{cursor_x},#{cursor_y}"
     > %0 vim /Users/me/work/tao-of-tmux/manuscript 0,34
       %1 tmux /Users/me/work/tao-of-tmux/manuscript 0,17
       %2 man /Users/me/work/tao-of-tmux/manuscript 0,0
-
+```
 Variables are specific to the objects being listed. For instance:
 
 Server-wide variables: `host`, `host_short` (no domain name), `socket_path`,
@@ -286,24 +282,24 @@ separation takes shape in tmux's internal attributes. If you `list-panes` all
 variables up the ladder, including window, session and server variables are
 available for the panes being listed. Try this:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux list-panes -F "pane: #{pane_id}, window: #{window_id}, \
       session: #{session_id}, server: #{socket_path}"
     > pane: %35, window: @13, session: $6, server: /private/tmp/tmux-501/default
       pane: %38, window: @13, session: $6, server: /private/tmp/tmux-501/default
       pane: %36, window: @13, session: $6, server: /private/tmp/tmux-501/default
-
+```
 Listing windows isn't designed to display variables for pane-specific properties.
 Since a window is a collection of panes, it can have 1 or more panes open at any
 time.
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux list-windows -F "window: #{window_id}, panes: #{window_panes} \
       pane_id: #{pane_id}"
     > window: @15, panes: 1 pane_id: %40
       window: @13, panes: 3 pane_id: %36
       window: @25, panes: 1 pane_id: %50
-
+```
 This will show the window ID, prefixed by an `@` symbol, and the number of panes
 inside the window.
 
@@ -317,31 +313,31 @@ By default, `list-panes` will only show panes in a window, unless you specify
 `-a` to output all on a server or `-s [-t session-name]` for all panes in a
 session:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux list-panes -s -t mysession
     > 1.0: [176x29] [history 87/2000, 21033 bytes] %0
       1.1: [87x6] [history 1814/2000, 408479 bytes] %1 (active)
       1.2: [88x6] [history 1916/2000, 464932 bytes] %2
       2.0: [176x24] [history 9/2000, 2262 bytes] %13
       2.1: [55x11] [history 55/2000, 7395 bytes] %14
-
+```
 And the `-t` flag lists all panes in a window:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux list-panes -t @0
     > 0: [176x29] [history 87/2000, 21033 bytes] %0
       1: [176x36] [history 1790/2000, 407807 bytes] %1 (active)
       2: [88x6] [history 1916/2000, 464932 bytes] %2
-
+```
 The same concept applies to `list-windows`. By default, The `-a` flag will list
 all windows on a server, `-t` lists windows within a session, and omitting `-t`
 will only list windows within the current session inside tmux.
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux list-windows
     > 1: zsh* (3 panes) [176x36] [layout f9a4,176x36,0,0[176x29,0,0,0,176x6,0,30{87x6,0,30,1,88x6,88,30,2}]] @0 (active)
       2: zsh- (5 panes) [176x36] [layout 55ef,176x36,0,0[176x24,0,0,13,176x11,0,25{55x11,0,25,14,58x11,56,25[58x7,56,25,16,58x3,56,33,17],61x11,115,25,15}]] @6
-
+```
 ## Controlling tmux {#send-keys}
 
 tmux allows sending keys, including Ctrl via `C-` or `^`, alt (Meta) via `M-`,
@@ -371,29 +367,29 @@ exercise outside of tmux or inside a scripting file and running it.
 
 Grab a pane ID from the output of `list-panes`:
 
-{language=shell, line-numbers=off}
+```
     $ tmux list-panes
     > 0: [180x57] [history 87/2000, 21033 bytes] %0
       1: [89x14] [history 1884/2000, 509864 bytes] %1 (active)
       2: [90x14] [history 1853/2000, 465297 bytes] %2
-
+```
 `%2` looks good. Replace `%2` with the pane you want to target. This sends `cal`
 to the input:
 
-{language=shell, line-numbers=off}
+```
     $ tmux send-keys -t %2 'cal'
-
+```
 Nice, let's cancel that out by sending a [`SIGINT`](https://en.wikipedia.org/wiki/Unix_signal#SIGINT):
 
-{language=shell, line-numbers=off}
+```
     $ tmux send-keys -t %2 'C-c'
-
+```
 This cancelled the command and brought up a fresh input. This time, let's send
 an Enter keypress to run `cal(1)`.
 
-{language=shell, line-numbers=off}
+```
     $ tmux send-keys -t %2 'cal' 'Enter'
-
+```
 This outputs in the adjacent pane.
 
 ![Top-left: Listing panes, Bottom-left: Sending keys to right pane, Right:
@@ -414,20 +410,20 @@ From there, you could use [redirection](http://pubs.opengroup.org/onlinepubs/969
 to place the output into a file. Let's do `>>` so we don't accidentally
 truncate a file:
 
-{language=shell, line-numbers=off}
+```
     $ tmux capture-pane -p >> ./test
-
+```
 As an alternative to redirection, you can also use `save-buffer`. The `-a` flag
 will get you the same behavior as appended output direction.
 
-{language=shell, line-numbers=off}
+```
     $ tmux save-buffer -a ./test
-
+```
 To check what's inside:
 
-{language=shell, line-numbers=off}
+```
     $ cat ./test
-
+```
 Like with `send-keys`, [targets](#targets) can be specified with `-t`. Let's
 copy a pane into tmux's clipboard ("paste buffer") and paste it into a text
 editor in a third pane:

@@ -1,4 +1,4 @@
-# Configuration {#config}
+# 配置（Configuration ）{#config}
 
 Most tmux users break away from the defaults by creating their own customized
 configurations. These configurations vary from the trivial, such as adding

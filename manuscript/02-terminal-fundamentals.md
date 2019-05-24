@@ -1,4 +1,4 @@
-# Terminal 基础知识 {#terminal-fundamentals}
+# Terminal 基础知识（fundamentals） {#terminal-fundamentals}
 
 在使用 tmux ，我们回顾一下命令行操作的基本知识。通常，我们使用命令行根据我们的使用经验和肌肉记忆，我们中很大一部人没有了解到工具之间的联系。
 

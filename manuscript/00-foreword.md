@@ -69,7 +69,7 @@ needs or interests. If you haven't installed tmux yet, please view the
 Follow [@TheTaoOfTmux](https://twitter.com/TheTaoOfTmux) for
 updates or [share on Twitter](https://twitter.com/intent/tweet?text=I%27m%20reading%20The%20Tao%20of%20tmux%20online%20at&url=https://leanpub.com/the-tao-of-tmux/read&hashtags=tmux&via=TheTaoOfTmux)!
 
-## 文字等风格说明
+## 代码等风格说明
 
 Formatted text `like this` is source code.
 
@@ -91,47 +91,47 @@ and hard technical details are in the Appendix. A lot of books use installation
 instructions as filler in the early chapters. For me, it's more of not wanting
 to confuse beginners.
 
-For special circumstances, like [tmux on Windows 10](#appendix-windows-bash), I
+For special circumstances, like [tmux on Windows 10](99-windows-bash.md), I
 decided adding screenshots is best, since many readers may be more comfortable
 with a visual approach.
 
-[*Thinking in tmux*](#thinking-tmux) goes over what tmux does and how it relates to
+[*Thinking in tmux*](01-thinking-tmux.md) goes over what tmux does and how it relates to
 the GUI desktops on our computers.  You'll understand the big picture of
 what tmux is and how it can make your life easier.
 
-[*Terminal Fundamentals*](#terminal-fundamentals) shows the text-based
+[*Terminal Fundamentals*](02-terminal-fundamentals.md) shows the text-based
 environments you'll be dealing with. It's great for those new to tmux, but also
 presents technical background for developers, who learned the ropes through
 examples and osmosis. At the end of this section, you'll be more confident and
 secure using the essential components underpinning a modern terminal
 environment.
 
-[*Practical usage*](#practical-usage) covers common bread-and-butter uses for
+[*Practical usage*](03-practical-usage.md) covers common bread-and-butter uses for
 you to use tmux immediately.
 
-[*Server*](#server) gives life to the unseen workhorse behind the scenes
+[*Server*](04-server.md) gives life to the unseen workhorse behind the scenes
 powering tmux. You'll think of tmux differently and may be impressed a
 client-server architecture could be presented to end users so seamlessly.
 
-[*Sessions*](#sessions) are the containers holding windows. You'll learn what
+[*Sessions*](05-session.md) are the containers holding windows. You'll learn what
 sessions are and how they help organize your workspace in the terminal. You'll
 learn how to manipulate and rename and traverse sessions.
 
-[*Windows*](#windows) are what you see when tmux is open in front of you.
+[*Windows*](06-window.md) are what you see when tmux is open in front of you.
 You'll learn how to rename and move windows. 
 
-[*Panes*](#panes) are a terminal in a terminal. This is where you get to work and
+[*Panes*](07-pane.md) are a terminal in a terminal. This is where you get to work and
 do your magic! You'll learn how to create, delete, move between, and resize
 panes.
 
-[*Configuration*](#config) discusses customization of tmux and sets the
+[*Configuration*](08-configuration.md) discusses customization of tmux and sets the
 foundation for how to think about `.tmux.conf` so you can customize your own.
 
-[*Status bar and styling*](#status-bar) is devoted to the customization
+[*Status bar and styling*](09-status-bar.md) is devoted to the customization
 of the status line and colors in tmux. As a bonus, you'll even learn how to
 display system information like CPU and memory usage via the status line.
 
-[*Scripting tmux*](#scripting-tmux) goes into command [aliases](#aliases)
+[*Scripting tmux*](10-scripting.md) goes into command [aliases](#aliases)
 and the advanced and powerful [Targets](#targets) and [Formats](#formats)
 concepts.
 
@@ -139,11 +139,11 @@ concepts.
 works under the hood. You may learn enough to impress colleagues who already use
 tmux. If you like programming on Unix-like systems, this one is for you.
 
-[*Tips and tricks*](#tips-and-tricks) wraps up with a whirlwind of useful
+[*Tips and tricks*](11-tips-and-tricks.md) wraps up with a whirlwind of useful
 terminal tutorials you can use with tmux to improve day to day development and
 administration experience.
 
-[*Cheatsheets*](#appendix-cheatsheets) are organized tables of commands,
+[*Cheatsheets*](99-cheatsheets.md) are organized tables of commands,
 shortcuts, and formats grouped by section.
 
 ## 捐赠
@@ -153,13 +153,14 @@ consider donating. Donations go directly to me and my current and future open so
 projects and are not squandered. Visit <http://www.git-pull.com/support.html>
 for ways to contribute.
 
-## Formats
+## 书籍形式（Formats）
 
-This book is available for sale on [Leanpub](https://leanpub.com/the-tao-of-tmux) and [Amazon Kindle](http://amzn.to/2gPfRhC).
+书本在 [Leanpub](https://leanpub.com/the-tao-of-tmux) 和 [Amazon Kindle](http://amzn.to/2gPfRhC)有销售。
 
-It's also available to read for [free on the web](https://leanpub.com/the-tao-of-tmux/read).
+免费的英文版本 [free on the web](https://leanpub.com/the-tao-of-tmux/read)。
+中文版本 [https://tao-of-tmux.readthedocs.io](https://tao-of-tmux.readthedocs.io/zh_CN/latest/)
 
-## Errata {#errata}
+## 勘误说明（Errata） {#errata}
 
 This is my first book. I am human and make mistakes.
 
@@ -170,7 +171,7 @@ You can also submit a pull request via <https://github.com/git-pull/tao-of-tmux>
 
 I will update digital versions of the book with the changes where applicable.
 
-## Thanks
+## 感谢
 
 Thanks to the [contributors](https://github.com/git-pull/tao-of-tmux/graphs/contributors)
 for spotting errors in this book and submitting errata through GitHub. In
@@ -180,12 +181,11 @@ providing valuable feedback.
 Some copy, particularly in [cheatsheets](#appendix-cheatsheets), comes straight out
 of the manual of tmux, which is [ISC-licensed](https://github.com/tmux/tmux/blob/master/COPYING).
 
-## Book Updates and tmux changes
+## 本书跟新和 tmux 的变动
 
-This book was written for tmux 2.3, released September 2016.
+本书基于 tmux 2.3，发布于 2016年9月。
 
-As of January 2017, it's trivial to push out minor changes to
-Leanpub. Kindle is harder.
+2017年1月，作者发布到 Leanpub，还有一个更新的版本在 Kindle。
 
 tmux does intermittently receive updates. I've accommodated many over the past 5
 years on my personal configurations and software libraries set with [continuous integration tests against multiple tmux versions](https://github.com/tony/libtmux/blob/master/.travis.yml).

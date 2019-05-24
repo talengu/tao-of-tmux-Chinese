@@ -1,12 +1,8 @@
-# Server {#server} 
+# 服务（Server ）{#server} 
 
-The server holds [sessions](05-session.md) and the [windows](06-window.md) and
-[panes](07-pane.md) within them.
+服务上面建立住 [sessions](05-session.md) 、[windows](06-window.md) 、[panes](07-pane.md) 。
 
-When tmux starts, you are connected to a server via a socket connection.
-What you see presented in your shell is merely a client connection. In
-this chapter, we uncover the invisible engine enabling your terminal
-applications to persist for months or even years at a time.
+开启 tmux，通过socket机制连接一个 tmux 服务（server）。与你交互的其实是tmux的client客户端。本节我们将到启用这个server引擎，应用程序可以一次持续数月甚至数年。
 
 ![](images/info/server.png)
 

@@ -1,13 +1,13 @@
-# Panes {#panes}
+# 面板（Panes） {#panes}
 
 Panes are [pseudoterminals](https://en.wikipedia.org/wiki/Pseudoterminal)
-encapsulating shells (e.g., Bash, Zsh). They reside within a [window](#windows).
+encapsulating shells (e.g., Bash, Zsh). They reside within a [window](06-window.md).
 A terminal within a terminal, they can run shell commands, scripts, and programs,
 like vim, emacs, top, htop, irssi, weechat, and so on within them.
 
 ![](images/info/pane.png)
 
-## Creating new panes
+## 创建新面板
 
 To create a new pane, you can `split-window` from within the current
 [window](#windows) and pane you are in.
@@ -23,23 +23,23 @@ window will usually have 1 to 5 panes open.
 
 Example usage:
 
-{language=shell, line-numbers=off}
+```
     # Create pane horizontally, $HOME directory, 50% width of current pane
     $ tmux split-window -h -c $HOME -p 50 vim
+```
 
-{width=75%}
 ![](images/07-pane/splitw/-h -c $HOME -p 50 vim - 2 panes.png)
 
-{language=shell, line-numbers=off}
+```
     # create new pane, split vertically with 75% height
     tmux split-window -p 75
+```
 
-{width=75%}
 ![](images/07-pane/splitw/-p 75.png)
 
-{pagebreak}
 
-## Traversing Panes {#pane-traversal}
+
+## 面板间切换（Traversing Panes） {#pane-traversal}
 
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
@@ -49,18 +49,19 @@ Example usage:
 |`Right`           | the right of the current pane.                     |
 |`Prefix` + `o`    | Select the next pane in the current window.        |
 
-I> *Moving around vimtuitively*
-I>
-I> If you like vim (hjkl) keybindings, add these to your [config](#config):
-I>
-I> {language=shell, line-numbers=off}
-I>     # hjkl pane traversal
-I>     bind h select-pane -L
-I>     bind j select-pane -D
-I>     bind k select-pane -U
-I>     bind l select-pane -R
+> *Moving around vimtuitively*
+>
+> If you like vim (hjkl) keybindings, add these to your [config](#config):
+>
+> ```
+>     # hjkl pane traversal
+>     bind h select-pane -L
+>     bind j select-pane -D
+>     bind k select-pane -U
+>     bind l select-pane -R
+> ```
 
-## Zoom in {#zoom-pane}
+## 面板最小化（Zoom in ）{#zoom-pane}
 
 To zoom in on a pane, navigate to it and do `Prefix` + `z`.
 
@@ -73,12 +74,12 @@ Behind the scenes, the keybinding is a shortcut for `$ tmux resize-pane -Z`. So,
 if you ever wanted to script tmux to zoom/unzoom a pane or apply this
 functionality to a custom key binding, you can do that too, for instance:
 
-{line-numbers=off}
+```
     bind-key -T prefix y resize-pane -Z
-
+```
 This would have `Prefix` + `y` zoom and unzoom panes.
 
-## Resizing panes {#resizing-panes}
+## 面板大小（Resizing panes） {#resizing-panes}
 
 Pane size can be adjusted within [windows](#windows) via [window layouts](#window-layouts)
 and `resize-pane`. Adjusting window layout switches the proportions and order of
@@ -102,13 +103,13 @@ space, something else will have less space.
 
 You can output the display of a pane to a file.
 
-{language=shell, line-numbers=off}
+```
     $ tmux pipe-pane -o 'cat >>~/output.#I-#P'
-
+```
 The `#I` and `#P` are [formats](#formats) for window index and pane index, so
 the file created is unique. Clever!
 
-## Summary
+## 小节
 
 Panes are shells within a shell. You can keep adding panes to a tmux window
 until you run out of room on your screen. Within your shell, you can `tail -F`

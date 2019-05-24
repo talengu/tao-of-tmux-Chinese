@@ -1,20 +1,16 @@
-# Practical usage {#practical-usage}
+# 开始使用（Practical usage） {#practical-usage}
 
-This is the easiest part; open your terminal and type `tmux`, hit enter.
-
+好的让我们开始吧！打开 terminal 输入 `tmux` 按 回车键 enter。
 ```shell
     $ tmux
 ```
+欢迎进入 tmux 的世界。
 
-You're in tmux.
+## 前缀 组合快捷键（ prefix key ）{#prefix-key}
 
-## The prefix key {#prefix-key}
+我们通过带前缀的组合快捷键向 tmux 输命令。我们可以拆分窗口（windows），移动窗口，切换窗口，切换会话（sessions），或者自定义的命令。
 
-The *prefix* is how we send commands into tmux. With this, we can split windows,
-move windows, switch windows, switch sessions, send in custom commands, you name
-it.
-
-And it's a hump we have to get over.
+这是一个我们必须克服的困难。
 
 It's kind of like [*Street Fighter*](https://en.wikipedia.org/wiki/Street_Fighter).
 In this video game, the player inputs a combination of buttons in sequence to
@@ -34,41 +30,41 @@ When you memorize a key combo, it's one less time you'll be moving your hand
 away from the keyboard to grab your mouse. You can focus your short-term memory
 on getting stuff done, resulting in fewer mistakes.
 
-Q> ### Coming from ``GNU Screen``?
-Q>
-Q> Your tmux prefix key can be set via your tmux configuration later!  In
-Q> your `~/.tmux.conf` file, set the `prefix` option:
-Q>
-Q> {language=shell, line-numbers=off}
-Q>     set-option -g prefix C-a
-Q>
-Q> This will set the prefix key to `screen(1)`'s (another terminal
-Q> multiplexer's) prefix key.
+> ### Coming from ``GNU Screen``?
+>
+> Your tmux prefix key can be set via your tmux configuration later!  In
+> your `~/.tmux.conf` file, set the `prefix` option:
+>
+> ```
+>     set-option -g prefix C-a
+> ```
+> This will set the prefix key to `screen(1)`'s (another terminal
+> multiplexer's) prefix key.
 
 The default leader prefix is `<Ctrl-b>`. While holding down the `control` key,
 press `b`.
 
-X> ### Sending tmux commands
-X>
-X> Practice:
-X>
-X> 1. Press `control` key down and *hold it*.
-X> 2. Press `b` and hold it.
-X> 3. Release both keys at the same time.
-X>
-X> Try it a few times. It may feel unnatural until you've done it a couple
-X> times, which is normal when memorizing shortcuts.
-X>
-X> Now, let's try something:
-X>
-X> `<Ctrl-b> d`. So,
-X>
-X> 1. Press `control` key down and *hold it*.
-X> 2. Press `b` and hold it.
-X> 3. Release both keys at the same time.
-X> 4. Hit `d`!
-X>
-X> You've sent tmux your first command, and you're now outside of tmux!
+> ### Sending tmux commands
+>
+> Practice:
+>
+> 1. Press `control` key down and *hold it*.
+> 2. Press `b` and hold it.
+> 3. Release both keys at the same time.
+>
+> Try it a few times. It may feel unnatural until you've done it a couple
+> times, which is normal when memorizing shortcuts.
+>
+> Now, let's try something:
+>
+> `<Ctrl-b> d`. So,
+>
+> 1. Press `control` key down and *hold it*.
+> 2. Press `b` and hold it.
+> 3. Release both keys at the same time.
+> 4. Hit `d`!
+>
+> You've sent tmux your first command, and you're now outside of tmux!
 
 You've detached the tmux session you were in. You can reattach via `$ tmux
 attach`. 
@@ -118,7 +114,7 @@ switching modes, copying and pasting, and so forth.
 - To pull it all together, [source code](#technical-stuff) files are prefixed
   `cmd-`.
 
-## Summary
+## 小节
 
 We've established tmux automatically creates a server upon starting it. The
 server allows you to detach and later reattach your work. The keyboard

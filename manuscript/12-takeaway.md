@@ -1,4 +1,4 @@
-# Takeaway {#takeaway}
+# 总结或最后（Takeaway） {#takeaway}
 
 In this book, we've taken an organized approach to understanding tmux. As you
 use tmux more and more, continue to come back and use this resource to help wrap

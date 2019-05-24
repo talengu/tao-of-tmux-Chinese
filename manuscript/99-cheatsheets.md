@@ -1,13 +1,12 @@
 {backmatter}
 
-# Appendix: Cheatsheets {#appendix-cheatsheets}
+# 附录：清单 （cheatsheets）{#appendix-cheatsheets}
 
-These are taken directly from tmux's manual pages, tabled and organized by
-hand into sections for convenience.
+下面直接从 tmux 的 使用参考 （manual pages）拷贝过来，整理后做成了表格。
 
-## Commands
+## 命令（Commands）
 
-### Session
+### 会话（Session）
 
 
 | Command          | Action                                                   |
@@ -22,7 +21,7 @@ hand into sections for convenience.
 | `new-session`    | Create a new session                                     |
 | `rename-session` | Rename a session                                         |
 
-### Window
+### 窗口（Window）
 
 
 | Command              | Action                                               |
@@ -47,7 +46,7 @@ hand into sections for convenience.
 | `swap-window`        | Swap two windows                                     |
 | `unlink-window`      | Unlink a window                                      |
 
-### Pane
+### 面板（Pane）
 
 
 | Command         | Action                                                    |
@@ -66,9 +65,9 @@ hand into sections for convenience.
 | `select-pane`   | Make a pane the active one in the window                  |
 | `swap-pane`     | Swap two panes                                            |
 
-{pagebreak}
 
-## Keybindings
+
+## （快捷键）Keybindings
 
 
 | Shortcut         | Action                                             |
@@ -76,7 +75,7 @@ hand into sections for convenience.
 |`C-b`             | Send the prefix key (C-b) through to the           |
 |                  | application.                                       |
 
-### Miscellaneous
+### 混杂快捷键（Miscellaneous）
 
 
 | Shortcut         | Action                                             |
@@ -91,7 +90,7 @@ hand into sections for convenience.
 |`?`               | List all key bindings.                             |
 |`:`               | Enter the tmux command prompt.                     |
 
-### Copy/Paste
+### 复制/粘贴（Copy/Paste）相关
 
 
 | Shortcut         | Action                                             |
@@ -104,16 +103,16 @@ hand into sections for convenience.
 |                  | list.                                              |
 |`-`               | Delete the most recently copied buffer of text.    |
 
-{pagebreak}
 
-### Session
+
+### 会话（Session）相关
 
 
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`$`               | Rename the current session.                        |
 
-#### Session Traversal
+#### 会话遍历（Session Traversal）
 
 
 | Shortcut         | Action                                             |
@@ -123,9 +122,9 @@ hand into sections for convenience.
 |`s`               | Select a new session for the attached client       |
 |                  | interactively.                                     |
 
-{pagebreak}
 
-### Window
+
+### 窗口（ Window）相关
 
 
 | Shortcut         | Action                                             |
@@ -135,7 +134,7 @@ hand into sections for convenience.
 |`i`               | Display some information about the current window. |
 |`,`               | Rename the current window.                         |
 
-#### Window Traversal
+#### 窗口遍历（Window Traversal）
 
 
 | Shortcut         | Action                                             |
@@ -151,16 +150,16 @@ hand into sections for convenience.
 |`l`               | Move to the previously selected window.            |
 |`'`               | Prompt for a window index to select.               |
 
-#### Window Moving
+#### 窗口移动（Window Moving）
 
 
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`.`               | Prompt for an index to move the current window     |
 
-{pagebreak}
 
-### Pane
+
+### 面板（Pane）相关
 
 
 | Shortcut         | Action                                             |
@@ -170,7 +169,7 @@ hand into sections for convenience.
 |`%`               | Split the current pane into two, left and right.   |
 |`"`               | Split the current pane into two, top and bottom.   |
 
-#### Pane Traversal
+#### 面板遍历（Pane Traversal）
 
 
 | Shortcut         | Action                                             |
@@ -180,7 +179,7 @@ hand into sections for convenience.
 |`Left, Right`     | the right of the current pane.                     |
 |`o`               | Select the next pane in the current window.        |
 
-#### Pane Moving
+#### 面板移动（Pane Moving）
 
 
 | Shortcut         | Action                                             |
@@ -191,7 +190,7 @@ hand into sections for convenience.
 |`}`               | Swap the current pane with the next pane.          |
 |`!`               | Break the current pane out of the window.          |
 
-#### Pane Resizing
+#### 面板大小调整（Pane Resizing）
 
 
 | Shortcut         | Action                                             |
@@ -204,7 +203,6 @@ hand into sections for convenience.
 |`M-Up, M-Down`    | Resize the current pane in steps of five cells.    |
 |`M-Left, M-Right` |                                                    |
 
-{pagebreak}
 
 ## Formats {#appendix-formats}
 

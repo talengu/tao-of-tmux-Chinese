@@ -1,6 +1,6 @@
-# Appendix: tmux on Windows 10 {#appendix-windows-bash}
+# 附录： tmux 在 Windows 10 使用{#appendix-windows-bash}
 
-As of Windows 10 build 14361, [you can run tmux](https://blogs.msdn.microsoft.com/commandline/2016/06/08/tmux-support-arrives-for-bash-on-ubuntu-on-windows/) via the Linux Subsystem feature.
+从 Windows 10 build 14361开始，可以通过 Window 的 Linux 子系统 [运行 tmux](https://blogs.msdn.microsoft.com/commandline/2016/06/08/tmux-support-arrives-for-bash-on-ubuntu-on-windows/) 。
 
 Usage requires enabling **Developer mode** via the "For Developers" tab in the
 "Update & security" settings.

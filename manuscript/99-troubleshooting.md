@@ -1,37 +1,26 @@
-# Appendix: Troubleshooting {#appendix-troubleshooting}
+# 附录： 常见问题（troubleshooting） {#appendix-troubleshooting}
 
-## `E353: Nothing in register *` when pasting on vim
+## 问题：在vim中粘贴时出现 `E353: Nothing in register *` 错误
 
-If you are using macOS / OS X with vim inside tmux, you may get the error
-`E353: Nothing in register *` when trying to paste.
-
-Try installing [`reattach-to-user-namespace`](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard)
-via [brew](http://brew.sh).
+macOS / OS X ，在 tmux 中使用 vim，尝试粘贴时，出现bug，可以尝试通过 [brew](http://brew.sh) 安装 [`reattach-to-user-namespace`](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard) 解决问题。
 
 ```shell
     $ brew install reattach-to-user-namespace
 ```
-## `tmuxp: command not found` and `powerline: command not found` {#troubleshoot-site-paths}
+## 问题：`tmuxp: command not found` 和 `powerline: command not found` {#troubleshoot-site-paths}
 
-This is due to your site package bin path (where application entry points are
-installed) not being in your paths. To find your user site packages base directory:
+这个问题时你安装的python包并没有在你的python环境的site package里面。首先，找到你的user site packages base directory：
 
 ```shell
     $ python -m site --user-base
 ```
-This will get you something like `/Users/me/Library/Python/2.7` on macOS with
-Python 2.7 or `/home/me/.local` on Linux/BSD boxes.
+在 macOS系统上 ，这会返回 `/Users/me/Library/Python/2.7`  ，或者在 Linux/BSD上 会返回`/home/me/.local` 。
 
-The applications are in the `bin/` folder inside. So, concatenate the two and
-apply them to your [`PATH`](https://en.wikipedia.org/wiki/PATH_(variable)). This
-can be done automatically on every shell session by using one of these in your
-`~/.bashrc` or `~/.zshrc`:
+这些应用的包在 `bin/`，把他们加到你的 [`PATH`](https://en.wikipedia.org/wiki/PATH_(variable))里面。一般在 `~/.bashrc` 和 `~/.zshrc` 文件上配置。
 
 ```bash
     export PATH=/Users/me/Library/Python/2.7/bin:$PATH     # macOS w/ python 2.7
     export PATH=$HOME/.local/bin:$PATH                     # Linux/BSD
     export PATH="`python -m site --user-base`/bin":$PATH   # May work all-around
 ```
-Then open a new terminal, or `. ~/.zshrc` / `. ~/.bashrc` in your current one.
-Then you can run `$ tmuxp -V`, `$ tmuxp load` and `$ powerline tmux right`
-commands.
+接着开一个新的 terminal，或者使能 `. ~/.zshrc` / `. ~/.bashrc` 在当前的 terminal。现在你可以运行`$ tmuxp -V`, `$ tmuxp load` 和 `$ powerline tmux right` 等命令了。

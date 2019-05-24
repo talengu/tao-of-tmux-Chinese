@@ -1,4 +1,4 @@
-# Tips and tricks {#tips-and-tricks}
+# 小技巧（tips and tricks） {#tips-and-tricks}
 
 ## Read the tmux manual in style
 
