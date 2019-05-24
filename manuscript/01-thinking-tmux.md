@@ -30,15 +30,10 @@ tmux 对于控制台来说，就像windows的desktop对于GUI应用。文字界�
 
 |**tmux**           |**"Desktop"-Speak**   |**Plain English**                  |
 |-------------------|----------------------|-----------------------------------|
-|Multiplexer        |Multi-tasking         |Multiple applications              |
-|                   |                      |simultaneously.                    |
-|-------------------|----------------------|-----------------------------------|
-|Session            |Desktop               |Applications are visible here      |
-|-------------------|----------------------|-----------------------------------|
-|Window             |Virtual Desktop or    |Desktop containing its own screen  |
-|                   |applications          |     			       |
-|-------------------|----------------------|-----------------------------------|
-|Pane               |Application           |Performs operations                |
+|Multiplexer        |Multi-tasking         |Multiple applications simultaneously.              |
+| Session | Desktop                         |Applications are visible here                    |
+| Window      | Virtual Desktop or applications | Desktop containing its own screen     |
+| Pane        | Application                     | Performs operations                   |
 
 就像图形的桌面一样，也可以在tmux的状态栏放一个日期/时间。
 
@@ -123,8 +118,7 @@ messengers, and get back to your messages when you return.
 
 Some keep development services running in a session. Hearty emphasis on
 *development*, you probably will want to daemonize and wrap your production web
-applications, using a tool like [supervisor](http://supervisord.org/), with its
-own safe environmental settings.
+applications, using a tool like [supervisor](http://supervisord.org/), with its own safe environmental settings.
 
 You can also have multiple users attach their clients to the same sessions,
 which is great for pair programming.  If you were in the same session, you

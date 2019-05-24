@@ -2,8 +2,9 @@
 
 This is the easiest part; open your terminal and type `tmux`, hit enter.
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux
+```
 
 You're in tmux.
 

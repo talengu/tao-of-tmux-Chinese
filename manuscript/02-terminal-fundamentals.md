@@ -31,30 +31,31 @@ compatible in my scripting, it gets hard to do simple things after a while. On
 FreeBSD, the default Make [(PMake)](https://www.freebsd.org/doc/en_US.ISO8859-1/books/pmake/)
 uses dots between conditionals:
 
-{line-numbers=off}
+```
     .IF
 
     .ENDIF
-
+```
 But on most Linux systems and macOS, GNU Make is the default, so they get to do:
 
-{line-numbers=off}
+```
     IF
 
     ENDIF
-
+```
 This is one of the many tiny inconsistencies that span operating systems, their
 userlands, their binary / library /  include paths, and adherence /
 interpretation of the [Filesystem Hierarchy Standard](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)
 or whether they follow their own.
 
-I> **Find your path**
-I>
-I> Most operating systems inspired by Unix (BSD's, macOS, Linux) will allow you
-I> to get the info of your systems' filesystem hierarchy via [`hier(7)`](https://www.freebsd.org/cgi/man.cgi?hier(7)).
-I>
-I> {language=shell, line-numbers=off}
-I>     $ man hier
+> **Find your path**
+> 
+> Most operating systems inspired by Unix (BSD's, macOS, Linux) will allow you
+> to get the info of your systems' filesystem hierarchy via [`hier(7)`](https://www.freebsd.org/cgi/man.cgi?hier(7)).
+>
+> ```
+> $ man hier
+> ```
 
 These differences add up. A good deal of software infrastructure out
 there exists solely to abstract the differences across them. For example: CMake,

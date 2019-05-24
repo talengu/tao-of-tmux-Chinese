@@ -11,10 +11,11 @@ The `status-left` and `status-right` option can be configured with  variables.
 It's [configurable](#config) through the `.tmux.conf` file and modifiable live
 through using `$ tmux set-option`.
 
-I> *Finding your current status line settings* 
-I>
-I> {language=shell, line-numbers=off}
-I>     $ tmux show-options -g | grep status
+> *Finding your current status line settings* 
+>
+> ```bash
+> $ tmux show-options -g | grep status
+> ```
 
 ## Window status symbols
 
@@ -63,28 +64,28 @@ Major Linux distributions package CMake, clang, and git.
 
 Before this step, you can `cd` into any directory you're ok keeping code in.
 
-{language=shell, line-numbers=off}
+```shell
     $ git clone https://github.com/thewtex/tmux-mem-cpu-load.git
     $ cd tmux-mem-cpu-load
     $ mkdir ./build
     $ cd ./build
     $ cmake ..
     $ make
-    
+
+
     # macOS, no sudo required
     $ make install
 
     # Linux, BSD will require sudo / root to install
     $ sudo make install
-
+```
 If successful, you should see the output below:
-
-{language=shell, line-numbers=off}
+```
     [100%] Built target tmux-mem-cpu-load
     Install the project...
     -- Install configuration: "MinSizeRel"
     -- Installing: /usr/local/bin/tmux-mem-cpu-load
-
+```
 You can remove the source code you cloned from the computer. The compiled
 application is installed.
 
@@ -97,17 +98,17 @@ use `status-left` and also theme it to be green:
 So to apply it to your theme, you need to double check what you already have.
 You may have information on there you want to keep.
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux show-option -g status-right
     status-right " "#{=21:pane_title}" %H:%M %d-%b-%y"
-
+```
 Copy what you had in response (or change, rearrange as you see fit) then add the
 `#(tmux-mem-cpu-load)` to it. You can apply the new status line in your current
 tmux session via `$ tmux set-option -g status-right`:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux set-option -g status-right '"#{=21:pane_title}" #(tmux-mem-cpu-load) %H:%M %d-%b-%y'
-
+```
 Also, note how I switched out the double quotes on either side of the option
 with single quotes. This is required, since there are double quotes inside.
 
@@ -149,9 +150,9 @@ colors can be used.
 
 You can style the color of the tmux clock via:
 
-{lang="text", line-numbers=off}
+```
     set-option -g clock-mode-colour white
-
+```
 Reminder: Clock mode can be opened with `$ tmux clock-mode` or `Prefix` + `t`.
 Pressing any key will exit clock mode.
 
@@ -162,9 +163,9 @@ it `message-command-style`, `message style` and so on.
 
 Let's try this:
 
-{lang="shell", line-numbers=off}
+```
     $ tmux set-option -ag message-style fg=yellow,blink\; set-option -ag message-style bg=black
-
+```
 ![Top: default scheme for prompt. Bottom: newly-styled.](images/09-status-bar/prompt.png)
 
 ## Styling while using tmux
@@ -175,20 +176,20 @@ your [config](#config) file.
 Start by grabbing your current status line section you want to edit, for
 instance:
 
-{lang="text", line-numbers=off}
+```shell
     $ tmux show-options -g status-left
     > status-left "[#S] "
     $ tmux show-options -g status-right
     > status-right " "#{=21:pane_title}" %H:%M %d-%b-%y"
-
+```
 Also, you can try to snip off the variable with `| cut -d' ' -f2-`:
 
-{lang="text", line-numbers=off}
+```shell
     $ tmux show-options -g status-left | cut -d' ' -f2-
     > "[#S] "
     $ tmux show-options -g status-right | cut -d' ' -f2-
     > " "#{=21:pane_title}" %H:%M %d-%b-%y"
-
+```
 Then, add the options to your [configuration](#config).
 
 To be sure your configuration fully works, you can start it in a different
@@ -199,26 +200,26 @@ to make sure your config file isn't missing any styling info.
 
 The tmux status line can be hidden, as well. Turn it off:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux set-option status off
-
+```
 And, turn it on:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux set-option status on
-
+```
 The above is best for scripting, but if you're binding it to a keyboard
 shortcut, *toggling*, or reversing the current option, it can be done via
 omitting the on/off value:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux set-option status
-
+```
 Bind toggling status line to `Prefix` + `q`:
 
-{language=shell, line-numbers=off}
+```shell
     $ tmux bind-key q set-option status
-
+```
 ## Example: Default config
 
 ![](images/09-status-bar/default.png)
@@ -226,7 +227,7 @@ Bind toggling status line to `Prefix` + `q`:
 This is an example of the default config you see if your tmux
 configuration has no status styling.
 
-{line-numbers=off}
+```
     status on
     status-interval 15
     status-justify left
@@ -239,12 +240,12 @@ configuration has no status styling.
     status-right-length 40
     status-right-style default
     status-style fg=black,bg=green
-
+```
 ## Example: Dressed up {#status-bar-example-dressed-up}
 
 ![](images/09-status-bar/dressed up.png)
 
-{line-numbers=off}
+```
     status on
     status-interval 1
     status-justify centre
@@ -261,11 +262,11 @@ configuration has no status styling.
     # default window title colors
     set-window-option -g window-status-fg colour244  # base0
     set-window-option -g window-status-bg default
-
+    
     # active window title colors
     set-window-option -g window-status-current-fg colour166  # orange
     set-window-option -g window-status-current-bg default
-
+```
 Configs can print the output of an application. In this example,
 [tmux-mem-cpu-load](https://github.com/thewtex/tmux-mem-cpu-load) is providing
 system statistics in the right-side section of the status line.
@@ -296,19 +297,19 @@ symbols.
 [Installation instructions](https://powerline.readthedocs.io/en/latest/installation.html)
 are on Read the Docs. For a better idea:
 
-{language=shell, line-numbers=off}
+```shell
     $ pip install --user powerline-status psutil
-
+```
 [psutil](https://github.com/giampaolo/psutil), a required dependency of
 powerline, is a cross-platform tool to gather system information.
 
 Assure you [properly configured python with your PATHs](#troubleshoot-site-paths),
 and try this:
 
-{line-numbers=off}
+```
     set -g status-interval 2
     set -g status-right '#(powerline tmux right)'
-
+```
 ## Summary
 
 Configuring the status line is optional. It can use the output of programs
