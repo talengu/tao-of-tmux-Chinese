@@ -3,100 +3,53 @@
 
 # 前言 
 
-几乎我所有的朋友使用tmux。我记得我们晚上出去喝酒，我们三个找一个桌子，掏出手机。这还是手机有“QWERTY”键的时代。
+我所有的朋友几乎都在使用tmux。我记得我们晚上出去喝酒，我们三个找一个桌子，掏出手机。这还是手机有“QWERTY”键的时代。
+
+尽管放在家里的电脑开启睡眠模式或者关掉了，但我们经常访问的 IRC 频道中的用户名仍然存在于聊天室列表中。我们的黑色terminal 上五颜六色的东西。我们使用ConnectBot连接云服务器并通过运行 [`screen(1)`](https://en.wikipedia.org/wiki/GNU_Screen) 重新连接聊天窗口。在凌晨2点，我们的土耳其咖啡到了，`|away`状态消息被替换掉，我们开始工作。
+
+有趣的是，即使我们知道对方的真实名字，我们有时也会用昵称相互打招呼。人际关系从线上到了线下。
 
 
+似乎它是精心策划的，但我们每个人都陷入了生活的同一个潮起潮落。没有人告诉我们这样做，但一点一点地，我们逐步优化我们的个人和专业生活方式，以达到看似奇怪的目的地。
 
-Despite our home computers being asleep or turned off, our usernames in the IRC
-channel we frequently visited persisted in the chatroom list. Our screens were
-lit by a kaleidoscope of colors on a black background. We ssh'd with ConnectBot
-into our cloud servers and reattached by running [`screen(1)`](https://en.wikipedia.org/wiki/GNU_Screen).
-As it hit 2AM, our Turkish coffee arrived, the `|away` status indicator trailing
-our online nicknames disappeared.
+就像生活中的很多事情，当我随心所欲按导航走的时候，其实最后到达一个地方，这种常常会有发生。所以，当我写一本电脑软件的教育手册的时候，希望不是强塞给你 tmux，喜欢或者不喜欢，但告诉你tmux 是什么，一些常用的使用技巧。
 
-It was funny noticing, even though we knew each other by our real names, we
-sometimes opted to call each other by our nicks. It's something about how
-personal relationships, formed online, persist in real life.
 
-It seemed as if it were orchestrated, but each of us fell into the same ebb and
-flow of living our lives. No one told us to do it, but bit by bit, we
-incrementally optimized our lifestyles, personally and professionally, to arrive
-at destinations seeming eerily alike.
-
-Like many things in life, when we act on autopilot, we sometimes arrive at
-similar destinations. This is often unplanned.
-
-So, when I write an educational book about a computer application, I hope to
-write it for human beings. Not to sell you on tmux, convince you to like it or
-hate it, but to tell you what it is and how some people use it. I'll leave the
-rest to you.
 
 ## 关于本书
 
-I've helped thousands learn tmux through my free resource under the name
-[The Tao of tmux](https://tmuxp.git-pull.com/en/latest/about_tmux.html), which I
-kept as part of the documentation for the [tmuxp session manager](https://github.com/tony/tmuxp).
-And now, it's been expanded into a full-blown book with refined graphics,
-examples, and much more.
+我通过完全免费的 [The Tao of tmux](https://tmuxp.git-pull.com/en/latest/about_tmux.html) 帮助过成百上千人学习 tmux，这份材料也属于 [tmuxp session manager](https://github.com/tony/tmuxp) 的一部分文档。
+现在，我将它拓展了一下，完善图，例子等，使之成为了一本书。
 
-You do not need a book to use or understand tmux. If you want a technical
-manual, look at the [manpage for tmux](http://man.openbsd.org/OpenBSD-current/man1/tmux.1).
-Manpages, however, are rarely sufficient to wrap your brain around
-abstract concepts; they're there for reference. This learning book is the
-culmination of years of explaining tmux to others online and in person.
+你只是想使用tmux的话，有一份man技术手册  [manpage for tmux](http://man.openbsd.org/OpenBSD-current/man1/tmux.1)。然而 Manpages 很少解释清楚抽象概念，他们更多的是一种参考手册。在这本书中我总结了个人多年使用和教人使用tmux的经验。
+在这本书里，我们将 tmux 按它的组成拆分，从 servers 到 panes。当然也会包括一些 terminal 的基础知识照顾到那些自学者。我参加过许多开源项目，设计了一些有效的 terminal 的 工作流程 （workflows）。
 
-In this book, we will break down tmux by its objects, from servers
-down to panes. It also includes a rehash of terminal facilities we use every day
-to keep us autodidacts up to speed with what is what. I've included numerous
-examples of projects, permissively licensed source code, and workflows designed
-for efficiency in the world of the terminal.
+tmux 真的很有用。它成为了我日常的一部分，除了官方的文档资源，我也写了受欢迎的  tmux 的配置文件[configuration](https://github.com/tony/tmux-config)，和插件 [tmux session manager](https://tmuxp.git-pull.com)。
 
-tmux is a tool I find useful. While I don't attach it to my personal identity,
-it's been part of my daily life for years. Besides the original resource,
-I've written a [popular tmux starter configuration](https://github.com/tony/tmux-config),
-a [pythonic tmux library](https://libtmux.git-pull.com), and a
-[tmux session manager](https://tmuxp.git-pull.com).
+我此刻正用运行在tmux pane里面的vim，写此文档。
+> I am writing this from vim running in a tmux pane, inside a window, in a session running on a tmux server, through a client.
 
-I am writing this from vim running in a tmux pane, inside a window, in a session
-running on a tmux server, through a client.
 
-A word to absolute beginners: Don't feel you need to grasp the concepts
-of the command line and terminal multiplexing in a single sitting. You have the
-choice of picking out concepts of tmux you like, according to your
-needs or interests. If you haven't installed tmux yet, please view the
-[Installation section](#appendix-installation) in the Appendix of the book.
+对初学者的一句忠告：不要觉得你需要在一次就能掌握命令行和终端多路复用的概念。 您可以根据自己的需要或兴趣选择自己喜欢的tmux概念。 如果您还没有安装tmux，请查看本书的 [Installation section](99-installation.md)部分。
 
-Follow [@TheTaoOfTmux](https://twitter.com/TheTaoOfTmux) for
-updates or [share on Twitter](https://twitter.com/intent/tweet?text=I%27m%20reading%20The%20Tao%20of%20tmux%20online%20at&url=https://leanpub.com/the-tao-of-tmux/read&hashtags=tmux&via=TheTaoOfTmux)!
+本书twitter [@TheTaoOfTmux](https://twitter.com/TheTaoOfTmux) 查看更新或者分享此文 [share on Twitter](https://twitter.com/intent/tweet?text=I%27m%20reading%20The%20Tao%20of%20tmux%20online%20at&url=https://leanpub.com/the-tao-of-tmux/read&hashtags=tmux&via=TheTaoOfTmux)!
 
 ## 代码等风格说明
 
-Formatted text `like this` is source code.
+强调符号如 `like this` ，这代表为代码部分。
 
-Formatted text with a $ in front is a terminal command. `$ echo 'like this'`.
-The text can be typed into the console, without the dollar character. For more
-information on the meaning of the "dollar prompt", check out [*What is the
-origin of the UNIX $ (dollar) prompt?*](https://superuser.com/questions/57575/what-is-the-origin-of-the-unix-dollar-prompt)
-on Super User.
+以`$`开头的为 terminal 的命令（command）。`$ echo 'like this'`。在终端中输入时不需要输入dollar符号。想知道更多关于 dollar提示符的意义，可查看在  Super User 网站上的 [*What is the origin of the UNIX $ (dollar) prompt?*](https://superuser.com/questions/57575/what-is-the-origin-of-the-unix-dollar-prompt)。
 
-In tmux, shortcuts require a [prefix key](#prefix-key) to be sent beforehand.
-For instance, `Prefix` + `d` will detach a tmux client from its session. This
-prefix, by default, is `<Ctrl-b>`, but users can override it. This is discussed in
-greater detail in *the prefix key* section and [*configuration*](#config).
+在 tmux 中，快捷键（shortcuts）需要有个预按键 [prefix key](03-practical-usage.md) 和其他键来组合命令。如  `Prefix` + `d` 代表将从 session 中脱离（detach）。通过 tmux默认 `<Ctrl-b>`，用户也可以更改。这些内容在 *the prefix key*部分 和  [*configuration*](08-configuration.md) 章节。
 
-## 本书大致框架
 
-First, anything involving [installation](http://man.openbsd.org/OpenBSD-current/man1/tmux.1)
-and hard technical details are in the Appendix. A lot of books use installation
-instructions as filler in the early chapters. For me, it's more of not wanting
-to confuse beginners.
 
-For special circumstances, like [tmux on Windows 10](99-windows-bash.md), I
-decided adding screenshots is best, since many readers may be more comfortable
-with a visual approach.
+## 本书主要内容
 
-[*Thinking in tmux*](01-thinking-tmux.md) goes over what tmux does and how it relates to
-the GUI desktops on our computers.  You'll understand the big picture of
+安装 [installation](http://man.openbsd.org/OpenBSD-current/man1/tmux.1)和技术细节部分在附录部分。许多书在前几章就介绍安装，但是背景写的比较少，可能会使刚开始学习的人迷惑。还有一些特殊的章节，如  [tmux on Windows 10](99-windows-bash.md)。我在文章加了一些截图，方便读者可视理解。
+
+
+[*tmux 初识（Thinking in tmux）*](01-thinking-tmux.md) goes over what tmux does and how it relates to the GUI desktops on our computers.  You'll understand the big picture of
 what tmux is and how it can make your life easier.
 
 [*Terminal Fundamentals*](02-terminal-fundamentals.md) shows the text-based
@@ -146,7 +99,7 @@ administration experience.
 [*Cheatsheets*](99-cheatsheets.md) are organized tables of commands,
 shortcuts, and formats grouped by section.
 
-## 捐赠
+## 打赏
 
 If you enjoy my learning material or my open source software projects, please
 consider donating. Donations go directly to me and my current and future open source
