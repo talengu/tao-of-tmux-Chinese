@@ -48,16 +48,9 @@ tmux 真的很有用。它成为了我日常的一部分，除了官方的文档
 
 安装 [installation](http://man.openbsd.org/OpenBSD-current/man1/tmux.1)和技术细节部分在附录部分。许多书在前几章就介绍安装，但是背景写的比较少，可能会使刚开始学习的人迷惑。还有一些特殊的章节，如  [tmux on Windows 10](99-windows-bash.md)。我在文章加了一些截图，方便读者可视理解。
 
+[*tmux 初识（Thinking in tmux）*](01-thinking-tmux.md) 概览一下 tmux 的功能和它如何配合GUI来操作。你会了解tmux大概东西，从而使得更加愉快的写代码。
 
-[*tmux 初识（Thinking in tmux）*](01-thinking-tmux.md) goes over what tmux does and how it relates to the GUI desktops on our computers.  You'll understand the big picture of
-what tmux is and how it can make your life easier.
-
-[*Terminal Fundamentals*](02-terminal-fundamentals.md) shows the text-based
-environments you'll be dealing with. It's great for those new to tmux, but also
-presents technical background for developers, who learned the ropes through
-examples and osmosis. At the end of this section, you'll be more confident and
-secure using the essential components underpinning a modern terminal
-environment.
+[*Terminal Fundamentals*](02-terminal-fundamentals.md) shows the text-based environments you'll be dealing with. It's great for those new to tmux, but also presents technical background for developers, who learned the ropes through examples and osmosis. At the end of this section, you'll be more confident and secure using the essential components underpinning a modern terminal environment.
 
 [*Practical usage*](03-practical-usage.md) covers common bread-and-butter uses for
 you to use tmux immediately.
