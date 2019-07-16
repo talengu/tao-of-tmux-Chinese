@@ -13,7 +13,7 @@ The active window will have a `*` symbol next to it.
 
 ![The first window, ID 1, titled "manuscript" is active. The second window, ID 2, titled zsh.](images/05-session/active-window.png)
 
-## 创建会话
+## 创建会话(sessions)
 
 The simplest command to create a new session is typing `tmux`:
 
@@ -29,7 +29,8 @@ descriptive. What would be better is:
 ```
     $ tmux new-session -s'my rails project'
 ```
-## Switching sessions within tmux
+
+## tmux 切换会话(sessions)
 
 Some acquire the habit of detaching their tmux client and reattaching via
 `tmux att -t session_name`. Thankfully, you can switch sessions from within
@@ -57,7 +58,7 @@ Example usage:
 ```
 If already inside a client, this will switch to a session, named "dev", if it exists.
 
-## Naming sessions
+## 重命名会话
 
 Sometimes, the default session name given by tmux isn't descriptive enough. It
 only takes a few seconds to update it.
@@ -84,7 +85,7 @@ Through command line, you can try:
 ```shell
     $ tmux rename-session -t 1 "my session"
 ```
-## Does my session exist?
+## 查找存在的会话
 
 If you're scripting tmux, you will want to see if a session exists.
 `has-session` will return a 0 [exit code](https://en.wikipedia.org/wiki/Exit_status)

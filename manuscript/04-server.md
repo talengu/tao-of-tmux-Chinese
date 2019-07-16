@@ -137,7 +137,7 @@ section in the [Scripting tmux](#scripting-tmux) chapter goes into
 `$ tmux capture-pane` and how you can use [targets](#targets) to copy pane
 content into your paste buffer or files with `$ tmux save-buffer`.
 
-## Summary
+## 小节
 
 The server is one of the fundamental underpinnings of tmux. Initialized
 automatically to the user, it persists by forking into the background. Running

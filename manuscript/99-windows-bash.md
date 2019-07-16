@@ -1,23 +1,36 @@
 # 附录： tmux 在 Windows 10 使用{#appendix-windows-bash}
 
+要在windows 系统上安装tmux，可以使用MSYS2，或者安装windows的子系统 Linux。
+
+## 通过 MSYS2
+
+下载安装  [MSYS2](http://www.msys2.org/)
+
+```bash
+pacman  -S tmux
+```
+
+![1563281005928](images/99-windows-bash/1563281005928.png)
+
+![1563281982394](99-windows-bash/1563281982394.png)
+
+
+
+## Window 的 Linux 子系统
+
 从 Windows 10 build 14361开始，可以通过 Window 的 Linux 子系统 [运行 tmux](https://blogs.msdn.microsoft.com/commandline/2016/06/08/tmux-support-arrives-for-bash-on-ubuntu-on-windows/) 。
 
-Usage requires enabling **Developer mode** via the "For Developers" tab in the
-"Update & security" settings.
+在 设置的 “Update & security”下的 "For Developers"，使能 **Developer mode** 选项。之后，打开 "Windows Features"。你可以在开始搜索 "Turn Windows features on or off"，然后打开 "Windows Subsystem for Linux (Beta)" 功能，需要重启电脑。
 
-After enabling, open "Windows Features". You can find it by searching for "Turn
-Windows features on or off". Then check "Windows Subsystem for Linux (Beta)".
-
-You may be asked to restart.
-
-Then open Command Prompt as you normally would (Run cli.exe). Then type
+接下来打开 cmd窗口(Run cli.exe)，运行：
 
 ```bash
 C:\Users\tony> bash.exe
 ```
 
-It will prompt you to agree to terms, create a user. In my build, tmux was
-already installed! But if it's not, type `sudo apt-get install tmux`.
+可能需要同意一些条款，创建一个用户。在作者的电脑上，tmux已经安装好了。如果没有安装可以使用`sudo apt-get install tmux`安装。
+
+
 
 ![Find Turn Windows Features on or off](images/99-windows-bash/01-turn-features-onoff.jpg)
 
@@ -41,8 +54,7 @@ yourusername@COMPUTERNAME-ID321FJ:/mnt/c/Users/username$ tmux
 
 ![In tmux!](images/99-windows-bash/09-tmux.jpg)
 
-This should allow you to run tmux within bash.exe.
+这下你可以在`bash.exe`里面运行tmux了。
 
-This is a real ubuntu installation, so you can continue to install
-packages via `sudo apt-get install **packagename**` and update packages
-via `sudo apt-get update && sudo apt-get upgrade`.
+在这个ubuntu系统里面，你可以通过 `sudo apt-get install **packagename**` 继续安装其他软件和`sudo apt-get update && sudo apt-get upgrade`更新软件。
+
