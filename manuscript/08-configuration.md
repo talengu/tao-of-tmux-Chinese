@@ -38,7 +38,7 @@ free to copy and paste from it as you wish.
 >     $ tmux -Ltesting_tmux attach
 > ```
 
-## Reloading configuration {#reload-config}
+## 重载配置文件  {#reload-config}
 
 You can apply config files in live tmux sessions. Compare this to `source` or
 ["dot"](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#dot)
@@ -70,7 +70,7 @@ command line.
 Note that reloading the configuration only *re-runs* the configuration file. It
 will not reset keybindings or styling you apply to tmux.
 
-## How configs work
+## 配置文件的工作原理
 
 The tmux configuration is processed just like [run commands](https://en.wikipedia.org/wiki/Run_commands)
 in a `~/.zshrc` or `~/.bashrc` file. `bind r source ~/.tmux.conf` in the tmux
@@ -100,7 +100,7 @@ window options (`set-window-option -g`).
 The rest of this chapter is going to proceed cookbook-style. You can pick out
 these tweaks and add them to your `.tmux.conf` and [reload](#reload-config).
 
-## Server options
+## 服务设置(Server options)
 
 Server options are set with `set-option -s option value`.
 
@@ -119,13 +119,13 @@ If you're having an issue with color detail in tmux, it may help to set
 ```
 This sets the `TERM` variable in new panes.
 
-## Session options
+## 会话设置(Session options)
 
 Aside from the [status bar](#status-bar), covered in the next chapter, most
 user configuration will be custom keybindings. This section covers the few
 generic options, and the next section goes into snippets involving keybindings.
 
-### Base index
+### 窗口计数(Base index)
 
 This was mentioned earlier in the book, but it's a favorite tweak of many tmux
 users, who find it more intuitive to start their window counting at *1*, rather
@@ -136,7 +136,7 @@ than the default, *0*. To set the starting number (base index) for windows:
 ```
 Setting `base-index` assures newly created windows start at 1 and count upwards.
 
-## Window options
+## 窗口设置(Window options)
 
 Window options are set via `set-option -w` or `set-window-option`. They are the
 same thing.
@@ -151,7 +151,7 @@ pane:
 ```
 Automatic renaming will be disabled for the window if you rename it manually.
 
-## Keybindings
+## 快捷键绑定(Keybindings)
 
 ### Prefix key
 

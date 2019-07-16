@@ -59,7 +59,7 @@ One server can contain one or multiple [sessions](05-session.md).
 
 Starting tmux after a server already is running will create a new session inside
 the existing server. 
-
+```txt
 W> ### Advanced: Multiple servers
 W>
 W> tmux is nimble. To use a separate server, pass in the `-L` flag to any
@@ -69,7 +69,7 @@ W> `tmux -L moo` - connect to server under socket name "moo" and attach
 W> a new session. Create server if none already exists for socket.
 W>
 W> `tmux -L moo attach` will attempt to re-attach a session if one exists.
-
+```
 ## How servers are "named"
 
 The default name for the server is `default`, which is stored as a socket in

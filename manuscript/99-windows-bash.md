@@ -12,7 +12,7 @@ pacman  -S tmux
 
 ![1563281005928](images/99-windows-bash/1563281005928.png)
 
-![1563281982394](99-windows-bash/1563281982394.png)
+![1563281982394](images/99-windows-bash/1563281982394.png)
 
 
 

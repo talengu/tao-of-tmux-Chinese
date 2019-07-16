@@ -40,7 +40,6 @@ tmux 对于控制台来说，就像windows的desktop对于GUI应用。文字界�
 ![](images/01-thinking-tmux/clocks.png)
 <p align="center"><em> 图: 左上： KDE（ubuntu等） 右上：Windows 10. 中间：macOS Sierra. 下方： tmux 2.3 默认的 status bar。</em></p></p>
 
-
 ## 多任务处理
 
 tmux 在一个窗口保持多个termianl。“tmux”缩写来自
@@ -126,7 +125,7 @@ The above are just examples; any general workspace you'd normally use in a
 terminal could work, especially projects or repetitive efforts you multitask
 on. The *[tips and tricks](#tips-and-tricks)* section will dive into specific
 flows you can use today.
-
+```
 Q> ### Do tmux sessions persist after a system restart?
 Q>
 Q> Unfortunately, no. A restart will kill the tmux server and any processes
@@ -149,7 +148,7 @@ Q> Besides session managers, [tmux-resurrect](https://github.com/tmux-plugins/tm
 Q> attempts to preserve running programs, working directories, and
 Q> so on within tmux. The benefit with tmux-resurrect is there's no JSON/YAML
 Q> config needed.
-
+```
 ## 小节
 
 tmux is a versatile addition to your terminal toolbelt. It helps you cover the
