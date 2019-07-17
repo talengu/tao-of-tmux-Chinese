@@ -8,7 +8,6 @@ tao-of-tmux 中文版!
 
 Tao of tmux 的作者是 Tony Narlock。
 
-本书英文可在线阅读 https://tao-of-tmux.readthedocs.io/en/latest/
 作者英文版地址 <https://leanpub.com/the-tao-of-tmux/read>
 
 翻译说明：
@@ -22,7 +21,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   
+
    manuscript/00-foreword.md
    manuscript/01-thinking-tmux.md
    manuscript/02-terminal-fundamentals.md
