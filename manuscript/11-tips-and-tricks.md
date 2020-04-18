@@ -65,16 +65,9 @@ moment, because you'd be using a log multiplexer in a terminal multiplexer.
 
 ## File watching {#file-watching}
 
-In my never-ending conquest to get software projects working in symphony with
-code changes, I've come to test many file watching applications and
-patterns. Pursuing the holy grail feedback loop upon file changes, I've gradually
-become the internet's unofficial connoisseur on them.
+In my never-ending conquest to get software projects working in symphony with code changes, I've come to test many file watching applications and patterns. Pursuing the holy grail feedback loop upon file changes, I've gradually become the internet's unofficial connoisseur on them.
 
-File watcher applications wait for a file to be updated, then execute a custom
-command, such as restarting a server, rebuilding an application, running tests,
-linters, and so on. It gives you, as a developer, instant feedback in the
-terminal, empowering a tmux workspace to have IDE-like features, without the
-bloat, memory, and CPU fans roaring.
+File watcher applications wait for a file to be updated, then execute a custom command, such as restarting a server, rebuilding an application, running tests, linters, and so on. It gives you, as a developer, instant feedback in the terminal, empowering a tmux workspace to have IDE-like features, without the bloat, memory, and CPU fans roaring.
 
 I eventually settled on [`entr(1)`](http://entrproject.org/), which works superbly across Linux distros, BSDs and OS X / macOS.
 

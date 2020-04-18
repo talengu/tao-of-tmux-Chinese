@@ -1,38 +1,33 @@
 # 面板（Panes） {#panes}
 
-Panes are [pseudoterminals](https://en.wikipedia.org/wiki/Pseudoterminal)
-encapsulating shells (e.g., Bash, Zsh). They reside within a [window](06-window.md).
-A terminal within a terminal, they can run shell commands, scripts, and programs,
-like vim, emacs, top, htop, irssi, weechat, and so on within them.
+Panes are [pseudoterminals](https://en.wikipedia.org/wiki/Pseudoterminal) encapsulating shells (e.g., Bash, Zsh). They reside within a [window](06-window.md).
+A terminal within a terminal, they can run shell commands, scripts, and programs, like vim, emacs, top, htop, irssi, weechat, and so on within them.
 
 ![](images/info/pane.png)
 
 ## 创建新面板
 
-To create a new pane, you can `split-window` from within the current
-[window](#windows) and pane you are in.
+To create a new pane, you can `split-window` from within the current [window](#windows) and pane you are in.
 
 | Shortcut         | Action                                             |
 |------------------|----------------------------------------------------|
 |`Prefix` + `%`    | `split-window -h` (split horizontally)             |
 |`Prefix` + `"`    | `split-window -v` (split vertically)               |
 
-You can continue to create panes until you've reached the limit of what the
-terminal can fit. This depends on the dimensions of your terminal. A normal
-window will usually have 1 to 5 panes open.
+You can continue to create panes until you've reached the limit of what the terminal can fit. This depends on the dimensions of your terminal. A normal window will usually have 1 to 5 panes open.
 
 Example usage:
 
-```
-    # Create pane horizontally, $HOME directory, 50% width of current pane
-    $ tmux split-window -h -c $HOME -p 50 vim
+```shell
+# Create pane horizontally, $HOME directory, 50% width of current pane
+$ tmux split-window -h -c $HOME -p 50 vim
 ```
 
 ![](images/07-pane/splitw/-h -c $HOME -p 50 vim - 2 panes.png)
 
-```
-    # create new pane, split vertically with 75% height
-    tmux split-window -p 75
+```shell
+# create new pane, split vertically with 75% height
+tmux split-window -p 75
 ```
 
 ![](images/07-pane/splitw/-p 75.png)
@@ -67,12 +62,9 @@ To zoom in on a pane, navigate to it and do `Prefix` + `z`.
 
 You can unzoom by pressing `Prefix` + `z` again.
 
-In addition, you can unzoom and move to an adjacent pane at the same time
-using a [pane traversal](#pane-traversal) key.
+In addition, you can unzoom and move to an adjacent pane at the same time using a [pane traversal](#pane-traversal) key.
 
-Behind the scenes, the keybinding is a shortcut for `$ tmux resize-pane -Z`. So,
-if you ever wanted to script tmux to zoom/unzoom a pane or apply this
-functionality to a custom key binding, you can do that too, for instance:
+Behind the scenes, the keybinding is a shortcut for `$ tmux resize-pane -Z`. So, if you ever wanted to script tmux to zoom/unzoom a pane or apply this functionality to a custom key binding, you can do that too, for instance:
 
 ```
     bind-key -T prefix y resize-pane -Z
@@ -81,12 +73,7 @@ This would have `Prefix` + `y` zoom and unzoom panes.
 
 ## 面板大小（Resizing panes） {#resizing-panes}
 
-Pane size can be adjusted within [windows](#windows) via [window layouts](#window-layouts)
-and `resize-pane`. Adjusting window layout switches the proportions and order of
-the panes. Resizing the panes targets a specific pane inside the window
-containing it, also shrinking or growing the size of the other columns or rows.
-It's like adjusting your car seat or reclining on a flight; if you take up more
-space, something else will have less space.
+Pane size can be adjusted within [windows](#windows) via [window layouts](#window-layouts) and `resize-pane`. Adjusting window layout switches the proportions and order of the panes. Resizing the panes targets a specific pane inside the window containing it, also shrinking or growing the size of the other columns or rows. It's like adjusting your car seat or reclining on a flight; if you take up more space, something else will have less space.
 
 | Shortcut         | Action              |
 |------------------|---------------------|
@@ -106,19 +93,12 @@ You can output the display of a pane to a file.
 ```
     $ tmux pipe-pane -o 'cat >>~/output.#I-#P'
 ```
-The `#I` and `#P` are [formats](#formats) for window index and pane index, so
-the file created is unique. Clever!
+The `#I` and `#P` are [formats](#formats) for window index and pane index, so the file created is unique. Clever!
 
 ## 小节
 
-Panes are shells within a shell. You can keep adding panes to a tmux window
-until you run out of room on your screen. Within your shell, you can `tail -F`
-log files, write and run scripts, and run [curses](https://en.wikipedia.org/wiki/Curses_(programming_library))-powered
-applications, like vim, top, htop, ncmpcpp, irssi, weechat, mutt, and so on.
+Panes are shells within a shell. You can keep adding panes to a tmux window until you run out of room on your screen. Within your shell, you can `tail -F` log files, write and run scripts, and run [curses](https://en.wikipedia.org/wiki/Curses_(programming_library))-powered applications, like vim, top, htop, ncmpcpp, irssi, weechat, mutt, and so on.
 
-You will always have at least one pane open. Once you kill the last pane in
-the window, the window will close. Panes are also resizable; you can resize
-panes by targeting them specifically and changing the window layout.
+You will always have at least one pane open. Once you kill the last pane in the window, the window will close. Panes are also resizable; you can resize panes by targeting them specifically and changing the window layout.
 
-In the next chapter, we will go into the ways you can customize your tmux
-shortcuts, status line, and behavior.
+In the next chapter, we will go into the ways you can customize your tmux shortcuts, status line, and behavior.

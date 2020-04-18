@@ -55,23 +55,14 @@ shortcut, e.g., **swap**-**w**indow is swapw, **split**-**w**indow is splitw.
 
 ## Pattern matching {#fnmatch}
 
-In addition to aliases, tmux commands and arguments may all be accessed via
-[`fnmatch(3)`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/fnmatch.html)
-patterns.
+In addition to aliases, tmux commands and arguments may all be accessed via [`fnmatch(3)`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/fnmatch.html) patterns.
 
-For instance, you need not type `$ tmux attach-session` every time. First,
-there's the [alias](#aliases) of `$ tmux attach`, but additionally, more
-concise commands can be used if they partially match the name of the command or
-the target. tmux's pattern matching allows `$ tmux attac`, `$ tmux att`, `$ tmux at`
-and `$ tmux a` to reach `$ tmux attach`.
+For instance, you need not type `$ tmux attach-session` every time. First, there's the [alias](#aliases) of `$ tmux attach`, but additionally, more concise commands can be used if they partially match the name of the command or the target. tmux's pattern matching allows `$ tmux attac`, `$ tmux att`, `$ tmux at` and `$ tmux a` to reach `$ tmux attach`.
 
 Every tmux command has shorthands; let's try this for `$ tmux new-session`:
 
-{language=shell, line-numbers=off}
-    $ tmux new-session
-
 ```shell
-$ tmux new-sessio
+$ tmux new-session
 
 # ...
 
@@ -81,32 +72,24 @@ $ tmux new-s
 and so on, until:
 
 ```shell
-    $ tmux new-
-    ambiguous command: new-, could be: new-session, new-window
+$ tmux new-
+ambiguous command: new-, could be: new-session, new-window
 ```
 
-The limitation, as seen above, is command matches can collide. Multiple commands
-begin with `new-`. So, if you wanted to use matches, `$ tmux new-s` for a new
-session or `$ tmux new-w` for a new window would be the most efficient way. But,
-the alias of `$ tmux new` for new session and `$ tmux neww` for new windows is
-even more concise than matching, since the special alias exists.
+The limitation, as seen above, is command matches can collide. Multiple commands begin with `new-`. So, if you wanted to use matches, `$ tmux new-s` for a new session or `$ tmux new-w` for a new window would be the most efficient way. But, the alias of `$ tmux new` for new session and `$ tmux neww` for new windows is even more concise than matching, since the special alias exists.
 
-Patterns can also match [targets](#targets) with window and session names. For
-instance, a session named `mysession` can be matched via `mys`:
+Patterns can also match [targets](#targets) with window and session names. For instance, a session named `mysession` can be matched via `mys`:
 
 ```shell
-    $ tmux attach -t mys
+$ tmux attach -t mys
 ```
-Matching targets will fail if a pattern matches more than one item. If 2
-sessions exist, named `mysession` and `mysession2`, the above command would
-fail. To target either session, the complete target name must be specified.
+Matching targets will fail if a pattern matches more than one item. If 2 sessions exist, named `mysession` and `mysession2`, the above command would fail. To target either session, the complete target name must be specified.
 
 ## Targets {#targets}
 
 If a command allows target specification, it's usually done through `-t`.
 
-Think of targets as tmux's way of specifying a [unique key](https://en.wikipedia.org/wiki/Unique_key)
-in a relational database.
+Think of targets as tmux's way of specifying a [unique key](https://en.wikipedia.org/wiki/Unique_key) in a relational database.
 
 | Entity    | Prefix | Example                               |
 |-----------|--------|---------------------------------------|
@@ -121,18 +104,11 @@ What I use to help me remember:
 So, sessions are represented by dollar signs ($) because they hold your projects
 (*ostensibly* where you make money or help someone else do it).
 
-Windows are represented by the [at sign](https://en.wikipedia.org/wiki/At_sign)
-(@). So, windows are like referencing / messaging a user on a social
-networking website.
+Windows are represented by the [at sign](https://en.wikipedia.org/wiki/At_sign) (@). So, windows are like referencing / messaging a user on a social networking website.
 
-Panes are the fun one, represented by the percent sign (%), like the
-default prompt for [csh](https://en.wikipedia.org/wiki/C_shell) and
-[tcsh](https://en.wikipedia.org/wiki/Tcsh). Hey, makes sense, since panes are
-pseudoterminals!
+Panes are the fun one, represented by the percent sign (%), like the default prompt for [csh](https://en.wikipedia.org/wiki/C_shell) and [tcsh](https://en.wikipedia.org/wiki/Tcsh). Hey, makes sense, since panes are pseudoterminals!
 
-When scripting tmux, the symbols help denote the type of object, but also serve
-as a way to target something deeply, such as the pane, *directly*, without
-needing to know or specify its window or session.
+When scripting tmux, the symbols help denote the type of object, but also serve as a way to target something deeply, such as the pane, *directly*, without needing to know or specify its window or session.
 
 Here are some examples of targets, assuming one session named `mysession` and a
 client at `/dev/ttys004`:
@@ -235,19 +211,15 @@ You know how template engines, such as
 [ERB](http://ruby-doc.org/stdlib-2.3.3/libdoc/erb/rdoc/ERB.html) in ruby,
 [jinja2](http://jinja.pocoo.org/docs/dev/) in python,
 [twig](http://twig.sensiolabs.org/) in PHP, and
-[JSP](https://en.wikipedia.org/wiki/JavaServer_Pages) in Java, allow template
-variables? Formats are a similar concept.
+[JSP](https://en.wikipedia.org/wiki/JavaServer_Pages) in Java, allow template variables? Formats are a similar concept.
 
-The `FORMATS` (variables) provided by tmux have expanded greatly
-since version 1.8. Some of the most commonly used formats as of tmux 2.3 are
-listed below. See the [appendix section on formats](#appendix-formats) for a
-complete list.
+The `FORMATS` (variables) provided by tmux have expanded greatly since version 1.8. Some of the most commonly used formats as of tmux 2.3 are listed below. See the [appendix section on formats](#appendix-formats) for a complete list.
 
 Let's try to output it:
 
 ```shell
-    $ tmux list-windows -F "#{window_id} #{window_name}"
-    > @0 zsh
+$ tmux list-windows -F "#{window_id} #{window_name}"
+> @0 zsh
 ```
 Here's a cool trick to list all panes with the x and y coordinates of the cursor
 position:
@@ -261,23 +233,15 @@ position:
 ```
 Variables are specific to the objects being listed. For instance:
 
-Server-wide variables: `host`, `host_short` (no domain name), `socket_path`,
-`start_time` and `pid`.
+Server-wide variables: `host`, `host_short` (no domain name), `socket_path`, `start_time` and `pid`.
 
-Session-wide variables: `session_attached`, `session_activity`,
-`session_created`, `session_height`, `session_id`, `session_name`,
-`session_width`, `session_windows` and all server-wide variables.
+Session-wide variables: `session_attached`, `session_activity`, `session_created`, `session_height`, `session_id`, `session_name`, `session_width`, `session_windows` and all server-wide variables.
 
-Window variables: `window_activity`, `window_active`, `window_height`,
-`window_id`, `window_index`, `window_layout`, `window_name`, `window_panes`,
-`window_width` and all session and server variables.
+Window variables: `window_activity`, `window_active`, `window_height`, `window_id`, `window_index`, `window_layout`, `window_name`, `window_panes`, `window_width` and all session and server variables.
 
-Pane variables: `cursor_x`, `cursor_y`, `pane_active`, `pane_current_command`,
-`pane_current_path`, `pane_height`, `pane_id`, `pane_index`, `pane_width`,
-`pane_pid` and all window, session and server variables.
+Pane variables: `cursor_x`, `cursor_y`, `pane_active`, `pane_current_command`, `pane_current_path`, `pane_height`, `pane_id`, `pane_index`, `pane_width`, `pane_pid` and all window, session and server variables.
 
-This book focuses on separating the concept of server, sessions,
-windows, and panes. With the knowledge of targets and formats, this
+This book focuses on separating the concept of server, sessions, windows, and panes. With the knowledge of targets and formats, this
 separation takes shape in tmux's internal attributes. If you `list-panes` all
 variables up the ladder, including window, session and server variables are
 available for the panes being listed. Try this:

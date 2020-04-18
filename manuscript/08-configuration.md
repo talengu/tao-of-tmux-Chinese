@@ -1,21 +1,12 @@
 # 配置（Configuration ）{#config}
 
-Most tmux users break away from the defaults by creating their own customized
-configurations. These configurations vary from the trivial, such as adding
-keybindings, and adjusting the prefix key, to complex things, such as decking
-out the [status bar](#status-bar) with system stats and fancy glyphs via powerlines.
+Most tmux users break away from the defaults by creating their own customized configurations. These configurations vary from the trivial, such as adding keybindings, and adjusting the prefix key, to complex things, such as decking out the [status bar](#status-bar) with system stats and fancy glyphs via powerlines.
 
-Configuration of tmux is managed through `.tmux.conf` in your `$HOME` directory. 
-The paths `~/.tmux.conf` and `$HOME/.tmux.conf` should work on OS X, Linux, and
-BSD.
+Configuration of tmux is managed through `.tmux.conf` in your `$HOME` directory.  The paths `~/.tmux.conf` and `$HOME/.tmux.conf` should work on OS X, Linux, and BSD.
 
-Configuration is applied upon initially starting tmux. The contents of the
-configuration are tmux commands. The file can be reloaded later via
-`source-file`, which is discussed in this chapter.
+Configuration is applied upon initially starting tmux. The contents of the configuration are tmux commands. The file can be reloaded later via `source-file`, which is discussed in this chapter.
 
-For a sample config, I maintain a pretty decked out one at
-<https://github.com/tony/tmux-config>. It's permissively licensed, and you're
-free to copy and paste from it as you wish.
+For a sample config, I maintain a pretty decked out one at <https://github.com/tony/tmux-config>. It's permissively licensed, and you're free to copy and paste from it as you wish.
 
 > **Custom Configs**
 >
@@ -24,25 +15,20 @@ free to copy and paste from it as you wish.
 > ```shell
 >     $ tmux -f path/to/config.conf
 >```
-> Note: If a tmux server is running in the background and you want 
-> to test a fresh config, you must either shut down the rest of the
-> tmux sessions or use a different socket name. Like this:
+> Note: If a tmux server is running in the background and you want to test a fresh config, you must either shut down the rest of the tmux sessions or use a different socket name. Like this:
 > 
 > ```shell
->     $ tmux -f path/to/config.conf -Ltesting_tmux
->```
-> And you can treat everything like normal; just keep passing `-Ltesting_tmux`
-> (or whatever socket name you feel like testing configs with) for reuse.
+>  $ tmux -f path/to/config.conf -Ltesting_tmux
+> ```
+>    And you can treat everything like normal; just keep passing `-Ltesting_tmux` (or whatever socket name you feel like testing configs with) for reuse.
 >
 > ```shell
->     $ tmux -Ltesting_tmux attach
-> ```
+>  $ tmux -Ltesting_tmux attach
+>```
 
 ## 重载配置文件  {#reload-config}
 
-You can apply config files in live tmux sessions. Compare this to `source` or
-["dot"](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#dot)
-in the POSIX standard.
+You can apply config files in live tmux sessions. Compare this to `source` or ["dot"](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#dot) in the POSIX standard.
 
 `Prefix` + `:` will open the tmux prompt, then type:
 
@@ -50,14 +36,11 @@ in the POSIX standard.
 
 And hit return.
 
-`$ tmux source-file /path/to/config.conf` can also achieve the same result via
-command line.
+`$ tmux source-file /path/to/config.conf` can also achieve the same result via command line.
 
-> **Easy reloadin'**
+> 简便加载
 >
-> Even better, often, you will keep your default tmux config stored in
-> `$HOME/.tmux.conf`. So, what can you do? You can `bind-key` to
-> `source-file ~/.tmux.conf`:
+> Even better, often, you will keep your default tmux config stored in `$HOME/.tmux.conf`. So, what can you do? You can `bind-key` to `source-file ~/.tmux.conf`:
 >
 > `bind r source ~/.tmux.conf`
 > 
@@ -67,19 +50,13 @@ command line.
 >
 > Now, you can type `Prefix` + `r` to get the config to reload.
 
-Note that reloading the configuration only *re-runs* the configuration file. It
-will not reset keybindings or styling you apply to tmux.
+Note that reloading the configuration only *re-runs* the configuration file. It will not reset keybindings or styling you apply to tmux.
 
 ## 配置文件的工作原理
 
-The tmux configuration is processed just like [run commands](https://en.wikipedia.org/wiki/Run_commands)
-in a `~/.zshrc` or `~/.bashrc` file. `bind r source ~/.tmux.conf` in the tmux
-configuration is the same as `$ tmux bind r source ~/.tmux.conf`.
+The tmux configuration is processed just like [run commands](https://en.wikipedia.org/wiki/Run_commands) in a `~/.zshrc` or `~/.bashrc` file. `bind r source ~/.tmux.conf` in the tmux configuration is the same as `$ tmux bind r source ~/.tmux.conf`.
 
-You could always create a shell script prefixing `tmux` in front of commands
-and run it on fresh servers. The result is the same. Same goes if you manually
-type in `$ tmux set-option` and `$ tmux bind-key` commands into any terminal (in
-or outside tmux).
+You could always create a shell script prefixing `tmux` in front of commands and run it on fresh servers. The result is the same. Same goes if you manually type in `$ tmux set-option` and `$ tmux bind-key` commands into any terminal (in or outside tmux).
 
 This in `.tmux.conf`:
 
@@ -93,12 +70,9 @@ Is the same as having no `.tmux.conf` (or `$ tmux -f/dev/null`) and typing:
 ```
 in a newly started tmux server.
 
-The important thing to internalize is that a tmux configuration consists of
-setting server options (`set-option -s`), global session (`set-option -g`), and
-window options (`set-window-option -g`).
+The important thing to internalize is that a tmux configuration consists of setting server options (`set-option -s`), global session (`set-option -g`), and window options (`set-window-option -g`).
 
-The rest of this chapter is going to proceed cookbook-style. You can pick out
-these tweaks and add them to your `.tmux.conf` and [reload](#reload-config).
+The rest of this chapter is going to proceed cookbook-style. You can pick out these tweaks and add them to your `.tmux.conf` and [reload](#reload-config).
 
 ## 服务设置(Server options)
 
@@ -138,8 +112,7 @@ Setting `base-index` assures newly created windows start at 1 and count upwards.
 
 ## 窗口设置(Window options)
 
-Window options are set via `set-option -w` or `set-window-option`. They are the
-same thing.
+Window options are set via `set-option -w` or `set-window-option`. They are the same thing.
 
 ### Automatic window naming
 

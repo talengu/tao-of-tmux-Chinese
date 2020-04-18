@@ -21,8 +21,7 @@ background for you.
 
 ## Zero config needed
 
-You don't notice it, but when you use tmux normally, a server is launched and
-being connected via a client.
+You don't notice it, but when you use tmux normally, a server is launched and being connected via a client.
 
 tmux is so streamlined, the book could continue to explain usage and not even
 mention servers. But, I'd rather you have a true understanding of how it works
@@ -31,8 +30,7 @@ expectations of utilitarianism. One cannot deny it's exquisitely executed
 from a user experience standpoint.
 
 How is it utilitarian? We'll go into it more in future chapters, where we dive
-into [Formats](#formats), [Targets](#targets), and tools, such as [libtmux](https://github.com/tony/libtmux)
-I made, which utilize these features.
+into [Formats](#formats), [Targets](#targets), and tools, such as [libtmux](https://github.com/tony/libtmux) I made, which utilize these features.
 
 It surprises some, because servers often beget a setup process. But servers
 being involved doesn't entail hours of configuration on each machine you run on.
@@ -53,12 +51,13 @@ your tmux session in a TTY or new X server.
 
 The tmux server won't go away until all sessions are closed.
 
-## Servers hold sessions
+## Servers 包含 sessions
 
-One server can contain one or multiple [sessions](05-session.md).
+一个 server包含一个或多个 [sessions](05-session.md).
 
 Starting tmux after a server already is running will create a new session inside
 the existing server. 
+
 ```txt
 W> ### Advanced: Multiple servers
 W>
@@ -105,8 +104,9 @@ chapter will cover this in greater detail.
 
 ## Clipboard {#clipboard}
 
-tmux clients wield a powerful clipboard feature to copy and paste across
-sessions, windows, and panes.
+tmux clients 拥有一个共享clipboard的特性，在essions, windows, 和 panes 都有用。
+
+
 
 Much like vi, tmux handles copying as a mode in which a pane is
 temporarily placed. When inside this mode, text can be selected and copied to

@@ -12,62 +12,53 @@
 
 这是一个我们必须克服的困难。
 
-It's kind of like [*Street Fighter*](https://en.wikipedia.org/wiki/Street_Fighter).
-In this video game, the player inputs a combination of buttons in sequence to
-perform flying spinning kicks and shoot fireballs; sweet. As the player grows
-more accustomed with the combos, they repeat moves by intuition, since they
-develop muscle memory.
+这有点像打街头霸王（[*Street Fighter*](https://en.wikipedia.org/wiki/Street_Fighter)）
 
-Without understanding how to send *command sequences* to tmux via the prefix
-key, you'll be dead in the water.
+在游戏中，玩家输入一套组合健，控制角色飞转踢脚和射击火球。玩家的游戏学习，变得更加习惯连击，他们凭直觉重复动作，发展出肌肉记忆。
 
-Key sequences will come up later if you use Vim, Emacs, or other TUI (Terminal
-User Interface) applications. If you haven't internalized the concept, let's do
-it now. Prior experience command sequences in TUI/GUI applications will come in
-handy.
+不知道使用组合键使用tmux，你会死在水中的。
 
-When you memorize a key combo, it's one less time you'll be moving your hand
-away from the keyboard to grab your mouse. You can focus your short-term memory
-on getting stuff done, resulting in fewer mistakes.
+如果使用用Vim，Emacs或其他(Terminal User Interface，TUI) 终端应用程序。如果尚未将组合命令的概念内在化，那就现在开始吧。 在TUI / GUI应用程序中的组合命令的经验将有助于你理解。
 
-> ### Coming from ``GNU Screen``?
->
-> Your tmux prefix key can be set via your tmux configuration later!  In
-> your `~/.tmux.conf` file, set the `prefix` option:
->
-> ```
->     set-option -g prefix C-a
-> ```
-> This will set the prefix key to `screen(1)`'s (another terminal
-> multiplexer's) prefix key.
+记住一个组合键，就会减少一次手移开操作鼠标的操作。专注在短时记忆上，把工作一次性做完，减少错误的产生。
 
-The default leader prefix is `<Ctrl-b>`. While holding down the `control` key,
-press `b`.
 
-> ### Sending tmux commands
->
-> Practice:
->
-> 1. Press `control` key down and *hold it*.
-> 2. Press `b` and hold it.
-> 3. Release both keys at the same time.
->
-> Try it a few times. It may feel unnatural until you've done it a couple
-> times, which is normal when memorizing shortcuts.
->
-> Now, let's try something:
->
-> `<Ctrl-b> d`. So,
->
-> 1. Press `control` key down and *hold it*.
-> 2. Press `b` and hold it.
-> 3. Release both keys at the same time.
-> 4. Hit `d`!
->
-> You've sent tmux your first command, and you're now outside of tmux!
 
-You've detached the tmux session you were in. You can reattach via `$ tmux
-attach`. 
+> ### 以前使用过 ``GNU Screen``？
+>
+> 通过 tmux 配置文件设置 tmux 的prefix key 。 在文件 `~/.tmux.conf`中设置 `prefix` :
+> 
+>```
+>  set-option -g prefix C-a
+>    ```
+> 于是把prefix键设置成 `screen(1)` (另一个终端复用工具) 中的prefix key 。
+
+默认的 leader prefix 是`<Ctrl-b>`。当按住`control`的时候，同时按`b`。
+
+
+> ### 发送 tmux 命令组合键
+>
+> 训练:
+>
+> 1. 按下 `control` 键保持
+> 2. 再按下 `b` 键保持
+> 3. 同时释放两个键
+>
+> 多尝试几次。多做几次你就会觉得自然而然记住快捷键。
+> 
+>接下来，训练:
+> 
+>`<Ctrl-b> d` 组合键
+> 
+>1. 按下 `control`键保持
+> 2. 按下 `b` 键保持
+> 3. 同时释放两个键
+> 4. 轻击打 `d`键
+> 
+>你刚刚发出了使用tmux的第一次组合键命令，看你跳出了tmux。
+
+你已经断开和tmux session的连接。可通过`$ tmux attach` 再次连接上。
+
 
 ### Nested tmux sessions
 

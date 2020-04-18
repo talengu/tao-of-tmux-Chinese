@@ -1,10 +1,6 @@
 # 总结或最后（Takeaway） {#takeaway}
 
-In this book, we've taken an organized approach to understanding tmux. As you
-use tmux more and more, continue to come back and use this resource to help wrap
-your brain around concepts. You do not have to understand the intricacies of
-tmux, let alone the terminal, in a single sitting. Acclimation happens over
-time.
+在这本书中，我们采用了一种有组织的方法来理解tmux。随着越来越多地使用tmux，请继续返回并使用此资源帮助来记忆。不必一次就理解tmux的复杂性，更不用说终端了。适应是随着时间的推移会发生的。
 
 tmux's userbase varies in skill level. Some readers of this book may have just
 learned how to use the `Prefix` key yesterday. Others are looking to tweak their

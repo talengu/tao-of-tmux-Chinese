@@ -9,22 +9,20 @@ tmux will have *at least* one session running.
 
 ![](images/info/session.png)
 
-The active window will have a `*` symbol next to it.
+激活的窗口有一个 `*` 在标签tab上。
 
 ![The first window, ID 1, titled "manuscript" is active. The second window, ID 2, titled zsh.](images/05-session/active-window.png)
 
 ## 创建会话(sessions)
 
-The simplest command to create a new session is typing `tmux`:
+最简单的创建会话的方法是直接打`tmux`:
 
 ```
     $ tmux
 ```
-The `$ tmux` application, with no commands is equivalent to
-`$ tmux new-session`. Nifty!
+ `$ tmux` 不带参数等价于 `$ tmux new-session`命令。
 
-By default, your session name will be given a number, which isn't too
-descriptive. What would be better is:
+默认情况下，session名字是一个数字，没有什么描述。下面的命令更好一些：
 
 ```
     $ tmux new-session -s'my rails project'

@@ -42,36 +42,28 @@ tmux 对于控制台来说，就像windows的desktop对于GUI应用。文字界�
 
 ## 多任务处理
 
-tmux 在一个窗口保持多个termianl。“tmux”缩写来自
+tmux 在一个窗口保持多个termianl。“tmux”缩写来自**T**erminal **Mu**ltiple**x**er。
 
-tmux allows you to keep multiple terminals running on the same screen. After
-all, the abbreviation "tmux" comes from - **T**erminal **Mu**ltiple**x**er.
+除了一个屏幕上的多个终端之外，tmux还允许您创建和链接多个“窗口”附加在tmux会话上。
 
-In addition to multiple terminals on one screen, tmux allows you to create and link
-multiple "windows" within the confines of the tmux session you attached.
+更好的是，你可以复制，粘贴和滚动。对图形也没有要求，所以你有完全的操控能力，即使你是通过SSH连接或在没有显示服务器的系统上工作，如 [X](https://en.wikipedia.org/wiki/X.org_server)。
 
-Even better, you can copy and paste and scroll. No requirement for graphics
-either, so you have full power, even if you're SSH'ing or on a system without 
-a display server such as [X](https://en.wikipedia.org/wiki/X.Org_Server).
+下面有些常见的场景：
 
-Here are a few common scenarios:
-
-- Running `$ tail -F /var/log/apache2/error.log` in a
-  pane to get a live stream of the latest system events.
-- Running a file watcher, like [watchman](https://github.com/facebook/watchman),
-  [gulp-watch](https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpwatchglob-opts-tasks),
+- 在pane a中运行“$tail-F/var/log/apache2/error.log”查阅正在改变的日志文件。
+- 运行 file watcher，如 [watchman](https://github.com/facebook/watchman)，[gulp-watch](https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpwatchglob-opts-tasks),
   [grunt-watch](https://github.com/gruntjs/grunt-contrib-watch), [guard](https://github.com/guard/guard),
-  or [entr](http://entrproject.org/). On file change, you could do stuff like:
+  或者 [entr](http://entrproject.org/)。监测文件更改，可设定后续命令：
   - rebuild LESS or SASS files, minimize CSS and/or assets and static files
   - lint with linters, like [cpplint](https://github.com/google/styleguide/tree/gh-pages/cpplint),
     [Cppcheck](http://cppcheck.sourceforge.net/), [rubocop](https://github.com/bbatsov/rubocop),
     [ESLint](http://eslint.org/), or [Flake8](http://flake8.pycqa.org/en/latest/)
   - rebuild with `make` or [`ninja`](https://ninja-build.org/)
-  - reload your [Express](http://expressjs.com/) server
-  - run any other custom command of your liking
-- Keeping a text editor, like vim, emacs, pico, nano, etc., open in a main pane,
-  while leaving two others open for CLI commands and building via `make` or
-  `ninja`.
+  - reload  [Express](http://expressjs.com/) server
+  - 运行一些自定义的命令
+- 运行一个 text editor, 如 vim, emacs, pico, nano, 等等。运行一个主pane,
+  用其他两个，一个 CLI commands ，另一个 用来使用 `make` 或者
+  `ninja`命令进行编译。
 
 ![vim + building a C++ project w/ CMake + Ninja using entr to rebuild on file changes, LLDB bottom right](images/01-thinking-tmux/dev-watch.png)
 
@@ -116,20 +108,17 @@ Some keep development services running in a session. Hearty emphasis on
 *development*, you probably will want to daemonize and wrap your production web
 applications, using a tool like [supervisor](http://supervisord.org/), with its own safe environmental settings.
 
-You can also have multiple users attach their clients to the same sessions,
-which is great for pair programming.  If you were in the same session, you
-and the other person would see the same thing, share the same input, and the
-same active window and pane.
+让多个用户将其客户机附加到同一个会话，可以结对编程（pair programming）了。如果在打开同一个session，其他人会看到相同的东西，相同的输入，相同的激活的window和pane。
 
 The above are just examples; any general workspace you'd normally use in a
 terminal could work, especially projects or repetitive efforts you multitask
 on. The *[tips and tricks](#tips-and-tricks)* section will dive into specific
 flows you can use today.
+
 ```
-Q> ### Do tmux sessions persist after a system restart?
+Q> ### 问题：tmux sessions 在系统重启后还会自动运行嘛?
 Q>
-Q> Unfortunately, no. A restart will kill the tmux server and any processes
-Q> running within it.
+Q> 不行。重启会关闭tmux server 和tmux 上正在运行的各种程序。
 Q>
 Q> Thankfully, the modern server can stay online for a long time. Even for
 Q> consumer laptops and PC's with a day or two uptime, having tmux persist
@@ -151,9 +140,6 @@ Q> config needed.
 ```
 ## 小节
 
-tmux is a versatile addition to your terminal toolbelt. It helps you cover the
-gaps between multitasking and workspace organization you'd otherwise lose, since
-there's no GUI. In addition, it includes a nice ability to detach workspaces to
-the background and reattach later.
+tmux是对终端工具带的一个丰富的补充。它有助于弥补多任务处理和工作空间组织之间的差距，因为没有图形用户界面会不太方便。此外，它还提供了一种将工作区放到后台，稍后可以重新连接（reattach）。
 
 在下一小节，我们会接触一些 terminal 的基本操作，进一步深入 tmux。
