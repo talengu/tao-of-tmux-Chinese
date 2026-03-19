@@ -6,123 +6,92 @@
 
 ![](images/info/server.png)
 
-## What? tmux is a server?
+## What? tmux is a server?（什么？tmux 是一个服务器？）
 
-Often, when "server" is mentioned, what comes to mind for many
-may be rackmounted hardware; to others, it may be software running
-daemonized on a server and managed through a utility, like upstart,
-supervisor, and so on.
+通常，当提到"服务器"时，许多人可能会想到机架式硬件；对其他人来说，它可能是在服务器上以守护进程方式运行的软件，通过 upstart、supervisor 等工具来管理。
 
-Unlike web or database software, tmux doesn't require specialized
-configuration settings or creating a service entry to start things.
+与 web 或数据库软件不同，tmux 不需要专门的配置设置或创建服务条目来启动。
 
-tmux uses a client-server model, but the server is forked to the 
-background for you.
+tmux 使用客户端-服务器模型，但服务器会为你 fork 到后台运行。
 
-## Zero config needed
+## Zero config needed（无需配置）
 
-You don't notice it, but when you use tmux normally, a server is launched and being connected via a client.
+你没有注意到，但当你正常使用 tmux 时，服务器会被启动并通过客户端连接。
 
-tmux is so streamlined, the book could continue to explain usage and not even
-mention servers. But, I'd rather you have a true understanding of how it works
-on systems. The implementation feels like magic, while living up to the unix
-expectations of utilitarianism. One cannot deny it's exquisitely executed
-from a user experience standpoint.
+tmux 如此流畅，本书可以继续解释用法甚至不提服务器。但是，我更希望你对它在系统上的工作方式有真正的理解。实现感觉像魔法，同时符合 unix 的功利主义期望。从用户体验的角度来看，不能否认它的执行非常巧妙。
 
-How is it utilitarian? We'll go into it more in future chapters, where we dive
-into [Formats](#formats), [Targets](#targets), and tools, such as [libtmux](https://github.com/tony/libtmux) I made, which utilize these features.
+它是如何功利的？我们将在未来的章节中深入探讨 [Formats](#formats)、[Targets](#targets)，以及我制作的 [libtmux](https://github.com/tony/libtmux) 等工具，它们利用了这些特性。
 
-It surprises some, because servers often beget a setup process. But servers
-being involved doesn't entail hours of configuration on each machine you run on.
-There's no setup.
+这让一些人惊讶，因为服务器通常会产生设置过程。但涉及的服务器并不需要在每台运行的机器上进行数小时的配置。没有设置。
 
-When people think server, they think pain. It invokes an image of digging
-around `/etc/` for configuration files and flipping settings on and off just to
-get basic systems online. But not with tmux. It's a server, but in the good way.
+当人们想到服务器时，他们想到的是痛苦。它唤起了在 `/etc/` 中挖掘配置文件并打开关闭设置以使基本系统上线的画面。但 tmux 不是这样。它是一个服务器，但是是好的那种。
 
-## Stayin' alive
+## Stayin' alive（保持活力）
 
-The server part of tmux is how your sessions can stay alive, even after your client
-is detached.
+tmux 的服务器部分是你的会话即使在客户端脱离后也能保持活力的方式。
 
-You can detach a tmux session from an SSH server and reconnect later.
-You can detach a tmux session, stop your X server in Linux/BSD, and reattach
-your tmux session in a TTY or new X server.
+你可以从 SSH 服务器上脱离 tmux 会话，然后再连接。
+你可以脱离 tmux 会话，停止 Linux/BSD 上的 X 服务器，然后在 TTY 或新的 X 服务器上重新附加你的 tmux 会话。
 
-The tmux server won't go away until all sessions are closed.
+tmux 服务器不会消失，直到所有会话都关闭。
 
-## Servers 包含 sessions
+## Servers 包含 sessions（服务器包含会话）
 
-一个 server包含一个或多个 [sessions](05-session.md).
+一个 server 包含一个或多个 [sessions](05-session.md)。
 
-Starting tmux after a server already is running will create a new session inside
-the existing server. 
+在服务器已经运行后启动 tmux 将在现有服务器内创建一个新会话。
 
 ```txt
 W> ### Advanced: Multiple servers
 W>
-W> tmux is nimble. To use a separate server, pass in the `-L` flag to any
-W> command.
+W> tmux 是敏捷的。要使用单独的服务器，请在任何命令上传递 `-L` 标志。
 W>
-W> `tmux -L moo` - connect to server under socket name "moo" and attach
-W> a new session. Create server if none already exists for socket.
+W> `tmux -L moo` - 连接到名为 "moo" 的 socket 服务器并附加一个新会话。如果 socket 不存在则创建服务器。
 W>
-W> `tmux -L moo attach` will attempt to re-attach a session if one exists.
+W> `tmux -L moo attach` 将尝试重新附加一个会话（如果存在的话）。
 ```
-## How servers are "named"
+## How servers are "named"（服务器如何"命名"）
 
-The default name for the server is `default`, which is stored as a socket in
-`/tmp`. The default directory for storing this can be overridden via setting
-the `TMUX_TMPDIR` environment variable.
+服务器的默认名称是 `default`，存储在 `/tmp` 中的 socket 中。可以通过设置 `TMUX_TMPDIR` 环境变量来覆盖默认目录。
 
-So, something like:
+所以，类似这样：
 
 ```
     $ export TMUX_TMPDIR=$HOME
     $ tmux
 ```
-Will give you a tmux directory created within your `$HOME` folder. On OS X,
-your home folder will probably be something like `/Users/yourusername`. On
-other systems, it may be `/home/yourusername`. If you want to find out, type
-`$ echo $HOME`.
+将会在你的 `$HOME` 文件夹中创建一个 tmux 目录。在 OS X 上，你的 home 文件夹可能是类似 `/Users/yourusername` 的路径。在其他系统上，可能是 `/home/yourusername`。如果你想知道，输入 `$ echo $HOME`。
 
-## Clients
+## Clients（客户端）
 
-Servers will have clients (you) connecting to them.
+服务器会有客户端（你）连接到它们。
 
-When you connect to a session and see windows and panes, it's a client
-connection into tmux.
+当你连接到一个会话并看到窗口和窗格时，这就是一个到 tmux 的客户端连接。
 
-You can retrieve a list of active client connections via:
+你可以获取活动客户端连接的列表：
 
 ```
     $ tmux list-clients
 ```
-These commands and the other `list-` commands, in practice, are rare. But, they
-are part of tmux scriptability should you want to get creative. The [scripting tmux](#scripting-tmux)
-chapter will cover this in greater detail.
+这些命令和其他 `list-` 命令在实践中很少见。但是，如果你想发挥创意，它们是 tmux 脚本化的一部分。[脚本化 tmux](#scripting-tmux) 章节将更详细地介绍这一点。
 
-## Clipboard {#clipboard}
+## Clipboard（剪贴板）{#clipboard}
 
-tmux clients 拥有一个共享clipboard的特性，在essions, windows, 和 panes 都有用。
+tmux 客户端拥有一个共享剪贴板的特性，在 sessions、windows 和 panes 中都很有用。
 
+与 vi 类似，tmux 将复制处理为一个模式，窗格会临时进入该模式。在这个模式下，可以选择文本并复制到*粘贴缓冲区*，即 tmux 的剪贴板。
 
+进入复制模式的默认键是 `Prefix` + `[`。
 
-Much like vi, tmux handles copying as a mode in which a pane is
-temporarily placed. When inside this mode, text can be selected and copied to
-the *paste buffer*, tmux's clipboard.
+1. 在其中，使用 `[space]` 进入复制模式。
+2. 使用方向键调整要选择的文本。
+3. 按 `[enter]` 复制选定的文本。
 
-The default key to enter copy mode is `Prefix` + `[`.
+粘贴复制文本的默认键是 `Prefix` + `]`。
 
-1. From within, use `[space]` to enter copy mode.
-2. Use the arrow keys to adjust the text to be selected.
-3. Press `[enter]` to copy the selected text.
-
-The default key to paste the text copied is `Prefix` + `]`.
-
-> *Vi-like copy-paste*
+> *类似 Vi 的复制粘贴*
 >
-> In your [config](#config), put this:
+> 在你的[配置](#config)中，添加这个：
 >
 > ```
 >     # Vi copypaste mode
@@ -131,20 +100,10 @@ The default key to paste the text copied is `Prefix` + `]`.
 >     bind-key -t vi-copy 'y' copy-selection
 > ```
 
-In addition to the "copy mode", tmux has advanced functionality to
-programmatically copy and paste. Later in the book, the [Capturing pane content](#capture-pane)
-section in the [Scripting tmux](#scripting-tmux) chapter goes into
-`$ tmux capture-pane` and how you can use [targets](#targets) to copy pane
-content into your paste buffer or files with `$ tmux save-buffer`.
+除了"复制模式"，tmux 还有高级功能可以编程方式复制和粘贴。在本书后面的章节中，[脚本化 tmux](#scripting-tmux) 章节中的[捕获窗格内容](#capture-pane)部分将介绍 `$ tmux capture-pane` 以及如何使用 [targets](#targets) 将窗格内容复制到粘贴缓冲区或使用 `$ tmux save-buffer` 保存到文件。
 
 ## 小节
 
-The server is one of the fundamental underpinnings of tmux. Initialized
-automatically to the user, it persists by forking into the background. Running
-behind the scenes, it ensures sessions, windows, panes, and buffers are
-operating, even when the client is detached.
+服务器是 tmux 的基本基础之一。它对用户自动初始化，通过 fork 到后台来保持持久化。在后台运行，它确保会话、窗口、窗格和缓冲区即使在客户端脱离时也能运行。
 
-The server can hold one or more *sessions*. You can copy and paste between
-sessions via the clipboard. In the next chapter, we will go deeper into the role
-sessions play and how they help you organize and control your terminal
-workspace.
+服务器可以容纳一个或多个*会话*。你可以通过剪贴板在会话之间复制粘贴。在下一章中，我们将更深入地探讨会话的角色以及它们如何帮助你组织和控制终端工作区。
