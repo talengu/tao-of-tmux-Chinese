@@ -1,104 +1,102 @@
 # 面板（Panes） {#panes}
 
-Panes are [pseudoterminals](https://en.wikipedia.org/wiki/Pseudoterminal) encapsulating shells (e.g., Bash, Zsh). They reside within a [window](06-window.md).
-A terminal within a terminal, they can run shell commands, scripts, and programs, like vim, emacs, top, htop, irssi, weechat, and so on within them.
+Panes 是[伪终端](https://en.wikipedia.org/wiki/Pseudoterminal)，封装了 shell（例如 Bash、Zsh）。它们位于 [window](06-window.md) 内。
+一个终端中的终端，它们可以运行 shell 命令、脚本和程序，如 vim、emacs、top、htop、irssi、weechat 等。
 
 ![](images/info/pane.png)
 
-## 创建新面板
+## 创建新面板（Creating new panes）
 
-To create a new pane, you can `split-window` from within the current [window](#windows) and pane you are in.
+要创建新窗格，你可以从当前所在的 [window](#windows) 和 pane 中执行 `split-window`。
 
-| Shortcut         | Action                                             |
-|------------------|----------------------------------------------------|
-|`Prefix` + `%`    | `split-window -h` (split horizontally)             |
-|`Prefix` + `"`    | `split-window -v` (split vertically)               |
+| 快捷键            | 操作                                              |
+|------------------|---------------------------------------------------|
+| `Prefix` + `%`  | `split-window -h`（水平分割）                     |
+| `Prefix` + `"`  | `split-window -v`（垂直分割）                     |
 
-You can continue to create panes until you've reached the limit of what the terminal can fit. This depends on the dimensions of your terminal. A normal window will usually have 1 to 5 panes open.
+你可以继续创建窗格，直到达到终端能容纳的极限。这取决于你终端的尺寸。一个普通窗口通常会有 1 到 5 个窗格打开。
 
-Example usage:
+示例用法：
 
 ```shell
-# Create pane horizontally, $HOME directory, 50% width of current pane
+# 水平创建窗格，$HOME 目录，当前窗格 50% 宽度
 $ tmux split-window -h -c $HOME -p 50 vim
 ```
 
 ![](images/07-pane/splitw/-h -c $HOME -p 50 vim - 2 panes.png)
 
 ```shell
-# create new pane, split vertically with 75% height
+# 创建新窗格，垂直分割，高度 75%
 tmux split-window -p 75
 ```
 
 ![](images/07-pane/splitw/-p 75.png)
 
-
-
 ## 面板间切换（Traversing Panes） {#pane-traversal}
 
-| Shortcut         | Action                                             |
-|------------------|----------------------------------------------------|
-|`Prefix` + `;`    | Move to the previously active pane.                |
-|`Prefix` + `Up` / | Change to the pane above, below,                   |
-|`Down` / `Left` / | to the left, or to the                             |
-|`Right`           | the right of the current pane.                     |
-|`Prefix` + `o`    | Select the next pane in the current window.        |
+| 快捷键            | 操作                                              |
+|------------------|---------------------------------------------------|
+| `Prefix` + `;`  | 移动到之前活动的窗格。                             |
+| `Prefix` + `Up` / | 切换到当前窗格上方、下方、                       |
+| `Down` / `Left` / | 左侧或右侧的窗格。                               |
+| `Right`          |                                                   |
+| `Prefix` + `o`  | 选择当前窗口中的下一个窗格。                       |
 
-> *Moving around vimtuitively*
+> *使用 vim 风格移动*
 >
-> If you like vim (hjkl) keybindings, add these to your [config](#config):
+> 如果你喜欢 vim（hjkl）键位绑定，在你的[配置](#config)中添加这些：
 >
 > ```
->     # hjkl pane traversal
+>     # hjkl 窗格遍历
 >     bind h select-pane -L
 >     bind j select-pane -D
 >     bind k select-pane -U
 >     bind l select-pane -R
 > ```
 
-## 面板最小化（Zoom in ）{#zoom-pane}
+## 面板最小化（Zoom in）{#zoom-pane}
 
-To zoom in on a pane, navigate to it and do `Prefix` + `z`.
+要放大窗格，导航到它并按 `Prefix` + `z`。
 
-You can unzoom by pressing `Prefix` + `z` again.
+你可以再次按 `Prefix` + `z` 取消放大。
 
-In addition, you can unzoom and move to an adjacent pane at the same time using a [pane traversal](#pane-traversal) key.
+此外，你可以使用[窗格遍历](#pane-traversal)键同时取消放大并移动到相邻窗格。
 
-Behind the scenes, the keybinding is a shortcut for `$ tmux resize-pane -Z`. So, if you ever wanted to script tmux to zoom/unzoom a pane or apply this functionality to a custom key binding, you can do that too, for instance:
+在幕后，键绑定是 `$ tmux resize-pane -Z` 的快捷方式。所以，如果你想编写 tmux 脚本来放大/缩小窗格或将此功能应用到自定义键绑定，你也可以这样做，例如：
 
 ```
     bind-key -T prefix y resize-pane -Z
 ```
-This would have `Prefix` + `y` zoom and unzoom panes.
+这会让 `Prefix` + `y` 放大和缩小窗格。
 
-## 面板大小（Resizing panes） {#resizing-panes}
+## 面板大小调整（Resizing panes） {#resizing-panes}
 
-Pane size can be adjusted within [windows](#windows) via [window layouts](#window-layouts) and `resize-pane`. Adjusting window layout switches the proportions and order of the panes. Resizing the panes targets a specific pane inside the window containing it, also shrinking or growing the size of the other columns or rows. It's like adjusting your car seat or reclining on a flight; if you take up more space, something else will have less space.
+窗格大小可以通过 [window layouts](#window-layouts) 和 `resize-pane` 在 [windows](#windows) 中调整。调整窗口布局会切换窗格的比例和顺序。调整窗格大小会针对包含它的窗口中的特定窗格，也会缩小或增大其他列或行的大小。这就像调整你的汽车座椅或在飞行中斜躺；如果你占用更多空间，其他东西就会有更少的空间。
 
-| Shortcut         | Action              |
-|------------------|---------------------|
-|`Prefix M-Up`     | `resize-pane -U 5`  |
-|`Prefix M-Down`   | `resize-pane -D 5`  |
-|`Prefix M-Left`   | `resize-pane -L 5`  |
-|`Prefix M-Right`  | `resize-pane -R 5`  |
-|`Prefix C-Up`     | `resize-pane -U`    |
-|`Prefix C-Down`   | `resize-pane -D`    |
-|`Prefix C-Left`   | `resize-pane -L`    |
-|`Prefix C-Right`  | `resize-pane -R`    |
+| 快捷键            | 操作              |
+|------------------|-------------------|
+| `Prefix M-Up`   | `resize-pane -U 5`|
+| `Prefix M-Down` | `resize-pane -D 5`|
+| `Prefix M-Left` | `resize-pane -L 5`|
+| `Prefix M-Right`| `resize-pane -R 5`|
+| `Prefix C-Up`   | `resize-pane -U`  |
+| `Prefix C-Down` | `resize-pane -D`  |
+| `Prefix C-Left` | `resize-pane -L`  |
+| `Prefix C-Right`| `resize-pane -R`  |
 
-## Outputting pane to a file
+## 输出面板到文件（Outputting pane to a file）
 
-You can output the display of a pane to a file.
+你可以将窗格的显示输出到文件。
 
 ```
     $ tmux pipe-pane -o 'cat >>~/output.#I-#P'
 ```
-The `#I` and `#P` are [formats](#formats) for window index and pane index, so the file created is unique. Clever!
+`#I` 和 `#P` 是窗口索引和窗格索引的[格式](#formats)，所以创建的文件是唯一的。聪明！
 
-## 小节
+## 小节（Summary）
 
-Panes are shells within a shell. You can keep adding panes to a tmux window until you run out of room on your screen. Within your shell, you can `tail -F` log files, write and run scripts, and run [curses](https://en.wikipedia.org/wiki/Curses_(programming_library))-powered applications, like vim, top, htop, ncmpcpp, irssi, weechat, mutt, and so on.
+窗格是 shell 中的 shell。你可以不断向 tmux 窗口添加窗格，直到屏幕上没有空间为止。在你的 shell 中，你可以 `tail -F` 日志文件、编写和运行脚本，以及运行 [curses](https://en.wikipedia.org/wiki/Curses_(programming_library)) 驱动的应用程序，如 vim、top、htop、ncmpcpp、irssi、weechat、mutt 等。
 
-You will always have at least one pane open. Once you kill the last pane in the window, the window will close. Panes are also resizable; you can resize panes by targeting them specifically and changing the window layout.
+你总是至少有一个窗格打开。一旦你杀死窗口中的最后一个窗格，窗口就会关闭。窗格也可以调整大小；你可以通过针对特定窗格并更改窗口布局来调整窗格大小。
 
-In the next chapter, we will go into the ways you can customize your tmux shortcuts, status line, and behavior.
+在下一章中，我们将介绍自定义 tmux 快捷键、状态栏和行为的方法。
