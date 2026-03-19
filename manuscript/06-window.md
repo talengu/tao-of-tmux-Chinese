@@ -1,76 +1,76 @@
 # 窗口（Windows） {#windows}
 
-Windows 包含 [panes](#panes). windows又包含在 [session](#sessions)中。
+Windows 包含 [panes](#panes)。windows 又包含在 [session](#sessions)中。
 
-They also have [layouts](#window-layouts), which can be one of many preset dimensions or a custom one done through [pane resizing](#pane-resizing).
+它们还有[布局（layouts）](#window-layouts)，可以是许多预设尺寸中的一种，也可以是通过[窗格调整大小](#pane-resizing)定制的。
 
 ![](images/info/window.png)
 
-You can see the current windows through the [status bar](#status-bar) at the bottom of tmux.
+你可以通过 tmux 底部的[状态栏](#status-bar)看到当前的窗口。
 
-## Creating windows
+## Creating windows（创建窗口）
 
-All sessions start with at least one window open. From there, you can create and kill windows as you see fit.
+所有会话都至少从一个打开的窗口开始。从那里，你可以根据需要创建和关闭窗口。
 
-Window indexes are numbers tmux uses to determine ordering. The first window's index is 0, unless you set it via `base-index` in your [configuration](#config). I usually `set -g base-index 1` in my tmux configuration, since 0 is after 9 on the keyboard.
+窗口索引是 tmux 用来确定顺序的数字。第一个窗口的索引是 0，除非你通过配置中的 `base-index` 设置它。我通常在我的 tmux 配置中设置 `set -g base-index 1`，因为 0 在键盘上位于 9 之后。
 
-`Prefix` + `c` will create a new window at the first open index. So, if you're in the first window, and there is no second window created, it will create the second window. If the second window is already taken, and the third hasn't been created, it will create the third window.
+`Prefix` + `c` 将在第一个空闲索引处创建一个新窗口。所以，如果你在第一个窗口，并且没有创建第二个窗口，它将创建第二个窗口。如果第二个窗口已经被占用，并且第三个窗口还没有创建，它将创建第三个窗口。
 
-If the `base_index` is 1 and there are 7 windows created, with the 5th window missing, creating a new window will fill the empty 5th index, since it's the next one in order and nothing is filling it. The next created window would be the eighth.
+如果 `base_index` 是 1，并且已经创建了 7 个窗口，而第 5 个窗口缺失，创建新窗口将填补空闲的第 5 个索引，因为它是顺序中的下一个，没有什么填充它。下一个创建的窗口将是第八个。
 
-## Naming windows
+## Naming windows（命名窗口）
 
-Just like with sessions, windows can have names. Labelling them helps keep track of what you're doing inside them.
+就像会话一样，窗口也可以有名称。为它们贴标签有助于跟踪你在其中做什么。
 
-![Renaming a window 'zsh' to 'renamed'](images/06-window/rename.png)
+![将窗口 'zsh' 重命名为 'renamed'](images/06-window/rename.png)
 
-When inside tmux, the shortcut `Prefix` + `,` is most commonly used. It opens a prompt in the tmux status line, where you can alter the name of the current window.
+在 tmux 内部，最常用的是快捷键 `Prefix` + `,`。它会在 tmux 状态行中打开一个提示符，你可以在其中更改当前窗口的名称。
 
-The default numbers given to windows also become muscle memory after a while. But naming helps you when you're in a new tmux flow and want to organize yourself. Also, if you're sharing tmux with another user, it's good practice to give a hint what's inside the windows.
+窗口的默认数字过一段时间也会成为肌肉记忆。但当你处于新的 tmux 流程中并想要组织自己时，命名会有所帮助。此外，如果你与其他用户共享 tmux，给出窗口内容的提示是很好的做法。
 
-## Traversing windows
+## Traversing windows（遍历窗口）
 
-Moving around windows is done in two ways, first, by iterating through via `Prefix` + `p` and `Prefix` + `n` and via the window index, which takes you directly to a specific window.
+移动窗口有两种方式，首先通过 `Prefix` + `p` 和 `Prefix` + `n` 迭代，以及通过窗口索引，这可以直接带你到特定的窗口。
 
-`Prefix` + `1`, `Prefix` + `2`, and so on... allows quickly navigating to windows via their index. Unlike window names, which change, indexes are consistent and only require a quick key combo for you to invoke.
+`Prefix` + `1`、`Prefix` + `2` 等等...允许通过它们的索引快速导航到窗口。与会改变的窗口名称不同，索引是一致的，只需要一个快速的组合键就可以调用。
 
-Prompt for a window index (useful for indexes greater than 9) with `Prefix` + `'`. If the window index is 10 or above, this will help you a lot.
+提示输入窗口索引（对于大于 9 的索引很有用）使用 `Prefix` + `'`。如果窗口索引是 10 或以上，这会对你有很大帮助。
 
-> ### Tip: Search + Traverse Windows for Text
+> ### 提示：搜索 + 遍历窗口查找文本
 >
-> You can forward to a window with a match of a text string by doing `Prefix` + `f`.
+> 你可以通过 `Prefix` + `f` 转发到具有匹配文本字符串的窗口。
 
-Bring up the last selected window with `Prefix` + `l`.
+使用 `Prefix` + `l` 调出最后选择的窗口。
 
-A list of current windows can be displayed with `Prefix` + `w`. This also gives some info on what's inside the window. Helpful when juggling a lot of things!
+当前窗口列表可以通过 `Prefix` + `w` 显示。这也会给出窗口内的一些信息。在同时处理很多任务时很有帮助！
 
-## Moving windows
+## Moving windows（移动窗口）
 
-Windows can also be reordered one by one via `move-window` and its associated shortcut. This is helpful if a window is worth keeping open but not important or rarely looked at. After you move a window, you can continue to reorder them at any point in time after.
+窗口也可以通过 `move-window` 及其相关快捷键逐个重新排序。如果一个窗口值得保持打开但不重要或很少查看，这很有帮助。移动窗口后，你可以随时继续重新排序它们。
 
-The command `$ tmux move-window` can be used to move windows.
+命令 `$ tmux move-window` 可用于移动窗口。
 
-The accepted arguments are `-s` (the window you are moving) and `-t`, where you are moving the window to.
+接受的参数是 `-s`（你要移动的窗口）和 `-t`，你要移动到的目标位置。
 
-You can also use `$ tmux movew` for short.
+你也可以使用短形式 `$ tmux movew`。
 
-Example: move the current window to number 2:
+示例：将当前窗口移动到编号 2：
 
 ```shell
     $ tmux movew -t2
 ```
-Example: move window 2 to window 1:
+示例：将窗口 2 移动到窗口 1：
 
 ```shell
     $ tmux movew -s2 -t1
 ```
-The shortcut to prompt for an index to move the current window to is `Prefix` + `.`.
+提示输入索引以将当前窗口移动到的快捷键是 `Prefix` + `.`。
 
-## Layouts {#window-layouts}
+## Layouts（布局）{#window-layouts}
 
-`Prefix` + `space` switches window *layouts*. These are preset configurations automatically adjusting proportions of [panes](#panes).
+`Prefix` + `space` 切换窗口*布局*。这些是自动调整[窗格](#panes)比例的预设配置。
 
-As of tmux 2.3, the supported layouts are:
+截至 tmux 2.3，支持的布局有：
 
 {width=75%}
 ![](images/06-window/even-horizontal.png)
@@ -87,32 +87,27 @@ As of tmux 2.3, the supported layouts are:
 {width=75%}
 ![](images/06-window/tiled.png)
 
-Specific touch-ups can be done via [resizing panes](#resizing-panes).
+可以通过[调整窗格大小](#resizing-panes)进行具体调整。
 
-To reset the proportions of the layout (such as after splitting or resizing panes), you have to run `$ tmux select-layout` again for the layout.
+要重置布局的比例（如在拆分或调整窗格大小后），你必须再次运行 `$ tmux select-layout` 来选择布局。
 
-This is different behavior than some [tiling window managers](https://en.wikipedia.org/wiki/Tiling_window_manager). [*awesome*](https://awesomewm.org/) and [*xmonad*](http://xmonad.org/), for instance, automatically handle proportions upon new items being added to their layouts.
+这与一些[平铺窗口管理器](https://en.wikipedia.org/wiki/Tiling_window_manager)的行为不同。例如，[*awesome*](https://awesomewm.org/) 和 [*xmonad*](http://xmonad.org/)会在新项目添加到其布局时自动处理比例。
 
-To allow easy resetting to a sensible layout across machines and terminal
-dimensions, you can try this in your [config](#config):
+为了在机器和终端尺寸上轻松重置为合理的布局，你可以在你的[配置](#config)中尝试这个：
 
 ```shell
 bind m set-window-option main-pane-height 60\; select-layout main-horizontal
 ```
 
+这允许你设置 `main-horizontal` 布局，并在每次执行 `Prefix` + `m` 时自动按比例设置底部窗格。
 
-
-This allows you to set a `main-horizontal` layout and automatically set the
-bottom panes proportionally on the bottom every time you do `Prefix` + `m`.
-
-Layouts can also be custom. To get the custom layout snippet for your current
-window, try this:
+布局也可以自定义。要获取当前窗口的自定义布局片段，尝试这个：
 
 ```shell
 $ tmux lsw -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f2
 ```
 
-To apply this layout:
+要应用这个布局：
 
 ```shell
 $ tmux lsw -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f2
@@ -121,30 +116,26 @@ $ tmux lsw -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f2
 # resize your panes or try doing this in another window to see the outcome
 $ tmux select-layout "5aed,176x79,0,0[176x59,0,0,0,176x19,0,60{87x19,0,60,1,88x19,88,60,2}]"
 ```
-## Closing windows
 
-There are two ways to kill a window. First, exit or kill every pane in the window. Panes can be killed via `Prefix` + `x` or by `Ctrl` + `d` within the pane's shell. The second way, `Prefix` + `&`, prompts if you really want to delete the window. Warning: this will destroy all the window's panes, along with the processes within them.
+## Closing windows（关闭窗口）
 
-From inside the current window, try this:
+有两种方式可以关闭窗口。首先，退出或杀死窗口中的每个窗格。窗格可以通过 `Prefix` + `x` 或在窗格的 shell 中按 `Ctrl` + `d` 来杀死。第二种方式，`Prefix` + `&`，会提示你是否真的要删除窗口。警告：这将销毁窗口的所有窗格以及其中的进程。
+
+在当前窗口内，尝试这个：
 
 ```shell
 $ tmux kill-window
 ```
-Another thing, when [scripting](#scripting-tmux) or trying to kill the window from outside, use a [target](#targets) of the window index:
+
+另一件事，当[编写脚本](#scripting-tmux)或从外部尝试杀死窗口时，使用窗口索引的[目标](#targets)：
 
 ```shell
 $ tmux kill-window -t2
 ```
-If you're trying to find the target of the window to kill, they reside in the number in the middle section of the [status line](#status-line) and via `$ tmux choose-window`. You can hit "return" after you're in choose-window to go back to where you were previously.
+如果你正在尝试找到要杀死的窗口的目标，它们位于[状态行](#status-line)的中间部分的数字中，也可以通过 `$ tmux choose-window`。在 choose-window 中后，按"return"可以回到你之前的位置。
 
-## Summary
+## 小节（Summary）
 
-In this chapter, you learned how to manipulate windows via renaming and changing
-their layouts, a couple of ways to kill windows in a pinch or in when shell
-scripting tmux. In addition, this chapter demonstrated how to save any tmux
-layout by printing the `window_layout` template variable.
+在本章中，你学会了如何通过重命名和更改布局来操作窗口，以及在紧急情况下或在 shell 编写 tmux 脚本时杀死窗口的几种方法。此外，本章还演示了如何通过打印 `window_layout` 模板变量来保存任何 tmux 布局。
 
-If you are in a tmux session, you'll always have at least one window open, and
-you'll be in it. And within the window will be "pane"; a shell within a shell.
-When a window closes all of its panes, the window closes too. In the next
-chapter, we'll go deeper into panes.
+如果你在 tmux 会话中，你总是至少有一个窗口打开，你会在其中。而窗口内会有"窗格"；一个 shell 中的 shell。当窗口关闭其所有窗格时，窗口也会关闭。在下一章中，我们将更深入地探讨窗格。
