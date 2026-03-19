@@ -1,173 +1,96 @@
 # Terminal 基础知识（fundamentals） {#terminal-fundamentals}
 
-在使用 tmux ，我们回顾一下命令行操作的基本知识。通常，我们使用命令行根据我们的使用经验和肌肉记忆，我们中很大一部人没有了解到工具之间的联系。
+在使用 tmux 之前，我们回顾一下命令行操作的基本知识。通常，我们使用命令行根据我们的使用经验和肌肉记忆，我们中很大一部人没有了解到工具之间的联系。
 
 经验丰富的开发者对 Zsh, Bash, iTerm2, konsole, /dev/tty, shell scripting 等比较熟悉。如果使用 tmux，你将经常和这些工具打交道，不管你是使用GUI界面，还是使用SSH连接远程服务器。
 
-如果你想如何在系统kernel层（数据结构等等）处理进程和TTY的细节可以参考 Marshall Kirk
-McKusick 的 [*The Design and Implementation of the FreeBSD
-Operating System (2nd Edition)*](http://amzn.to/2iTmVyv), 尤其是 Chapter 4, *Process Management* and Section
-8.6, *Terminal Handling*。和  Linus Åkesson写的 [*The TTY demystified*](http://www.linusakesson.net/programming/tty/index.php) (在线)深入 TTY，这些会帮助你理解。
+如果你想了解在系统 kernel 层（数据结构等等）处理进程和TTY的细节，可以参考 Marshall Kirk McKusick 的 [*The Design and Implementation of the FreeBSD Operating System (2nd Edition)*](http://amzn.to/2iTmVyv)，尤其是 Chapter 4, *Process Management* 和 Section 8.6, *Terminal Handling*。以及 Linus Åkesson 写的 [*The TTY demystified*](http://www.linusakesson.net/programming/tty/index.php)（在线）深入 TTY，这些会帮助你理解。
 
-
-从Unix，4.2 BSD等的历史中，我们可以找到更多相关知识，我们可以讨论一整天。我们可以从多个角度来看，比如c语言或者来自Unix/BSD谱系，或者是Linux，GNU等等。就像《权力的游戏》一样;你可以从多个故事中找到线索。给一些好的 YouTube 视频资源 Marshall Kirk McKusick 讲的 [*A Narrative History of BSD*](https://www.youtube.com/watch?v=bVSXXeiFLgk)、AT&T [*The UNIX Operating System*](https://www.youtube.com/watch?v=tc4ROCJYbm0)、Stephen R. Bourne  [*Early days of Unix and design of sh*](https://www.youtube.com/watch?v=FI_bZhV7wpI)。
+从 Unix、4.2 BSD 等的历史中，我们可以找到更多相关知识，我们可以讨论一整天。我们可以从多个角度来看，比如 C 语言或者来自 Unix/BSD 谱系，或者是 Linux、GNU 等等。就像《权力的游戏》一样，你可以从多个故事中找到线索。这里有一些好的 YouTube 视频资源：Marshall Kirk McKusick 讲的 [*A Narrative History of BSD*](https://www.youtube.com/watch?v=bVSXXeiFLgk)、AT&T [*The UNIX Operating System*](https://www.youtube.com/watch?v=tc4ROCJYbm0)、Stephen R. Bourne [*Early days of Unix and design of sh*](https://www.youtube.com/watch?v=FI_bZhV7wpI)。
 
 ## POSIX 标准
 
-操作系统如 macOS（）
-Operating systems like macOS (formerly OS X), Linux, and the BSDs, follow
-something similar to the POSIX specification in terms of how they square away
-various responsibilities and interfaces of the operating system. They're
-categorized as ["Mostly POSIX-compliant"](https://en.wikipedia.org/wiki/POSIX#Mostly_POSIX-compliant).
+操作系统如 macOS（原名 OS X）、Linux 和 BSD，在处理操作系统的各种职责和接口时，遵循类似 POSIX 规范的标准。它们被归类为["Mostly POSIX-compliant"（基本符合 POSIX）](https://en.wikipedia.org/wiki/POSIX#Mostly_POSIX-compliant)。
 
-In daily life, we often break compatibility with POSIX standards for reasons of
-sheer practicality. Operating systems, like macOS, will drop you right into Bash.
-[`make(1)`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html),
-a POSIX standard, is [GNU Make](https://www.gnu.org/software/make/) on macOS by
-default. Did you know, as of September 2016, POSIX Make has no conditionals?
+在日常生活中，出于实用性的考虑，我们经常会打破与 POSIX 标准的兼容性。像 macOS 这样的操作系统会直接让你进入 Bash。[`make(1)`](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html) 是 POSIX 标准，但在 macOS 上默认是 [GNU Make](https://www.gnu.org/software/make/)。你知道吗，截至 2016 年 9 月，POSIX Make 还没有条件语句？
 
-I'm not saying this to take a run at purists. As someone who tries to remain
-compatible in my scripting, it gets hard to do simple things after a while. On
-FreeBSD, the default Make [(PMake)](https://www.freebsd.org/doc/en_US.ISO8859-1/books/pmake/)
-uses dots between conditionals:
+我这么说并不是要攻击纯粹主义者。作为一个在脚本中尽量保持兼容性的人，一段时间后做简单的事情也会变得困难。在 FreeBSD 上，默认的 Make [(PMake)](https://www.freebsd.org/doc/en_US.ISO8859-1/books/pmake/) 在条件语句之间使用点号：
 
 ```
     .IF
 
     .ENDIF
 ```
-But on most Linux systems and macOS, GNU Make is the default, so they get to do:
+
+但在大多数 Linux 系统和 macOS 上，GNU Make 是默认的，所以它们可以这样做：
 
 ```
     IF
 
     ENDIF
 ```
-This is one of the many tiny inconsistencies that span operating systems, their
-userlands, their binary / library /  include paths, and adherence /
-interpretation of the [Filesystem Hierarchy Standard](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)
-or whether they follow their own.
 
-> **Find your path**
+这是跨越操作系统的众多微小不一致之一，包括它们的用户空间、二进制/库/包含路径，以及对 [文件系统层次结构标准（Filesystem Hierarchy Standard）](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)的遵守/解释，或者它们是否遵循自己的标准。
+
+> **找到你的路径**
 > 
-> Most operating systems inspired by Unix (BSD's, macOS, Linux) will allow you
-> to get the info of your systems' filesystem hierarchy via [`hier(7)`](https://www.freebsd.org/cgi/man.cgi?hier(7)).
+> 大多数受 Unix 启发的操作系统（BSD、macOS、Linux）都允许你通过 [`hier(7)`](https://www.freebsd.org/cgi/man.cgi?hier(7)) 获取系统文件系统层次结构的信息。
 >
 > ```
 > $ man hier
 > ```
 
-These differences add up. A good deal of software infrastructure out
-there exists solely to abstract the differences across them. For example: CMake,
-Autotools, SFML, SDL2, interpreted programming languages, and their standard
-libraries are dedicated to normalizing the banal differences across
-BSD-derivatives and Linux distributions. Many, many `#ifdef` preprocessor
-directives in your C and C++ applications. You want open source, you get choice,
-but be aware; there's a lot of upkeep cost in keeping these upstream projects
-(and even your personal ones) compatible. But I digress, back to terminal stuff.
+这些差异会累积。大量的软件基础设施的存在 solely 是为了抽象这些差异。例如：CMake、Autotools、SFML、SDL2、解释型编程语言及其标准库都致力于规范化 BSD 衍生系统和 Linux 发行版之间平淡无奇的差异。你的 C 和 C++ 应用程序中会有很多很多的 `#ifdef` 预处理指令。你想要开源，你就获得了选择，但要注意；保持这些上游项目（甚至你的个人项目）的兼容性需要大量的维护成本。但我离题了，回到终端话题。
 
-Why does it matter? Why bring it up? You'll see this stuff everywhere.
-So, let's separate the usual suspects into their respective categories.
+为什么这很重要？为什么要提这个？你会在任何地方看到这些东西。所以，让我们把常见的嫌疑对象分门别类。
 
-## Terminal interface
+## Terminal interface（终端接口）
 
-The terminal interface can be best introduced by citing official specification,
-laying out its technical properties, interfaces, and responsibilities. This can
-be viewed in its [POSIX specification](http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap11.html).
+终端接口最好通过引用官方规范来介绍，它列出了其技术属性、接口和职责。可以在其 [POSIX 规范](http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap11.html)中查看。
 
-This includes TTYs, including text terminals and X sessions within them. On
-Linux / BSD systems, you can switch between sessions via `<ctrl-alt-F1>`
-through `<ctrl-alt-F12>`.
+这包括 TTY，包括文本终端和其中的 X 会话。在 Linux / BSD 系统上，你可以通过 `<ctrl-alt-F1>` 到 `<ctrl-alt-F12>` 在会话之间切换。
 
-## Terminal emulators
+## Terminal emulators（终端模拟器）
 
-GUI Terminals: Terminal.app, iterm, iterm2, konsole, lxterm, xfce4-terminal,
-rxvt-unicode, xterm, roxterm, gnome terminal, cmd.exe + bash.exe
+GUI 终端：Terminal.app、iterm、iterm2、konsole、lxterm、xfce4-terminal、rxvt-unicode、xterm、roxterm、gnome terminal、cmd.exe + bash.exe
 
-## Shell languages {#shell-languages}
+## Shell 语言 {#shell-languages}
 
-Shell languages are programming languages. You may not compile the code
-into binaries with [`gcc`](https://gcc.gnu.org/) or [`clang`](http://clang.llvm.org/),
-or have shiny [npm](https://www.npmjs.com/) package manager for them, but a
-language is a language.
+Shell 语言是编程语言。你可能不会用 [`gcc`](https://gcc.gnu.org/) 或 [`clang`](http://clang.llvm.org/) 将代码编译成二进制文件，也没有光鲜亮丽的 [npm](https://www.npmjs.com/) 包管理器，但语言就是语言。
 
-Each shell interpreter has its own language features. Like with shells, many
-will resemble the [POSIX shell language](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_01)
-and strive to be compatible with it. Zsh and Bash should be able to understand
-POSIX shell scripts you write, but not the other way around (we will cover this
-in [shell interpreters](#shells)).
+每个 shell 解释器都有自己的语言特性。和 shell 一样，许多都会类似于 [POSIX shell 语言](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_01)并努力与之兼容。Zsh 和 Bash 应该能够理解你编写的 POSIX shell 脚本，但反过来不行（我们将在 [shell 解释器](#shells)中讨论这一点）。
 
-The first line of shell file is the [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix))
-statement, which points to the interpreter to run the script in. They normally
-use the `.sh` extension, but they can also be `.zsh`, `.csh` and so on if
-they're for a specific interpreter.
+shell 文件的第一行是 [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) 语句，指向运行脚本的解释器。它们通常使用 `.sh` 扩展名，但如果针对特定解释器，也可以是 `.zsh`、`.csh` 等。
 
-Zsh scripts are implemented by the Zsh shell interpreter, Bash scripts by Bash.
-But the languages are not as closely regulated and standardized as, say, [C++'s
-standards committee](http://www.open-std.org/jtc1/sc22/wg21/) workgroups or
-[python's PEPs](https://www.python.org/dev/peps/). Bash and Zsh take features
-from Korn and C Shell's languages, but without all the ceremony and bureaucracy
-other languages espouse.
+Zsh 脚本由 Zsh shell 解释器实现，Bash 脚本由 Bash 实现。但这些语言不像 [C++ 标准委员会](http://www.open-std.org/jtc1/sc22/wg21/)工作组或 [Python 的 PEP](https://www.python.org/dev/peps/) 那样受到严格的监管和标准化。Bash 和 Zsh 从 Korn 和 C Shell 的语言中汲取特性，但没有其他语言所推崇的那些繁文缛节。
 
-## Shell interpreters (Shells) {#shells}
+## Shell 解释器（Shells） {#shells}
 
-Examples: POSIX sh, Bash, Zsh, csh, tcsh, ksh, fish
+示例：POSIX sh、Bash、Zsh、csh、tcsh、ksh、fish
 
-Shell interpreters *implement* the shell language. They are a layer on top of
-the kernel and are what allow you, interactively, to run commands and
-applications inside them.
+Shell 解释器*实现*了 shell 语言。它们是内核之上的一层，允许你交互式地在其中运行命令和应用程序。
 
-As of October 2016, the [latest POSIX specification](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/sh.html)
-covers in technical detail the responsibilities of the shell.
+截至 2016 年 10 月，[最新的 POSIX 规范](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/sh.html)以技术细节涵盖了 shell 的职责。
 
-For shells and operating systems: each distro or group does their own darn
-thing. On most Linux distributions and macOS, you'll typically be dropped into
-Bash.
+对于 shell 和操作系统：每个发行版或组织都有自己的做法。在大多数 Linux 发行版和 macOS 上，你通常会被直接放入 Bash。
 
-On FreeBSD, you may default to a plain vanilla `sh` unless you specify
-otherwise during the installation process. In Ubuntu, `/bin/sh` used to be
-`bash` ([Bourne Again Shell](https://en.wikipedia.org/wiki/Bourne_shell)) but
-was [replaced with `dash`](https://wiki.ubuntu.com/DashAsBinSh)
-([Debian Almquist Shell](https://en.wikipedia.org/wiki/Almquist_shell)). So,
-here, you are thinking "hmm, `/bin/sh`, probably just a plain old POSIX shell";
-however, system startup scripts on Ubuntu used to allow non-POSIX scripting
-via Bash. This is because specialty [shell languages](#shell-languages), such as
-Bash and Zsh, add helpful and practical features, but they're not portable.
-For instance, you would need to install the Zsh interpreter across all your
-systems if you rely on Zsh-specialized scripting. If you conformed with POSIX
-shell scripting, your scripting would have the highest level of compatibility
-at the cost of being more verbose.
+在 FreeBSD 上，除非你在安装过程中另有指定，否则你可能默认使用普通的 `sh`。在 Ubuntu 中，`/bin/sh` 曾经是 `bash`（[Bourne Again Shell](https://en.wikipedia.org/wiki/Bourne_shell)），但[被替换为 `dash`](https://wiki.ubuntu.com/DashAsBinSh)（[Debian Almquist Shell](https://en.wikipedia.org/wiki/Almquist_shell)）。所以，在这里你可能会想"嗯，`/bin/sh`，可能就是一个普通的 POSIX shell"；然而，Ubuntu 上的系统启动脚本曾经允许通过 Bash 进行非 POSIX 脚本编写。这是因为特殊的 [shell 语言](#shell-languages)，如 Bash 和 Zsh，添加了有用的实用功能，但它们不可移植。例如，如果你依赖 Zsh 专用脚本，你需要在所有系统上安装 Zsh 解释器。如果你遵循 POSIX shell 脚本编写，你的脚本将具有最高级别的兼容性，但代价是更加冗长。
 
-Recent versions of macOS include Zsh by default. Linux distributions
-typically require you to install it via package manager and install it to
-`/usr/bin/zsh`. BSD systems build it via the port system, [`pkg(8)`](https://www.freebsd.org/cgi/man.cgi?query=pkg&apropos=0&sektion=0&manpath=FreeBSD+10.3-RELEASE+and+Ports&arch=default&format=html)
-on FreeBSD, or [`pkg_add(1)`](http://man.openbsd.org/pkg_add.1) on OpenBSD,
-and it will install to `/usr/local/bin/zsh`.
+最新版本的 macOS 默认包含 Zsh。Linux 发行版通常需要你通过包管理器安装它，并安装到 `/usr/bin/zsh`。BSD 系统通过 port 系统构建它，FreeBSD 上使用 [`pkg(8)`](https://www.freebsd.org/cgi/man.cgi?query=pkg&apropos=0&sektion=0&manpath=FreeBSD+10.3-RELEASE+and+Ports&arch=default&format=html)，OpenBSD 上使用 [`pkg_add(1)`](http://man.openbsd.org/pkg_add.1)，它会安装到 `/usr/local/bin/zsh`。
 
-It's fun to experiment with different shells. On many systems, you can use
-[`chsh -s`](https://en.wikipedia.org/wiki/Chsh) to update the default shell for
-a user.
+尝试不同的 shell 很有趣。在许多系统上，你可以使用 [`chsh -s`](https://en.wikipedia.org/wiki/Chsh) 来更新用户的默认 shell。
 
-The other thing to mention is, for `chsh -s` to work, you typically need to have
-it added to [`/etc/shells`](https://bash.cyberciti.biz/guide//etc/shells).
+另一件要提到的事是，要让 `chsh -s` 工作，你通常需要将其添加到 [`/etc/shells`](https://bash.cyberciti.biz/guide//etc/shells)。
 
 ## 小节
 
-To wrap it up, you will hear people talking about shells all the time.
-Context is key. It could be:
+总结一下，你会经常听到人们在谈论 shell。上下文是关键。它可能是：
 
-- A generic way to refer to any terminal you have open. "Type `$ top` into your
-  shell and see what happens." (Press q to quit.)
-- A server they have to log into. Before the era of the cloud, it would be
-  popular for small hosts to sell "C Shells" with root access.
-- A shell within a tmux [pane](#panes).
-- If scripting is mentioned, it is likely either the script file, an issue
-  related to the scripts' behavior, or something about the shell language.
+- 一种通用的方式来指代你打开的任何终端。"在你的 shell 中输入 `$ top` 看看会发生什么。"（按 q 退出。）
+- 一个他们必须登录的服务器。在云时代之前，小型主机销售带有 root 访问权限的"C Shells"很流行。
+- tmux [pane（窗格）](#panes)中的一个 shell。
+- 如果提到脚本编写，那可能是脚本文件、与脚本行为相关的问题，或者关于 shell 语言的一些事情。
 
-But overall, after this overview, go back to doing what you're doing. If shell
-is what people say and they understand it, use it. The backing you have here
-should make you more confident in yourself. These days, it's an ongoing battle
-catching our street smarts up with book smarts.
+但总的来说，在这个概述之后，继续做你正在做的事情。如果人们说 shell 并且他们理解它，那就用它。你在这里学到的知识应该让你更加自信。如今，让我们的实战经验跟上理论知识是一场持续的战斗。
 
-In the next chapter, we will touch some terminal basics before diving
-deeper into tmux.
+在下一章，我们将在深入了解 tmux 之前，接触一些终端基础知识。
