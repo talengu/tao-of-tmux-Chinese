@@ -1,124 +1,99 @@
 # 会话（Sessions） {#sessions}
 
-Welcome to the session, the highest-level entity residing in the [server](04-server.md)
-instance. Server instances are forked to the background upon starting a fresh
-instance and reconnected to when reattaching sessions. Your interaction with
-tmux will have *at least* one session running.
+欢迎来到会话，这是驻留在 [server](04-server.md) 实例中的最高层级实体。服务器实例在启动新实例时 fork 到后台运行，并在重新附加会话时重新连接。你与 tmux 的交互*至少*有一个会话在运行。
 
 一个会话包含多个窗口 [windows](06-window.md)。
 
 ![](images/info/session.png)
 
-激活的窗口有一个 `*` 在标签tab上。
+激活的窗口有一个 `*` 在标签 tab 上。
 
-![The first window, ID 1, titled "manuscript" is active. The second window, ID 2, titled zsh.](images/05-session/active-window.png)
+![第一个窗口，ID 1，标题为 "manuscript"，处于活动状态。第二个窗口，ID 2，标题为 zsh。](images/05-session/active-window.png)
 
-## 创建会话(sessions)
+## 创建会话（sessions）
 
-最简单的创建会话的方法是直接打`tmux`:
+最简单的创建会话的方法是直接打 `tmux`:
 
 ```
     $ tmux
 ```
- `$ tmux` 不带参数等价于 `$ tmux new-session`命令。
+ `$ tmux` 不带参数等价于 `$ tmux new-session` 命令。
 
-默认情况下，session名字是一个数字，没有什么描述。下面的命令更好一些：
+默认情况下，session 名字是一个数字，没有什么描述。下面的命令更好一些：
 
 ```
     $ tmux new-session -s'my rails project'
 ```
 
-## tmux 切换会话(sessions)
+## tmux 切换会话（sessions）
 
-Some acquire the habit of detaching their tmux client and reattaching via
-`tmux att -t session_name`. Thankfully, you can switch sessions from within
-tmux!
+有些人养成脱离 tmux 客户端然后通过 `tmux att -t session_name` 重新附加的习惯。幸运的是，你可以从 tmux 内部切换会话！
 
-| Shortcut         | Action                                             |
-|------------------|----------------------------------------------------|
-|`Prefix` + `(`    | Switch the attached client to the previous session.|
-|`Prefix` + `)`    | Switch the attached client to the next session.    |
-|`Prefix` + `L`    | Switch the attached client back to the last        |
-|                  | session.                                           |
-|`Prefix` + `s`    | Select a new session for the attached client       |
-|                  | interactively.                                     |
+| 快捷键            | 操作                                              |
+|------------------|---------------------------------------------------|
+| `Prefix` + `(`  | 将附加的客户端切换到上一个会话。                   |
+| `Prefix` + `)`  | 将附加的客户端切换到下一个会话。                   |
+| `Prefix` + `L`  | 将附加的客户端切换回上一个会话。                   |
+| `Prefix` + `s`  | 交互式地为附加的客户端选择一个新会话。             |
 
-`Prefix` + `s` will allow you to switch between sessions within the same tmux
-client.
+`Prefix` + `s` 允许你在同一个 tmux 客户端中的会话之间切换。
 
-This command name can be confusing. `switch-client` will allow you to traverse
-between sessions in the [server](#server).
+这个命令名称可能容易混淆。`switch-client` 允许你在 [server](#server) 中的会话之间遍历。
 
-Example usage:
+示例用法：
 
 ```
     $ tmux switch-client -t dev
 ```
-If already inside a client, this will switch to a session, named "dev", if it exists.
+如果已经在客户端内部，这会切换到名为 "dev" 的会话（如果存在的话）。
 
-## 重命名会话
+## 重命名会话（Renaming sessions）
 
-Sometimes, the default session name given by tmux isn't descriptive enough. It
-only takes a few seconds to update it.
+有时候，tmux 给出的默认会话名称不够描述性。只需几秒钟就可以更新它。
 
-You can name it whatever you want. Typically, if I'm working on multiple web
-projects in one session, I'll name it "web". If I'm assigning one software
-project to a single session, I'll name it after the software project. You'll
-likely develop your own naming conventions, but anything is more descriptive
-than the default.
+你可以随意命名它。通常，如果我在一个会话中处理多个 Web 项目，我会将其命名为 "web"。如果我将一个软件项目分配给单个会话，我会以软件项目命名它。你可能会形成自己的命名约定，但任何名称都比默认的更具描述性。
 
-![Renaming a session '0' to 'react web'](images/05-session/rename.png)
+![将会话 '0' 重命名为 'react web'](images/05-session/rename.png)
 
-If you don't name your sessions, it'll be difficult to keep track of what the
-session contains. Sometimes, you may forget you have a project opened,
-especially if your machine has been running for a few days, weeks, or months.
-You can save time by reattaching your session and avoid creating a duplicate.
+如果你不命名你的会话，就很难跟踪会话包含什么。有时候，你可能会忘记你打开了一个项目，特别是如果你的机器已经运行了几天、几周或几个月。你可以通过重新附加会话来节省时间，避免创建重复的会话。
 
-You can rename sessions from within tmux with `Prefix` + `$`.  The status bar
-will be temporarily altered into a text field to allow altering the session
-name.
+你可以通过 `Prefix` + `$` 在 tmux 内部重命名会话。状态栏将暂时变成一个文本字段，允许更改会话名称。
 
-Through command line, you can try:
+通过命令行，你可以尝试：
 
 ```shell
     $ tmux rename-session -t 1 "my session"
 ```
-## 查找存在的会话
 
-If you're scripting tmux, you will want to see if a session exists.
-`has-session` will return a 0 [exit code](https://en.wikipedia.org/wiki/Exit_status)
-if the session exists, but will report a 1 exit code *and* print an error if a
-session does not exist.
+## 查找存在的会话（Finding sessions）
+
+如果你在编写 tmux 脚本，你可能想知道会话是否存在。如果会话存在，`has-session` 将返回 0 [退出码](https://en.wikipedia.org/wiki/Exit_status)，但如果会话不存在，它将报告退出码 1 *并*打印错误。
 
 ```shell
     $ tmux has-session -t 1
 ```
-It assumes the session "1" exists; it'll just return 0 with no output.
+它假设会话 "1" 存在；它只会返回 0 且没有输出。
 
-But if it doesn't, you'll get something like this in a response:
+但如果不存在，你会收到类似这样的响应：
 
 ```
     $ tmux has-session -t 1
     > can't find session 1
 ```
-To try it in a shell script:
+在 shell 脚本中尝试：
 
 ```
     if tmux has-session -t 0 ; then
         echo "has session 0"
     fi
 ```
+
 ## 小节
 
-In this chapter, you learned how to rename sessions for organizational purposes
-and how to switch between them quickly.
+在本章中，你学会了如何为组织目的重命名会话，以及如何快速在它们之间切换。
 
-You'll always be attached to a session when you're using a client in tmux. When
-the last remaining session is closed, the server will close also.
+当你在 tmux 中使用客户端时，你总是附加到一个会话。当最后一个会话关闭时，服务器也会关闭。
 
-Think of sessions as workspaces designed to help organize a set of windows,
-analogous to [virtual desktop](https://en.wikipedia.org/wiki/Virtual_desktop)
-spaces in GUI computing.
+把会话想象成旨在帮助组织一组窗口的工作空间，类似于 GUI 计算中的[虚拟桌面](https://en.wikipedia.org/wiki/Virtual_desktop)空间。
 
-In the next chapter, we will go into *windows*, which, like sessions, are also
-nameable and let you switch between them.
+在下一章中，我们将深入探讨 *windows*，它们像会话一样，也是可命名的，并允许你在它们之间切换。
